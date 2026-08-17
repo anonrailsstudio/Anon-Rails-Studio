@@ -40,11 +40,11 @@
         nav a {
             color: var(--text-main);
             text-decoration: none;
-            margin-left: 0.8rem;
-            font-size: 0.95rem;
+            margin-left: 0.5rem;
+            font-size: 0.9rem;
             font-weight: 500;
             transition: all 0.3s;
-            padding: 0.6rem 1rem;
+            padding: 0.5rem 0.8rem;
             border-radius: 8px;
             border: 1px solid transparent;
             cursor: pointer;
@@ -150,6 +150,23 @@
         .page-section { display: none; }
         .page-section.active-page { display: block; }
 
+        /* Timeline / Novedades */
+        .news-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-purple);
+            border-left: 4px solid var(--accent);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .news-date {
+            font-size: 0.85rem;
+            color: var(--accent);
+            font-weight: bold;
+            margin-bottom: 0.4rem;
+        }
+
         /* Foro UI */
         .forum-box {
             background-color: var(--bg-card);
@@ -206,6 +223,7 @@
         <a onclick="showPage('inicio')" class="logo">ANON <span>RAILS</span> STUDIO</a>
         <nav>
             <a onclick="showPage('inicio')" id="nav-inicio" class="active">Inicio</a>
+            <a onclick="showPage('novedades')" id="nav-novedades">Novedades</a>
             <a onclick="showPage('historia')" id="nav-historia">Historia</a>
             <a onclick="showPage('juegos')" id="nav-juegos">Juegos</a>
             <a onclick="showPage('modelos')" id="nav-modelos">Modelos 3D</a>
@@ -248,12 +266,30 @@
         </div>
     </div>
 
+    <!-- NOVEDADES -->
+    <div id="page-novedades" class="page-section">
+        <div class="container">
+            <div class="section-title">Novedades y Actualizaciones</div>
+            
+            <div class="news-card">
+                <div class="news-date">📅 17 DE AGOSTO DE 2026</div>
+                <h3 style="color: #fff; font-size: 1.3rem; margin-bottom: 0.5rem;">Lanzamiento del Sitio Web Oficial</h3>
+                <p style="color: var(--text-muted);">Inauguramos nuestra plataforma web para compartir avances de proyectos, modelos 3D y conectar de forma directa con la comunidad a través de nuestro foro integrado.</p>
+            </div>
+
+            <div class="news-card">
+                <div class="news-date">📅 PRÓXIMAMENTE</div>
+                <h3 style="color: #fff; font-size: 1.3rem; margin-bottom: 0.5rem;">Actualización de Flota y Nuevas Rutas</h3>
+                <p style="color: var(--text-muted);">Estamos desarrollando nuevas formaciones de trenes e implementando sistemas de señalización mejorados para nuestros mapas en Roblox Studio.</p>
+            </div>
+        </div>
+    </div>
+
     <!-- FORO -->
     <div id="page-foro" class="page-section">
         <div class="container">
             <div class="section-title">Foro de la Comunidad</div>
             
-            <!-- Publicar tema -->
             <div class="forum-box">
                 <h3 style="margin-bottom: 1rem; color: var(--accent);">Crear una publicación</h3>
                 <input type="text" id="post-author" class="forum-input" placeholder="Tu nombre / usuario (Ej: FerroFan99)">
@@ -262,7 +298,6 @@
                 <button onclick="addPost()" class="btn">Publicar Tema</button>
             </div>
 
-            <!-- Lista de Publicaciones -->
             <h3 style="margin-bottom: 1.5rem; color: #fff;">Publicaciones Recientes</h3>
             <div id="forum-posts-container"></div>
         </div>
@@ -325,7 +360,6 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // Sistema dinámico del Foro
         const defaultPosts = [
             {
                 author: "AnonRailsAdmin",
@@ -383,7 +417,6 @@
             loadPosts();
         }
 
-        // Cargar posts al iniciar
         loadPosts();
     </script>
 
