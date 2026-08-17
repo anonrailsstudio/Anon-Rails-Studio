@@ -150,6 +150,45 @@
         .page-section { display: none; }
         .page-section.active-page { display: block; }
 
+        /* Foro UI */
+        .forum-box {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-purple);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .forum-input, .forum-textarea {
+            width: 100%;
+            padding: 0.8rem;
+            margin-bottom: 1rem;
+            background-color: #000;
+            border: 1px solid var(--border-purple);
+            border-radius: 8px;
+            color: #fff;
+            font-size: 1rem;
+        }
+
+        .forum-textarea { resize: vertical; min-height: 100px; }
+
+        .forum-post {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-purple);
+            border-radius: 10px;
+            padding: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .forum-post-header {
+            display: flex;
+            justify-content: space-between;
+            color: var(--accent);
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
         footer {
             text-align: center;
             padding: 2.5rem;
@@ -170,6 +209,7 @@
             <a onclick="showPage('historia')" id="nav-historia">Historia</a>
             <a onclick="showPage('juegos')" id="nav-juegos">Juegos</a>
             <a onclick="showPage('modelos')" id="nav-modelos">Modelos 3D</a>
+            <a onclick="showPage('foro')" id="nav-foro">Foro</a>
             <a onclick="showPage('ventas')" id="nav-ventas">Tienda</a>
             <a onclick="showPage('nosotros')" id="nav-nosotros">Sobre Nosotros</a>
         </nav>
@@ -199,16 +239,36 @@
                     <a onclick="showPage('modelos')" class="btn">Ver Catálogo</a>
                 </div>
                 <div class="card">
-                    <span class="badge badge-multi">Soporte</span>
-                    <h3>Tienda & Donaciones</h3>
-                    <p>Consigue pases de juego exclusivos, assets 3D o apoya directamente el estudio mediante PayPal.</p>
-                    <a onclick="showPage('ventas')" class="btn btn-paypal">Ir a la Tienda</a>
+                    <span class="badge badge-multi">Comunidad</span>
+                    <h3>Foro Comunitario</h3>
+                    <p>Comparte sugerencias, reporta errores y platica sobre simuladores ferroviarios con la comunidad.</p>
+                    <a onclick="showPage('foro')" class="btn">Ir al Foro</a>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- HISTORIA -->
+    <!-- FORO -->
+    <div id="page-foro" class="page-section">
+        <div class="container">
+            <div class="section-title">Foro de la Comunidad</div>
+            
+            <!-- Publicar tema -->
+            <div class="forum-box">
+                <h3 style="margin-bottom: 1rem; color: var(--accent);">Crear una publicación</h3>
+                <input type="text" id="post-author" class="forum-input" placeholder="Tu nombre / usuario (Ej: FerroFan99)">
+                <input type="text" id="post-title" class="forum-input" placeholder="Título de la publicación">
+                <textarea id="post-content" class="forum-textarea" placeholder="Escribe el contenido de tu publicación..."></textarea>
+                <button onclick="addPost()" class="btn">Publicar Tema</button>
+            </div>
+
+            <!-- Lista de Publicaciones -->
+            <h3 style="margin-bottom: 1.5rem; color: #fff;">Publicaciones Recientes</h3>
+            <div id="forum-posts-container"></div>
+        </div>
+    </div>
+
+    <!-- OTRAS SECCIONES -->
     <div id="page-historia" class="page-section">
         <div class="container">
             <div class="section-title">Historia</div>
@@ -216,7 +276,6 @@
         </div>
     </div>
 
-    <!-- JUEGOS -->
     <div id="page-juegos" class="page-section">
         <div class="container">
             <div class="section-title">Juegos</div>
@@ -224,7 +283,6 @@
         </div>
     </div>
 
-    <!-- MODELOS 3D -->
     <div id="page-modelos" class="page-section">
         <div class="container">
             <div class="section-title">Modelos 3D</div>
@@ -232,7 +290,6 @@
         </div>
     </div>
 
-    <!-- TIENDA -->
     <div id="page-ventas" class="page-section">
         <div class="container">
             <div class="section-title">Tienda</div>
@@ -240,7 +297,6 @@
         </div>
     </div>
 
-    <!-- SOBRE NOSOTROS -->
     <div id="page-nosotros" class="page-section">
         <div class="container">
             <div class="section-title">Sobre Nosotros</div>
@@ -261,17 +317,74 @@
             navLinks.forEach(link => link.classList.remove('active'));
 
             const targetPage = document.getElementById('page-' + pageId);
-            if (targetPage) {
-                targetPage.classList.add('active-page');
-            }
+            if (targetPage) targetPage.classList.add('active-page');
 
             const targetNav = document.getElementById('nav-' + pageId);
-            if (targetNav) {
-                targetNav.classList.add('active');
-            }
+            if (targetNav) targetNav.classList.add('active');
 
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
+
+        // Sistema dinámico del Foro
+        const defaultPosts = [
+            {
+                author: "AnonRailsAdmin",
+                title: "¡Bienvenidos al foro oficial de Anon Rails Studio!",
+                content: "Usa este espacio para compartir ideas, enviar sugerencias de locomotoras o reportar errores.",
+                date: "17/08/2026"
+            }
+        ];
+
+        function loadPosts() {
+            const savedPosts = JSON.parse(localStorage.getItem('forum_posts')) || defaultPosts;
+            const container = document.getElementById('forum-posts-container');
+            container.innerHTML = '';
+
+            savedPosts.forEach(post => {
+                const postElement = document.createElement('div');
+                postElement.className = 'forum-post';
+                postElement.innerHTML = `
+                    <div class="forum-post-header">
+                        <span>👤 ${post.author}</span>
+                        <span>📅 ${post.date}</span>
+                    </div>
+                    <h4 style="color: #fff; font-size: 1.1rem; margin-bottom: 0.4rem;">${post.title}</h4>
+                    <p style="color: var(--text-muted); font-size: 0.95rem;">${post.content}</p>
+                `;
+                container.appendChild(postElement);
+            });
+        }
+
+        function addPost() {
+            const authorInput = document.getElementById('post-author').value.trim();
+            const titleInput = document.getElementById('post-title').value.trim();
+            const contentInput = document.getElementById('post-content').value.trim();
+
+            if (!authorInput || !titleInput || !contentInput) {
+                alert("Por favor completa todos los campos para publicar.");
+                return;
+            }
+
+            const newPost = {
+                author: authorInput,
+                title: titleInput,
+                content: contentInput,
+                date: new Date().toLocaleDateString('es-ES')
+            };
+
+            const posts = JSON.parse(localStorage.getItem('forum_posts')) || defaultPosts;
+            posts.unshift(newPost);
+            localStorage.setItem('forum_posts', JSON.stringify(posts));
+
+            document.getElementById('post-author').value = '';
+            document.getElementById('post-title').value = '';
+            document.getElementById('post-content').value = '';
+
+            loadPosts();
+        }
+
+        // Cargar posts al iniciar
+        loadPosts();
     </script>
 
 </body>
