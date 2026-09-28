@@ -3,84 +3,1491 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Página con Carrusel</title>
+    <title>Anon Rails - Simuladores Ferroviarios</title>
     <style>
-        /* Estilos básicos de la página */
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
+        /* TEMAS DE COLORES (VARIABLES CSS MATES Y CÓMODAS A LA VISTA) */
+        :root {
+            /* Tema por defecto: Marrón & Negro Moderno (Mate) */
+            --bg-main: #12100e;
+            --bg-card: rgba(28, 24, 21, 0.85);
+            --sidebar-bg: rgba(22, 19, 16, 0.9);
+            --accent: #c67d34;
+            --accent-glow: #a66324;
+            --border-purple: #2a221c;
+            --text-main: #f0eae1;
+            --text-muted: #b5a899;
+            --accent-rgb: 198, 125, 52;
         }
 
-        /* Contenedor del carrusel */
-        .carrusel-contenedor {
-            position: relative;
-            max-width: 100%;
-            margin: 20px 0;
-            overflow: hidden;
+        /* 1. Marrón y Negro Moderno (Mate) */
+        [data-theme="brown-black"] {
+            --bg-main: #12100e; --bg-card: rgba(28, 24, 21, 0.85); --sidebar-bg: rgba(22, 19, 16, 0.9);
+            --accent: #c67d34; --accent-glow: #a66324; --border-purple: #2a221c;
+            --text-main: #f0eae1; --text-muted: #b5a899; --accent-rgb: 198, 125, 52;
+        }
+        /* 2. Púrpura Elegante */
+        [data-theme="purple"] {
+            --bg-main: #120e17; --bg-card: rgba(27, 22, 36, 0.85); --sidebar-bg: rgba(21, 16, 31, 0.9);
+            --accent: #8b5cf6; --accent-glow: #7c3aed; --border-purple: #2d243b;
+            --text-main: #f3f0f7; --text-muted: #a79bbd; --accent-rgb: 139, 92, 246;
+        }
+        /* 3. Gris Espacial Moderno */
+        [data-theme="space-gray"] {
+            --bg-main: #111318; --bg-card: rgba(27, 31, 39, 0.85); --sidebar-bg: rgba(21, 24, 32, 0.9);
+            --accent: #0284c7; --accent-glow: #0369a1; --border-purple: #272f3d;
+            --text-main: #f0f4f8; --text-muted: #94a3b8; --accent-rgb: 2, 132, 199;
+        }
+        /* 4. Azul Nocturno */
+        [data-theme="cyber-blue"] {
+            --bg-main: #0b1120; --bg-card: rgba(19, 29, 51, 0.85); --sidebar-bg: rgba(14, 22, 41, 0.9);
+            --accent: #3b82f6; --accent-glow: #2563eb; --border-purple: #1e293b;
+            --text-main: #f1f5f9; --text-muted: #94a3b8; --accent-rgb: 59, 130, 246;
+        }
+        /* 5. Verde Bosque */
+        [data-theme="matrix-green"] {
+            --bg-main: #0c1410; --bg-card: rgba(20, 33, 26, 0.85); --sidebar-bg: rgba(16, 28, 21, 0.9);
+            --accent: #10b981; --accent-glow: #059669; --border-purple: #1f3328;
+            --text-main: #f0fdf4; --text-muted: #86efac; --accent-rgb: 16, 185, 129;
+        }
+        /* 6. Dorado Cálido */
+        [data-theme="gold-dark"] {
+            --bg-main: #14120e; --bg-card: rgba(33, 30, 23, 0.85); --sidebar-bg: rgba(26, 23, 18, 0.9);
+            --accent: #d97706; --accent-glow: #b45309; --border-purple: #332d22;
+            --text-main: #fefce8; --text-muted: #d97706; --accent-rgb: 217, 119, 6;
+        }
+        /* 7. Cian Mate */
+        [data-theme="future-cyan"] {
+            --bg-main: #0c1518; --bg-card: rgba(19, 34, 40, 0.85); --sidebar-bg: rgba(15, 28, 33, 0.9);
+            --accent: #0891b2; --accent-glow: #0e7490; --border-purple: #1e333b;
+            --text-main: #f0fdfa; --text-muted: #99f6e4; --accent-rgb: 8, 145, 178;
+        }
+        /* 8. Rojo Vinotinto */
+        [data-theme="crimson-red"] {
+            --bg-main: #170e0f; --bg-card: rgba(38, 22, 24, 0.85); --sidebar-bg: rgba(31, 17, 19, 0.9);
+            --accent: #dc2626; --accent-glow: #b91c1c; --border-purple: #3b1d20;
+            --text-main: #fef2f2; --text-muted: #fca5a5; --accent-rgb: 220, 38, 38;
+        }
+        /* 9. Rosa Palo */
+        [data-theme="sunset-pink"] {
+            --bg-main: #170e14; --bg-card: rgba(38, 23, 33, 0.85); --sidebar-bg: rgba(31, 18, 27, 0.9);
+            --accent: #db2777; --accent-glow: #be185d; --border-purple: #3c2033;
+            --text-main: #fdf2f8; --text-muted: #fbcfe8; --accent-rgb: 219, 39, 119;
+        }
+        /* 10. Menta Suave */
+        [data-theme="mystic-mint"] {
+            --bg-main: #0e1413; --bg-card: rgba(22, 33, 31, 0.85); --sidebar-bg: rgba(17, 26, 24, 0.9);
+            --accent: #0d9488; --accent-glow: #0f766e; --border-purple: #203330;
+            --text-main: #f0fdfa; --text-muted: #99f6e4; --accent-rgb: 13, 148, 136;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
+        body { background-color: var(--bg-main); color: var(--text-main); line-height: 1.6; display: flex; min-height: 100vh; position: relative; }
+
+        /* CANVAS FONDO INTERACTIVO */
+        #bg-canvas { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 0; pointer-events: none; }
+
+        /* NAVEGACIÓN LATERAL */
+        aside {
+            width: 260px;
+            background-color: var(--sidebar-bg);
+            backdrop-filter: blur(8px);
+            border-right: 1px solid var(--border-purple);
+            padding: 2rem 1.2rem;
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            height: 100vh;
+            z-index: 1000;
+        }
+
+        .logo { 
+            font-size: 1.5rem; 
+            font-weight: 900; 
+            color: var(--text-main); 
+            letter-spacing: 1px; 
+            text-decoration: none; 
+            margin-bottom: 2rem;
+            display: block;
+            cursor: pointer;
+        }
+        .logo span { color: var(--accent); }
+
+        nav { display: flex; flex-direction: column; gap: 0.5rem; }
+
+        nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            padding: 0.8rem 1rem;
             border-radius: 8px;
+            border: 1px solid transparent;
+            cursor: pointer;
+            display: block;
+            transition: all 0.2s ease;
         }
 
-        /* Imágenes del carrusel */
-        .slide {
-            display: none; /* Ocultas por defecto */
+        nav a:hover, nav a.active {
+            color: var(--text-main);
+            background-color: var(--bg-card);
+            border-color: var(--border-purple);
+        }
+
+        /* SELECTOR DE TEMAS EN MENÚ */
+        .theme-selector-box {
+            margin-top: auto;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-purple);
+        }
+        .theme-selector-box label { font-size: 0.8rem; color: var(--text-muted); display: block; margin-bottom: 0.4rem; font-weight: bold; }
+        .theme-select {
             width: 100%;
-            height: auto;
+            padding: 0.5rem;
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            border: 1px solid var(--border-purple);
+            border-radius: 6px;
+            outline: none;
+            cursor: pointer;
+            font-size: 0.85rem;
         }
 
-        /* Transición suave al cambiar de imagen */
-        .fade {
-            animation-name: fade;
-            animation-duration: 1.5s;
+        /* CONTENIDO PRINCIPAL */
+        main {
+            margin-left: 260px;
+            flex-grow: 1;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            z-index: 1;
         }
 
-        @keyframes fade {
-            from { opacity: 0.4; }
-            to { opacity: 1; }
+        .hero {
+            text-align: center;
+            padding: 5rem 1.5rem;
+            border-bottom: 1px solid var(--border-purple);
+        }
+
+        .hero h1 { font-size: 2.8rem; margin-bottom: 1.2rem; color: var(--text-main); }
+        .hero p { color: var(--text-muted); max-width: 680px; margin: 0 auto 2.5rem auto; font-size: 1.1rem; }
+
+        .container { max-width: 1000px; margin: 0 auto; padding: 3rem 1.5rem; width: 100%; }
+        
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            border-left: 4px solid var(--accent);
+            padding-left: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+
+        .card {
+            background-color: var(--bg-card);
+            backdrop-filter: blur(8px);
+            border-radius: 12px;
+            padding: 1.8rem;
+            border: 1px solid var(--border-purple);
+            margin-bottom: 2rem;
+        }
+
+        .card-header-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.3rem 0.7rem;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+            text-transform: uppercase;
+            border: 1px solid var(--border-purple);
+            background-color: var(--bg-main);
+            color: var(--accent);
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--accent);
+            color: #ffffff;
+            padding: 0.7rem 1.4rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.9rem;
+            border: none;
+            cursor: pointer;
+            text-align: center;
+            transition: background 0.2s ease;
+        }
+
+        .btn:hover { background-color: var(--accent-glow); }
+        .btn-danger { background-color: #dc2626; }
+        .btn-danger:hover { background-color: #b91c1c; }
+        .btn-warning { background-color: #d97706; }
+        .btn-warning:hover { background-color: #b45309; }
+        .btn-secondary { background-color: var(--bg-main); border: 1px solid var(--border-purple); color: var(--text-main); }
+        .btn-secondary:hover { border-color: var(--accent); }
+        .btn-sm { padding: 0.4rem 0.8rem; font-size: 0.8rem; }
+
+        .page-section { display: none; }
+        .page-section.active-page { display: block; }
+
+        .game-img {
+            width: 100%;
+            max-height: 380px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin: 1rem 0;
+            border: 1px solid var(--border-purple);
+        }
+
+        /* BARRA DE PROGRESO */
+        .progress-container {
+            margin: 1.5rem 0;
+            background-color: var(--bg-main);
+            border-radius: 8px;
+            padding: 1rem;
+            border: 1px solid var(--border-purple);
+        }
+        .progress-header { display: flex; justify-content: space-between; font-weight: bold; margin-bottom: 0.5rem; }
+        .progress-bar-bg {
+            background-color: var(--bg-card);
+            height: 14px;
+            border-radius: 7px;
+            overflow: hidden;
+            border: 1px solid var(--border-purple);
+        }
+        .progress-bar-fill {
+            background-color: var(--accent);
+            height: 100%;
+            width: 0%;
+            transition: width 0.4s ease;
+        }
+
+        /* TRAMOS */
+        .tramos-list { display: flex; flex-direction: column; gap: 1rem; margin-top: 1rem; }
+        .tramo-card {
+            background: var(--bg-main);
+            border: 1px solid var(--border-purple);
+            padding: 1rem 1.2rem;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .admin-panel {
+            display: none;
+            background-color: var(--bg-card);
+            backdrop-filter: blur(8px);
+            border: 1px solid var(--accent);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .forum-input, .forum-textarea, .forum-select {
+            width: 100%;
+            padding: 0.8rem;
+            margin-bottom: 1rem;
+            background-color: var(--bg-main);
+            border: 1px solid var(--border-purple);
+            border-radius: 6px;
+            color: var(--text-main);
+            font-size: 0.95rem;
+        }
+
+        .forum-textarea { resize: vertical; min-height: 90px; }
+
+        .news-card, .forum-post {
+            background-color: var(--bg-card);
+            backdrop-filter: blur(8px);
+            border: 1px solid var(--border-purple);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .news-card { border-left: 4px solid var(--accent); }
+
+        /* CARRUSEL Y SLIDESHOW MODELOS 3D */
+        .carousel-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto 2rem auto;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border-purple);
+            background-color: var(--bg-main);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+        }
+
+        .carousel-slide-container {
+            position: relative;
+            width: 100%;
+            height: 420px;
+            overflow: hidden;
+        }
+
+        .carousel-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.8s ease-in-out;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+        }
+
+        .carousel-slide.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .carousel-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .carousel-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(0deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 70%, transparent 100%);
+            color: #ffffff;
+            padding: 1.5rem 1.5rem 1rem 1.5rem;
+            text-align: left;
+        }
+
+        .carousel-caption h3 {
+            font-size: 1.3rem;
+            color: var(--accent);
+            margin-bottom: 0.3rem;
+        }
+
+        .carousel-caption p {
+            font-size: 0.9rem;
+            color: #e0e0e0;
+        }
+
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: #ffffff;
+            border: 1px solid var(--border-purple);
+            font-size: 1.5rem;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .carousel-btn:hover {
+            background-color: var(--accent);
+            color: #fff;
+        }
+
+        .carousel-btn.prev { left: 15px; }
+        .carousel-btn.next { right: 15px; }
+
+        .carousel-indicators {
+            position: absolute;
+            bottom: 12px;
+            right: 20px;
+            display: flex;
+            gap: 8px;
+            z-index: 10;
+        }
+
+        .indicator-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.4);
+            cursor: pointer;
+            border: 1px solid rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .indicator-dot.active {
+            background-color: var(--accent);
+            width: 28px;
+            border-radius: 6px;
+        }
+
+        /* ADMIN LISTA MODELOS 3D */
+        .model-item-row {
+            background-color: var(--bg-main);
+            border: 1px solid var(--border-purple);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .model-item-preview {
+            width: 80px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 6px;
+            border: 1px solid var(--border-purple);
+            background-color: #000;
+        }
+
+        .model-item-details {
+            flex-grow: 1;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background-color: var(--bg-card);
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border-purple);
+            margin-top: 4rem;
         }
     </style>
 </head>
-<body>
+<body data-theme="brown-black">
 
-    <h1>Título Principal</h1>
-    <p>Este es un texto explicativo antes del carrusel de imágenes.</p>
+    <canvas id="bg-canvas"></canvas>
 
-    <!-- CARRUSEL DE IMÁGENES -->
-    <div class="carrusel-contenedor">
-        <!-- Reemplaza las rutas 'imagen1.jpg', 'imagen2.jpg', etc., por tus archivos -->
-        <img class="slide fade" src="imagen1.jpg" alt="Primera imagen">
-        <img class="slide fade" src="imagen2.jpg" alt="Segunda imagen">
-        <img class="slide fade" src="imagen3.jpg" alt="Tercera imagen">
-    </div>
+    <!-- MENÚ LATERAL -->
+    <aside>
+        <a onclick="showPage('inicio')" class="logo">ANON <span>RAILS</span></a>
+        <nav>
+            <a onclick="showPage('inicio')" id="nav-inicio" class="active">🏠 Inicio</a>
+            <a onclick="showPage('novedades')" id="nav-novedades">📢 Novedades</a>
+            <a onclick="showPage('juegos')" id="nav-juegos">🎮 Juegos</a>
+            <a onclick="showPage('foro')" id="nav-foro">💬 Foro</a>
+            <a onclick="showPage('modelos3d')" id="nav-modelos3d">📦 Modelos 3D</a>
+            <a onclick="showPage('nosotros')" id="nav-nosotros">👥 Sobre Nosotros</a>
+        </nav>
 
-    <h2>Subtítulo</h2>
-    <p>Texto adicional debajo del carrusel de fotos.</p>
+        <div class="theme-selector-box">
+            <label for="theme-select">🎨 Tema de Color:</label>
+            <select id="theme-select" class="theme-select" onchange="changeTheme(this.value)">
+                <option value="brown-black">🪵 Marrón & Negro Moderno</option>
+                <option value="purple">🔮 Púrpura Elegante</option>
+                <option value="space-gray">⚙️ Gris Espacial Moderno</option>
+                <option value="cyber-blue">🟦 Azul Nocturno</option>
+                <option value="matrix-green">🟢 Verde Bosque</option>
+                <option value="gold-dark">👑 Dorado Cálido</option>
+                <option value="future-cyan">💎 Cian Mate</option>
+                <option value="crimson-red">🔴 Rojo Vinotinto</option>
+                <option value="sunset-pink">🌸 Rosa Palo</option>
+                <option value="mystic-mint">🍃 Menta Suave</option>
+            </select>
+        </div>
+    </aside>
 
-    <!-- SCRIPT PARA EL CAMBIO AUTOMÁTICO DE IMÁGENES -->
+    <main>
+        <div>
+            <!-- INICIO -->
+            <div id="page-inicio" class="page-section active-page">
+                <section class="hero">
+                    <h1>Simulación Ferroviaria de Alta Calidad</h1>
+                    <p>Desarrollamos experiencias ferroviarias inmersivas. Realismo, detalle y pasión por las vías.</p>
+                    <a onclick="showPage('juegos')" class="btn">Explorar Juegos</a>
+                </section>
+
+                <div class="container">
+                    <div class="section-title">Destacados</div>
+                    <div class="grid">
+                        <div class="card" style="margin-bottom:0;">
+                            <span class="badge">Nuestros Proyectos</span>
+                            <h3 style="margin-bottom: 0.5rem;">Catálogo de Juegos</h3>
+                            <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Explora los juegos en desarrollo, plataformas, avances y sus respectivos manuales.</p>
+                            <a onclick="showPage('juegos')" class="btn">Ver Juegos</a>
+                        </div>
+                        <div class="card" style="margin-bottom:0;">
+                            <span class="badge">Comunidad</span>
+                            <h3 style="margin-bottom: 0.5rem;">Foro Comunitario</h3>
+                            <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Comparte sugerencias, reporta errores y platica sobre simuladores con la comunidad.</p>
+                            <a onclick="showPage('foro')" class="btn">Ir al Foro</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- NOVEDADES -->
+            <div id="page-novedades" class="page-section">
+                <div class="container">
+                    <div class="section-title">
+                        <span>Novedades y Actualizaciones</span>
+                        <button onclick="toggleAdminPanel('admin-panel-news')" class="btn btn-sm">🔒 Modo Admin</button>
+                    </div>
+
+                    <div id="admin-panel-news" class="admin-panel">
+                        <h3 style="margin-bottom: 1rem; color: var(--accent);">🛠️ Publicar Nueva Novedad</h3>
+                        <input type="text" id="news-title" class="forum-input" placeholder="Título de la novedad">
+                        <input type="text" id="news-image-url" class="forum-input" placeholder="URL de la imagen (Link)">
+                        <textarea id="news-content" class="forum-textarea" placeholder="Escribe la descripción de la novedad..."></textarea>
+                        <button onclick="addNews()" class="btn">Publicar Novedad</button>
+                    </div>
+
+                    <div id="news-container"></div>
+                </div>
+            </div>
+
+            <!-- JUEGOS -->
+            <div id="page-juegos" class="page-section">
+                <div class="container">
+                    <div class="section-title">
+                        <span>Juegos de Anon Rails</span>
+                        <button onclick="toggleAdminPanel('admin-panel-juegos')" class="btn btn-sm">🔒 Panel Admin</button>
+                    </div>
+
+                    <!-- PANEL DE ADMINISTRACIÓN DE JUEGOS Y TRAMOS -->
+                    <div id="admin-panel-juegos" class="admin-panel">
+                        <h3 style="margin-bottom: 1rem; color: var(--accent);" id="game-form-title">🎮 Crear / Editar Juego</h3>
+                        <input type="hidden" id="edit-game-id" value="-1">
+                        
+                        <label style="color: var(--text-muted); font-size: 0.85rem;">Nombre del Juego:</label>
+                        <input type="text" id="input-game-title" class="forum-input" placeholder="Ej: Metroverso WorldWide">
+
+                        <label style="color: var(--text-muted); font-size: 0.85rem;">Plataforma:</label>
+                        <input type="text" id="input-game-platform" class="forum-input" placeholder="Ej: Roblox, PC / Standalone, OpenBVE">
+
+                        <label style="color: var(--text-muted); font-size: 0.85rem;">URL de Imagen del Juego (Link):</label>
+                        <input type="text" id="input-game-image" class="forum-input" placeholder="https://ejemplo.com/imagen.jpg">
+
+                        <label style="color: var(--text-muted); font-size: 0.85rem;">URL del Manual / Guía (Link):</label>
+                        <input type="text" id="input-game-manual" class="forum-input" placeholder="https://ejemplo.com/manual.pdf">
+
+                        <label style="color: var(--text-muted); font-size: 0.85rem;">Descripción:</label>
+                        <textarea id="input-game-desc" class="forum-textarea" placeholder="Descripción detallada del juego..."></textarea>
+
+                        <label style="color: var(--text-muted); font-size: 0.85rem;">Porcentaje de Avance (1 - 100):</label>
+                        <input type="number" id="input-game-progress" class="forum-input" min="1" max="100" placeholder="Ej: 45">
+
+                        <label style="color: var(--text-muted); font-size: 0.85rem;">Etapa Actual:</label>
+                        <input type="text" id="input-game-stage" class="forum-input" placeholder="Ej: Fase Beta / Modelado de Vías">
+
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 2rem;">
+                            <button onclick="saveGame()" class="btn" id="btn-save-game">Guardar Juego</button>
+                            <button onclick="resetGameForm()" class="btn btn-danger" id="btn-cancel-game" style="display: none;">Cancelar</button>
+                        </div>
+
+                        <hr style="border-color: var(--border-purple); margin-bottom: 1.5rem;">
+
+                        <h3 style="margin-bottom: 1rem; color: var(--accent);" id="tramo-form-title">🛤️ Agregar / Editar Tramo a un Juego</h3>
+                        <input type="hidden" id="edit-tramo-index" value="-1">
+
+                        <label style="color: var(--text-muted); font-size: 0.85rem;">Seleccionar Juego:</label>
+                        <select id="select-game-for-tramo" class="forum-select"></select>
+
+                        <input type="text" id="input-linea" class="forum-input" placeholder="Nombre del Tramo / Línea (Ej: Línea Mitre)">
+                        <input type="number" id="input-km" class="forum-input" placeholder="Longitud en KM (Ej: 24)">
+                        <input type="text" id="input-origen-destino" class="forum-input" placeholder="Trayecto (Ej: Retiro - Tigre)">
+
+                        <div style="display: flex; gap: 0.5rem;">
+                            <button onclick="saveTramo()" class="btn" id="btn-save-tramo">Guardar Tramo</button>
+                            <button onclick="resetTramoForm()" class="btn btn-danger" id="btn-cancel-tramo" style="display: none;">Cancelar</button>
+                        </div>
+                    </div>
+
+                    <!-- CONTENEDOR DE JUEGOS DINÁMICO -->
+                    <div id="games-container"></div>
+                </div>
+            </div>
+
+            <!-- FORO -->
+            <div id="page-foro" class="page-section">
+                <div class="container">
+                    <div class="section-title">Foro de la Comunidad</div>
+                    
+                    <div class="admin-panel" style="display:block;">
+                        <h3 style="margin-bottom: 1rem; color: var(--accent);">Crear una publicación</h3>
+                        <input type="text" id="post-author" class="forum-input" placeholder="Tu usuario (Ej: FerroFan99)">
+                        <input type="text" id="post-title" class="forum-input" placeholder="Título de la publicación">
+                        <textarea id="post-content" class="forum-textarea" placeholder="Escribe el contenido..."></textarea>
+                        <button onclick="addPost()" class="btn">Publicar Tema</button>
+                    </div>
+
+                    <h3 style="margin-bottom: 1.5rem;">Publicaciones Recientes</h3>
+                    <div id="forum-posts-container"></div>
+                </div>
+            </div>
+
+            <!-- MODELOS 3D -->
+            <div id="page-modelos3d" class="page-section">
+                <div class="container">
+                    <div class="section-title">
+                        <span>Modelos 3D</span>
+                        <button onclick="toggleAdminPanel('admin-panel-modelos3d')" class="btn btn-sm">🔒 Gestor 3D Admin</button>
+                    </div>
+                    <p style="color: var(--text-muted); font-size: 1.1rem; margin-bottom: 2rem;">Catálogo e imágenes de trenes, señalizaciones y objetos 3D desarrollados para nuestras experiencias.</p>
+
+                    <!-- PANEL DE ADMINISTRACIÓN DE GALERÍA Y SLIDESHOW DE MODELOS 3D -->
+                    <div id="admin-panel-modelos3d" class="admin-panel">
+                        <h3 style="margin-bottom: 1rem; color: var(--accent);" id="model3d-form-title">📦 Agregar / Editar Imagen de Modelo 3D</h3>
+                        <input type="hidden" id="edit-model3d-id" value="-1">
+
+                        <label style="color: var(--text-muted); font-size: 0.85rem;">Título del Modelo / Imagen:</label>
+                        <input type="text" id="input-model3d-title" class="forum-input" placeholder="Ej: Locomotora Diésel CSR SDD7">
+
+                        <label style="color: var(--text-muted); font-size: 0.85rem;">Categoría / Etiqueta:</label>
+                        <input type="text" id="input-model3d-category" class="forum-input" placeholder="Ej: Material Rodante / Infraestructura / Señalización">
+
+                        <label style="color: var(--text-muted); font-size: 0.85rem;">URL de la Imagen (Link):</label>
+                        <input type="text" id="input-model3d-image" class="forum-input" placeholder="https://ejemplo.com/imagen_modelo.jpg">
+
+                        <label style="color: var(--text-muted); font-size: 0.85rem;">Descripción Corta:</label>
+                        <textarea id="input-model3d-desc" class="forum-textarea" placeholder="Breve descripción del elemento modelado..."></textarea>
+
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1.5rem;">
+                            <button onclick="saveModel3D()" class="btn" id="btn-save-model3d">Guardar Modelo</button>
+                            <button onclick="resetModel3DForm()" class="btn btn-danger" id="btn-cancel-model3d" style="display: none;">Cancelar</button>
+                        </div>
+
+                        <h4 style="color: var(--text-main); margin-bottom: 1rem; border-top: 1px solid var(--border-purple); padding-top: 1rem;">Lista de Modelos Guardados</h4>
+                        <div id="admin-models3d-list"></div>
+                    </div>
+
+                    <!-- CARRUSEL SLIDESHOW AUTOMÁTICO -->
+                    <div class="carousel-wrapper" onmouseenter="pauseCarousel()" onmouseleave="resumeCarousel()">
+                        <div class="carousel-slide-container" id="carousel-slides-container">
+                            <!-- Inyectado dinámicamente -->
+                        </div>
+
+                        <!-- Botones de navegación manual -->
+                        <button class="carousel-btn prev" onclick="prevSlide()" title="Anterior">❮</button>
+                        <button class="carousel-btn next" onclick="nextSlide()" title="Siguiente">❯</button>
+
+                        <!-- Indicadores -->
+                        <div class="carousel-indicators" id="carousel-indicators-container"></div>
+                    </div>
+
+                    <!-- TARJETAS DE CATEGORÍAS -->
+                    <div class="grid" id="models3d-cards-grid">
+                        <div class="card" style="margin-bottom:0;">
+                            <span class="badge">Modelado 3D</span>
+                            <h3 style="margin-bottom: 0.5rem;">Locomotoras & Formaciones</h3>
+                            <p style="color: var(--text-muted);">Modelos detallados de material rodante optimizados para simulación en vivo.</p>
+                        </div>
+                        <div class="card" style="margin-bottom:0;">
+                            <span class="badge">Infraestructura</span>
+                            <h3 style="margin-bottom: 0.5rem;">Señales y Catenarias</h3>
+                            <p style="color: var(--text-muted);">Elementos de vía, cambios de agujas y sistemas de señalización interactivos.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SOBRE NOSOTROS -->
+            <div id="page-nosotros" class="page-section">
+                <div class="container">
+                    <div class="section-title">Sobre Nosotros</div>
+                    <p style="color: var(--text-muted); font-size: 1.1rem;">Somos Anon Rails, apasionados por el desarrollo de simuladores de trenes realistas.</p>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>&copy; 2026 Anon Rails. Todos los derechos reservados.</p>
+        </footer>
+    </main>
+
     <script>
-        let indice = 0;
-        mostrarSlides();
+        let isAdminLoggedIn = false;
 
-        function mostrarSlides() {
-            let i;
-            let slides = document.getElementsByClassName("slide");
-            
-            // Oculta todas las imágenes
-            for (i = 0; i < slides.length; i++) {
-                slides[i].style.display = "none";  
-            }
-            
-            indice++;
-            if (indice > slides.length) { indice = 1; }    
-            
-            // Muestra la imagen actual
-            slides[indice - 1].style.display = "block";  
-            
-            // Cambia la imagen cada 3000 milisegundos (3 segundos)
-            setTimeout(mostrarSlides, 3000); 
+        function showPage(pageId) {
+            document.querySelectorAll('.page-section').forEach(p => p.classList.remove('active-page'));
+            document.querySelectorAll('nav a').forEach(l => l.classList.remove('active'));
+
+            const targetPage = document.getElementById('page-' + pageId);
+            if (targetPage) targetPage.classList.add('active-page');
+
+            const targetNav = document.getElementById('nav-' + pageId);
+            if (targetNav) targetNav.classList.add('active');
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
-    </script>
 
+        // --- TEMA DE COLOR ---
+        function changeTheme(themeKey) {
+            document.body.setAttribute('data-theme', themeKey);
+            localStorage.setItem('selected_theme', themeKey);
+        }
+
+        function loadTheme() {
+            const savedTheme = localStorage.getItem('selected_theme') || 'brown-black';
+            document.body.setAttribute('data-theme', savedTheme);
+            const themeSelect = document.getElementById('theme-select');
+            if (themeSelect) themeSelect.value = savedTheme;
+        }
+
+        // --- PANEL DE ADMIN (CLAVE 6860) ---
+        function toggleAdminPanel(panelId) {
+            const panel = document.getElementById(panelId);
+            if (!panel) return;
+
+            if (panel.style.display === 'block') {
+                panel.style.display = 'none';
+            } else {
+                if (isAdminLoggedIn) {
+                    panel.style.display = 'block';
+                } else {
+                    const pass = prompt("Introduce la contraseña de Administrador:");
+                    if (pass === "6860") {
+                        isAdminLoggedIn = true;
+                        panel.style.display = 'block';
+                        renderGames(); // Recarga para activar botones de administración
+                        renderModels3DAdmin(); // Recarga la administración de modelos
+                    } else if (pass !== null) {
+                        alert("Contraseña incorrecta.");
+                    }
+                }
+            }
+        }
+
+        // --- SISTEMA DE JUEGOS Y TRAMOS ---
+        const defaultGames = [
+            {
+                id: 1,
+                title: "Metroverso WorldWide",
+                platform: "Roblox",
+                image: "https://images.unsplash.com/photo-1515165562839-978bbcf1b267?auto=format&fit=crop&w=1000&q=80",
+                manual: "",
+                description: "Simulador ferroviario inmersivo con líneas interurbanas, señalización realista y material rodante detallado.",
+                progress: 45,
+                stage: "Desarrollo Alfa / Vías y Estaciones",
+                tramos: [
+                    { linea: "Línea Principal A", km: 15, trayecto: "Estación Central - San Martín" }
+                ]
+            }
+        ];
+
+        function getGamesData() {
+            return JSON.parse(localStorage.getItem('anon_rails_games')) || defaultGames;
+        }
+
+        function saveGamesData(games) {
+            localStorage.setItem('anon_rails_games', JSON.stringify(games));
+        }
+
+        function renderGames() {
+            const games = getGamesData();
+            const container = document.getElementById('games-container');
+            const selectGame = document.getElementById('select-game-for-tramo');
+            
+            if (!container || !selectGame) return;
+
+            container.innerHTML = '';
+            selectGame.innerHTML = '';
+
+            games.forEach((game) => {
+                // Opción para el selector de tramos
+                const option = document.createElement('option');
+                option.value = game.id;
+                option.textContent = game.title;
+                selectGame.appendChild(option);
+
+                // Tarjeta de Juego
+                const gameCard = document.createElement('div');
+                gameCard.className = 'card';
+
+                let adminActions = '';
+                if (isAdminLoggedIn) {
+                    adminActions = `
+                        <div style="display:flex; gap:0.5rem; margin-top:0.5rem;">
+                            <button onclick="prepareEditGame(${game.id})" class="btn btn-warning btn-sm">✏️ Editar Juego</button>
+                            <button onclick="deleteGame(${game.id})" class="btn btn-danger btn-sm">🗑️ Borrar Juego</button>
+                        </div>
+                    `;
+                }
+
+                let manualBtn = game.manual ? `<a href="${game.manual}" target="_blank" class="btn btn-secondary btn-sm" style="margin-top:0.5rem;">📖 Ver Manual / Guía</a>` : '';
+
+                let tramosHtml = '';
+                if (game.tramos && game.tramos.length > 0) {
+                    game.tramos.forEach((tramo, tIndex) => {
+                        let tramoAdminBtns = '';
+                        if (isAdminLoggedIn) {
+                            tramoAdminBtns = `
+                                <div>
+                                    <button onclick="prepareEditTramo(${game.id}, ${tIndex})" class="btn btn-warning btn-sm">✏️ Edit</button>
+                                    <button onclick="deleteTramo(${game.id}, ${tIndex})" class="btn btn-danger btn-sm">🗑️ Del</button>
+                                </div>
+                            `;
+                        }
+
+                        tramosHtml += `
+                            <div class="tramo-card">
+                                <div>
+                                    <h4 style="color: var(--accent); font-size: 1rem;">${tramo.linea}</h4>
+                                    <p style="font-size: 0.85rem; color: var(--text-main);"><strong>Distancia:</strong> ${tramo.km} km</p>
+                                    <p style="font-size: 0.85rem; color: var(--text-muted);"><strong>Trayecto:</strong> ${tramo.trayecto}</p>
+                                </div>
+                                ${tramoAdminBtns}
+                            </div>
+                        `;
+                    });
+                } else {
+                    tramosHtml = `<p style="color: var(--text-muted); font-size: 0.9rem;">No hay tramos registrados aún.</p>`;
+                }
+
+                gameCard.innerHTML = `
+                    <div class="card-header-flex">
+                        <div>
+                            <span class="badge">Plataforma: ${game.platform}</span>
+                            <h2 style="font-size: 1.8rem; color: var(--text-main);">${game.title}</h2>
+                        </div>
+                        ${adminActions}
+                    </div>
+
+                    ${game.image ? `<img src="${game.image}" class="game-img" alt="Imagen del juego" onerror="this.src='https://placehold.co/800x400/221e1a/c67d34?text=Anon+Rails+Juego'">` : ''}
+
+                    <p style="color: var(--text-muted); margin-top: 0.8rem;">${game.description}</p>
+                    ${manualBtn}
+
+                    <div class="progress-container">
+                        <div class="progress-header">
+                            <span style="color: var(--text-muted);">Etapa: <span style="color: var(--text-main);">${game.stage}</span></span>
+                            <span style="color: var(--accent);">${game.progress}%</span>
+                        </div>
+                        <div class="progress-bar-bg">
+                            <div class="progress-bar-fill" style="width: ${game.progress}%;"></div>
+                        </div>
+                    </div>
+
+                    <h3 style="color: var(--accent); margin-top: 1.5rem; border-top: 1px solid var(--border-purple); padding-top: 1rem;">🛤️ Tramos e Información</h3>
+                    <div class="tramos-list">${tramosHtml}</div>
+                `;
+
+                container.appendChild(gameCard);
+            });
+        }
+
+        function saveGame() {
+            const editId = parseInt(document.getElementById('edit-game-id').value);
+            const title = document.getElementById('input-game-title').value.trim();
+            const platform = document.getElementById('input-game-platform').value.trim();
+            const image = document.getElementById('input-game-image').value.trim();
+            const manual = document.getElementById('input-game-manual').value.trim();
+            const desc = document.getElementById('input-game-desc').value.trim();
+            const progress = parseInt(document.getElementById('input-game-progress').value) || 0;
+            const stage = document.getElementById('input-game-stage').value.trim();
+
+            if (!title) { alert("Por favor, ingresa el título del juego."); return; }
+
+            let games = getGamesData();
+
+            if (editId === -1) {
+                // Nuevo juego
+                const newGame = {
+                    id: Date.now(),
+                    title,
+                    platform: platform || "Roblox",
+                    image,
+                    manual,
+                    description: desc,
+                    progress,
+                    stage: stage || "En Desarrollo",
+                    tramos: []
+                };
+                games.push(newGame);
+            } else {
+                // Editar juego existente
+                games = games.map(g => {
+                    if (g.id === editId) {
+                        return {
+                            ...g,
+                            title,
+                            platform: platform || g.platform,
+                            image,
+                            manual,
+                            description: desc,
+                            progress,
+                            stage: stage || g.stage
+                        };
+                    }
+                    return g;
+                });
+            }
+
+            saveGamesData(games);
+            resetGameForm();
+            renderGames();
+        }
+
+        function prepareEditGame(gameId) {
+            const games = getGamesData();
+            const game = games.find(g => g.id === gameId);
+            if (!game) return;
+
+            document.getElementById('edit-game-id').value = game.id;
+            document.getElementById('input-game-title').value = game.title;
+            document.getElementById('input-game-platform').value = game.platform;
+            document.getElementById('input-game-image').value = game.image;
+            document.getElementById('input-game-manual').value = game.manual;
+            document.getElementById('input-game-desc').value = game.description;
+            document.getElementById('input-game-progress').value = game.progress;
+            document.getElementById('input-game-stage').value = game.stage;
+
+            document.getElementById('game-form-title').innerText = "✏️ Editar Juego: " + game.title;
+            document.getElementById('btn-save-game').innerText = "Actualizar Juego";
+            document.getElementById('btn-cancel-game').style.display = "inline-block";
+
+            window.scrollTo({ top: document.getElementById('admin-panel-juegos').offsetTop - 20, behavior: 'smooth' });
+        }
+
+        function resetGameForm() {
+            document.getElementById('edit-game-id').value = "-1";
+            document.getElementById('input-game-title').value = "";
+            document.getElementById('input-game-platform').value = "";
+            document.getElementById('input-game-image').value = "";
+            document.getElementById('input-game-manual').value = "";
+            document.getElementById('input-game-desc').value = "";
+            document.getElementById('input-game-progress').value = "";
+            document.getElementById('input-game-stage').value = "";
+
+            document.getElementById('game-form-title').innerText = "🎮 Crear / Editar Juego";
+            document.getElementById('btn-save-game').innerText = "Guardar Juego";
+            document.getElementById('btn-cancel-game').style.display = "none";
+        }
+
+        function deleteGame(gameId) {
+            if (confirm("¿Estás seguro de eliminar este juego?")) {
+                let games = getGamesData();
+                games = games.filter(g => g.id !== gameId);
+                saveGamesData(games);
+                renderGames();
+            }
+        }
+
+        function saveTramo() {
+            const gameId = parseInt(document.getElementById('select-game-for-tramo').value);
+            const tramoIndex = parseInt(document.getElementById('edit-tramo-index').value);
+            const linea = document.getElementById('input-linea').value.trim();
+            const km = parseFloat(document.getElementById('input-km').value) || 0;
+            const trayecto = document.getElementById('input-origen-destino').value.trim();
+
+            if (!linea) { alert("Ingresa el nombre de la línea o tramo."); return; }
+            if (!gameId) { alert("Selecciona un juego."); return; }
+
+            let games = getGamesData();
+            const game = games.find(g => g.id === gameId);
+
+            if (game) {
+                if (!game.tramos) game.tramos = [];
+
+                if (tramoIndex === -1) {
+                    game.tramos.push({ linea, km, trayecto });
+                } else {
+                    game.tramos[tramoIndex] = { linea, km, trayecto };
+                }
+
+                saveGamesData(games);
+                resetTramoForm();
+                renderGames();
+            }
+        }
+
+        function prepareEditTramo(gameId, tramoIndex) {
+            const games = getGamesData();
+            const game = games.find(g => g.id === gameId);
+            if (!game || !game.tramos[tramoIndex]) return;
+
+            const tramo = game.tramos[tramoIndex];
+
+            document.getElementById('select-game-for-tramo').value = gameId;
+            document.getElementById('edit-tramo-index').value = tramoIndex;
+            document.getElementById('input-linea').value = tramo.linea;
+            document.getElementById('input-km').value = tramo.km;
+            document.getElementById('input-origen-destino').value = tramo.trayecto;
+
+            document.getElementById('tramo-form-title').innerText = "✏️ Editar Tramo de " + game.title;
+            document.getElementById('btn-save-tramo').innerText = "Actualizar Tramo";
+            document.getElementById('btn-cancel-tramo').style.display = "inline-block";
+
+            window.scrollTo({ top: document.getElementById('admin-panel-juegos').offsetTop - 20, behavior: 'smooth' });
+        }
+
+        function resetTramoForm() {
+            document.getElementById('edit-tramo-index').value = "-1";
+            document.getElementById('input-linea').value = "";
+            document.getElementById('input-km').value = "";
+            document.getElementById('input-origen-destino').value = "";
+
+            document.getElementById('tramo-form-title').innerText = "🛤️ Agregar / Editar Tramo a un Juego";
+            document.getElementById('btn-save-tramo').innerText = "Guardar Tramo";
+            document.getElementById('btn-cancel-tramo').style.display = "none";
+        }
+
+        function deleteTramo(gameId, tramoIndex) {
+            if (confirm("¿Borrar este tramo?")) {
+                let games = getGamesData();
+                const game = games.find(g => g.id === gameId);
+                if (game && game.tramos) {
+                    game.tramos.splice(tramoIndex, 1);
+                    saveGamesData(games);
+                    renderGames();
+                }
+            }
+        }
+
+        // --- SISTEMA DE MODELOS 3D, SLIDESHOW Y GALERÍA DYNÁMICA ---
+        const defaultModels3D = [
+            {
+                id: 1,
+                title: "Locomotora Diésel GM GT22CW",
+                category: "Material Rodante",
+                image: "https://images.unsplash.com/photo-1474487548417-781cb71495f3?auto=format&fit=crop&w=1200&q=80",
+                description: "Modelo 3D de alta fidelidad con bogies articulados, textura mate y física personalizada."
+            },
+            {
+                id: 2,
+                title: "Señalamiento Luminoso LED Ferroviario",
+                category: "Infraestructura",
+                image: "https://images.unsplash.com/photo-1515165562839-978bbcf1b267?auto=format&fit=crop&w=1200&q=80",
+                description: "Sistema de señales programables con lógica de cantones automática."
+            },
+            {
+                id: 3,
+                title: "Coche de Pasajeros de Larga Distancia",
+                category: "Material Rodante",
+                image: "https://images.unsplash.com/photo-1541427468627-a89a96e5ca1d?auto=format&fit=crop&w=1200&q=80",
+                description: "Interior modelado con asientos reclinables, iluminación nocturna e intercomunicadores."
+            }
+        ];
+
+        let currentSlideIndex = 0;
+        let carouselTimer = null;
+
+        function getModels3DData() {
+            return JSON.parse(localStorage.getItem('anon_rails_models3d')) || defaultModels3D;
+        }
+
+        function saveModels3DData(models) {
+            localStorage.setItem('anon_rails_models3d', JSON.stringify(models));
+        }
+
+        function renderCarousel() {
+            const models = getModels3DData();
+            const slidesContainer = document.getElementById('carousel-slides-container');
+            const indicatorsContainer = document.getElementById('carousel-indicators-container');
+
+            if (!slidesContainer || !indicatorsContainer) return;
+
+            slidesContainer.innerHTML = '';
+            indicatorsContainer.innerHTML = '';
+
+            if (models.length === 0) {
+                slidesContainer.innerHTML = `
+                    <div class="carousel-slide active" style="background:#1a1a1a; display:flex; justify-content:center; align-items:center;">
+                        <p style="color:var(--text-muted);">No hay modelos 3D disponibles en la galería.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            if (currentSlideIndex >= models.length) {
+                currentSlideIndex = 0;
+            }
+
+            models.forEach((model, idx) => {
+                // Slide Item
+                const slideEl = document.createElement('div');
+                slideEl.className = `carousel-slide ${idx === currentSlideIndex ? 'active' : ''}`;
+                slideEl.innerHTML = `
+                    <img src="${model.image}" alt="${model.title}" onerror="this.src='https://placehold.co/900x420/1c1815/c67d34?text=${encodeURIComponent(model.title)}'">
+                    <div class="carousel-caption">
+                        <span class="badge" style="margin-bottom:0.3rem;">${model.category}</span>
+                        <h3>${model.title}</h3>
+                        <p>${model.description}</p>
+                    </div>
+                `;
+                slidesContainer.appendChild(slideEl);
+
+                // Indicator Dot
+                const dotEl = document.createElement('div');
+                dotEl.className = `indicator-dot ${idx === currentSlideIndex ? 'active' : ''}`;
+                dotEl.onclick = () => goToSlide(idx);
+                indicatorsContainer.appendChild(dotEl);
+            });
+        }
+
+        function showSlide(index) {
+            const models = getModels3DData();
+            if (models.length === 0) return;
+
+            if (index < 0) {
+                currentSlideIndex = models.length - 1;
+            } else if (index >= models.length) {
+                currentSlideIndex = 0;
+            } else {
+                currentSlideIndex = index;
+            }
+
+            renderCarousel();
+        }
+
+        function nextSlide() {
+            showSlide(currentSlideIndex + 1);
+        }
+
+        function prevSlide() {
+            showSlide(currentSlideIndex - 1);
+        }
+
+        function goToSlide(index) {
+            showSlide(index);
+        }
+
+        function startCarousel() {
+            stopCarousel();
+            carouselTimer = setInterval(() => {
+                nextSlide();
+            }, 4000); // Cambia automáticamente cada 4 segundos
+        }
+
+        function stopCarousel() {
+            if (carouselTimer) {
+                clearInterval(carouselTimer);
+                carouselTimer = null;
+            }
+        }
+
+        function pauseCarousel() {
+            stopCarousel();
+        }
+
+        function resumeCarousel() {
+            startCarousel();
+        }
+
+        // --- GESTIÓN DE MODELOS 3D EN MODO ADMIN ---
+        function renderModels3DAdmin() {
+            const models = getModels3DData();
+            const container = document.getElementById('admin-models3d-list');
+            if (!container) return;
+
+            container.innerHTML = '';
+
+            if (models.length === 0) {
+                container.innerHTML = `<p style="color:var(--text-muted); font-size:0.9rem;">No hay modelos guardados.</p>`;
+                return;
+            }
+
+            models.forEach((model) => {
+                const itemRow = document.createElement('div');
+                itemRow.className = 'model-item-row';
+                itemRow.innerHTML = `
+                    <img src="${model.image}" class="model-item-preview" alt="Preview" onerror="this.src='https://placehold.co/80x60/12100e/c67d34?text=3D'">
+                    <div class="model-item-details">
+                        <strong style="color:var(--text-main); font-size:0.95rem;">${model.title}</strong>
+                        <div style="font-size:0.8rem; color:var(--text-muted);">${model.category}</div>
+                    </div>
+                    <div style="display:flex; gap:0.4rem;">
+                        <button onclick="prepareEditModel3D(${model.id})" class="btn btn-warning btn-sm">✏️ Editar</button>
+                        <button onclick="deleteModel3D(${model.id})" class="btn btn-danger btn-sm">🗑️ Borrar</button>
+                    </div>
+                `;
+                container.appendChild(itemRow);
+            });
+        }
+
+        function saveModel3D() {
+            const editId = parseInt(document.getElementById('edit-model3d-id').value);
+            const title = document.getElementById('input-model3d-title').value.trim();
+            const category = document.getElementById('input-model3d-category').value.trim();
+            const image = document.getElementById('input-model3d-image').value.trim();
+            const desc = document.getElementById('input-model3d-desc').value.trim();
+
+            if (!title || !image) {
+                alert("Por favor, ingresa el título y la URL de la imagen del modelo 3D.");
+                return;
+            }
+
+            let models = getModels3DData();
+
+            if (editId === -1) {
+                models.push({
+                    id: Date.now(),
+                    title,
+                    category: category || "Modelado 3D",
+                    image,
+                    description: desc
+                });
+            } else {
+                models = models.map(m => {
+                    if (m.id === editId) {
+                        return { ...m, title, category: category || m.category, image, description: desc };
+                    }
+                    return m;
+                });
+            }
+
+            saveModels3DData(models);
+            resetModel3DForm();
+            renderCarousel();
+            renderModels3DAdmin();
+        }
+
+        function prepareEditModel3D(modelId) {
+            const models = getModels3DData();
+            const model = models.find(m => m.id === modelId);
+            if (!model) return;
+
+            document.getElementById('edit-model3d-id').value = model.id;
+            document.getElementById('input-model3d-title').value = model.title;
+            document.getElementById('input-model3d-category').value = model.category;
+            document.getElementById('input-model3d-image').value = model.image;
+            document.getElementById('input-model3d-desc').value = model.description;
+
+            document.getElementById('model3d-form-title').innerText = "✏️ Editar Imagen de Modelo 3D: " + model.title;
+            document.getElementById('btn-save-model3d').innerText = "Actualizar Modelo";
+            document.getElementById('btn-cancel-model3d').style.display = "inline-block";
+        }
+
+        function resetModel3DForm() {
+            document.getElementById('edit-model3d-id').value = "-1";
+            document.getElementById('input-model3d-title').value = "";
+            document.getElementById('input-model3d-category').value = "";
+            document.getElementById('input-model3d-image').value = "";
+            document.getElementById('input-model3d-desc').value = "";
+
+            document.getElementById('model3d-form-title').innerText = "📦 Agregar / Editar Imagen de Modelo 3D";
+            document.getElementById('btn-save-model3d').innerText = "Guardar Modelo";
+            document.getElementById('btn-cancel-model3d').style.display = "none";
+        }
+
+        function deleteModel3D(modelId) {
+            if (confirm("¿Eliminar este modelo 3D del slideshow?")) {
+                let models = getModels3DData();
+                models = models.filter(m => m.id !== modelId);
+                saveModels3DData(models);
+                renderCarousel();
+                renderModels3DAdmin();
+            }
+        }
+
+        // --- SISTEMA DE NOVEDADES ---
+        const defaultNews = [
+            {
+                id: 1,
+                title: "Próxima Actualización de Vías y Señalización",
+                image: "https://images.unsplash.com/photo-1515165562839-978bbcf1b267?auto=format&fit=crop&w=1000&q=80",
+                content: "Estamos trabajando en la reconstrucción completa del sistema de cambiavías e iluminación dinámica de cabina.",
+                date: "2026-03-28"
+            }
+        ];
+
+        function getNewsData() {
+            return JSON.parse(localStorage.getItem('anon_rails_news')) || defaultNews;
+        }
+
+        function saveNewsData(news) {
+            localStorage.setItem('anon_rails_news', JSON.stringify(news));
+        }
+
+        function renderNews() {
+            const news = getNewsData();
+            const container = document.getElementById('news-container');
+            if (!container) return;
+
+            container.innerHTML = '';
+            news.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'news-card';
+                card.innerHTML = `
+                    <h3 style="color: var(--accent); margin-bottom: 0.5rem;">${item.title}</h3>
+                    <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 1rem;">Publicado el: ${item.date}</p>
+                    ${item.image ? `<img src="${item.image}" class="game-img" alt="Novedad" onerror="this.style.display='none'">` : ''}
+                    <p style="color: var(--text-main);">${item.content}</p>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function addNews() {
+            const title = document.getElementById('news-title').value.trim();
+            const image = document.getElementById('news-image-url').value.trim();
+            const content = document.getElementById('news-content').value.trim();
+
+            if (!title || !content) { alert("Completa título y contenido."); return; }
+
+            const news = getNewsData();
+            news.unshift({
+                id: Date.now(),
+                title,
+                image,
+                content,
+                date: new Date().toISOString().split('T')[0]
+            });
+
+            saveNewsData(news);
+            document.getElementById('news-title').value = '';
+            document.getElementById('news-image-url').value = '';
+            document.getElementById('news-content').value = '';
+            renderNews();
+        }
+
+        // --- SISTEMA DE FORO ---
+        const defaultPosts = [
+            {
+                id: 1,
+                author: "FerroFan99",
+                title: "¿Qué opinan de las nuevas cabinas 3D?",
+                content: "El nivel de detalle del instrumental mate quedó excelente. ¡Felicidades al equipo!",
+                date: "2026-03-27"
+            }
+        ];
+
+        function getPostsData() {
+            return JSON.parse(localStorage.getItem('anon_rails_posts')) || defaultPosts;
+        }
+
+        function savePostsData(posts) {
+            localStorage.setItem('anon_rails_posts', JSON.stringify(posts));
+        }
+
+        function renderPosts() {
+            const posts = getPostsData();
+            const container = document.getElementById('forum-posts-container');
+            if (!container) return;
+
+            container.innerHTML = '';
+            posts.forEach(post => {
+                const card = document.createElement('div');
+                card.className = 'forum-post';
+                card.innerHTML = `
+                    <div style="display:flex; justify-content:space-between; margin-bottom:0.5rem;">
+                        <strong style="color: var(--accent);">${post.author}</strong>
+                        <span style="font-size: 0.8rem; color: var(--text-muted);">${post.date}</span>
+                    </div>
+                    <h4 style="margin-bottom: 0.5rem; color: var(--text-main);">${post.title}</h4>
+                    <p style="color: var(--text-muted); font-size: 0.95rem;">${post.content}</p>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function addPost() {
+            const author = document.getElementById('post-author').value.trim() || "Anónimo";
+            const title = document.getElementById('post-title').value.trim();
+            const content = document.getElementById('post-content').value.trim();
+
+            if (!title || !content) { alert("Escribe un título y contenido."); return; }
+
+            const posts = getPostsData();
+            posts.unshift({
+                id: Date.now(),
+                author,
+                title,
+                content,
+                date: new Date().toISOString().split('T')[0]
+            });
+
+            savePostsData(posts);
+            document.getElementById('post-author').value = '';
+            document.getElementById('post-title').value = '';
+            document.getElementById('post-content').value = '';
+            renderPosts();
+        }
+
+        // --- CANVAS DE FONDO INTERACTIVO DE PARTÍCULAS ---
+        function initBgCanvas() {
+            const canvas = document.getElementById('bg-canvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+
+            function resizeCanvas() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+            resizeCanvas();
+            window.addEventListener('resize', resizeCanvas);
+
+            const particles = [];
+            const particleCount = 35;
+
+            for (let i = 0; i < particleCount; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    size: Math.random() * 2 + 1,
+                    speedX: (Math.random() - 0.5) * 0.4,
+                    speedY: (Math.random() - 0.5) * 0.4,
+                    alpha: Math.random() * 0.5 + 0.2
+                });
+            }
+
+            function animateCanvas() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                const computedAccent = getComputedStyle(document.body).getPropertyValue('--accent').trim() || '#c67d34';
+
+                particles.forEach(p => {
+                    p.x += p.speedX;
+                    p.y += p.speedY;
+
+                    if (p.x < 0) p.x = canvas.width;
+                    if (p.x > canvas.width) p.x = 0;
+                    if (p.y < 0) p.y = canvas.height;
+                    if (p.y > canvas.height) p.y = 0;
+
+                    ctx.fillStyle = computedAccent;
+                    ctx.globalAlpha = p.alpha;
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                    ctx.fill();
+                });
+
+                requestAnimationFrame(animateCanvas);
+            }
+
+            animateCanvas();
+        }
+
+        // --- INICIALIZACIÓN GENERAL ---
+        window.onload = function() {
+            loadTheme();
+            renderGames();
+            renderNews();
+            renderPosts();
+            renderCarousel();
+            renderModels3DAdmin();
+            startCarousel();
+            initBgCanvas();
+        };
+    </script>
 </body>
 </html>
