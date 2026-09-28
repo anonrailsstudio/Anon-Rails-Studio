@@ -15,31 +15,77 @@
 
     <style>
         :root {
-            --bg-dark: #0f0a1c;
-            --bg-card: rgba(23, 16, 41, 0.85);
-            --bg-nav: rgba(15, 10, 28, 0.95);
-            --accent-pink: #fd3b69;
-            --accent-pink-hover: #e02854;
-            --text-main: #ffffff;
-            --text-muted: #a09abf;
-            --accent-rgb: 253, 59, 105;
+            --bg-dark: #080e18; 
+            --bg-card: rgba(16, 27, 46, 0.85); 
+            --bg-nav: rgba(8, 14, 24, 0.95);
+            --accent-pink: #00d2ff; 
+            --accent-pink-hover: #00a3cc;
+            --text-main: #f1f5f9; 
+            --text-muted: #8295a8; 
+            --accent-rgb: 0, 210, 255;
             --font-family: 'Roboto', sans-serif;
         }
 
-        [data-theme="brown-black"] {
-            --bg-dark: #120e0a; --bg-card: rgba(31, 23, 18, 0.85); --bg-nav: rgba(18, 14, 10, 0.95);
-            --accent-pink: #d97706; --accent-pink-hover: #b45309;
-            --text-main: #f5f0eb; --text-muted: #a39587; --accent-rgb: 217, 119, 6;
-        }
+        /* PALETAS DE COLOR / TEMAS */
         [data-theme="cyber-blue"] {
             --bg-dark: #080e18; --bg-card: rgba(16, 27, 46, 0.85); --bg-nav: rgba(8, 14, 24, 0.95);
             --accent-pink: #00d2ff; --accent-pink-hover: #00a3cc;
             --text-main: #f1f5f9; --text-muted: #8295a8; --accent-rgb: 0, 210, 255;
         }
+        [data-theme="brown-black"] {
+            --bg-dark: #120e0a; --bg-card: rgba(31, 23, 18, 0.85); --bg-nav: rgba(18, 14, 10, 0.95);
+            --accent-pink: #d97706; --accent-pink-hover: #b45309;
+            --text-main: #f5f0eb; --text-muted: #a39587; --accent-rgb: 217, 119, 6;
+        }
         [data-theme="matrix-green"] {
             --bg-dark: #06120b; --bg-card: rgba(15, 33, 22, 0.85); --bg-nav: rgba(6, 18, 11, 0.95);
             --accent-pink: #10b981; --accent-pink-hover: #059669;
             --text-main: #f0fdf4; --text-muted: #79a388; --accent-rgb: 16, 185, 129;
+        }
+        [data-theme="neon-violet"] {
+            --bg-dark: #0d0614; --bg-card: rgba(26, 15, 38, 0.85); --bg-nav: rgba(13, 6, 20, 0.95);
+            --accent-pink: #a855f7; --accent-pink-hover: #9333ea;
+            --text-main: #f8fafc; --text-muted: #94a3b8; --accent-rgb: 168, 85, 247;
+        }
+        [data-theme="ruby-red"] {
+            --bg-dark: #140606; --bg-card: rgba(38, 15, 15, 0.85); --bg-nav: rgba(20, 6, 6, 0.95);
+            --accent-pink: #ef4444; --accent-pink-hover: #dc2626;
+            --text-main: #fef2f2; --text-muted: #991b1b; --accent-rgb: 239, 68, 68;
+        }
+        [data-theme="sunset-orange"] {
+            --bg-dark: #140a06; --bg-card: rgba(38, 20, 15, 0.85); --bg-nav: rgba(20, 10, 6, 0.95);
+            --accent-pink: #f97316; --accent-pink-hover: #ea580c;
+            --text-main: #fff7ed; --text-muted: #9a3412; --accent-rgb: 249, 115, 22;
+        }
+        [data-theme="sakura-pink"] {
+            --bg-dark: #140610; --bg-card: rgba(38, 15, 30, 0.85); --bg-nav: rgba(20, 6, 16, 0.95);
+            --accent-pink: #ec4899; --accent-pink-hover: #db2777;
+            --text-main: #fdf2f8; --text-muted: #9d174d; --accent-rgb: 236, 72, 153;
+        }
+        [data-theme="electric-yellow"] {
+            --bg-dark: #121106; --bg-card: rgba(33, 31, 15, 0.85); --bg-nav: rgba(18, 17, 6, 0.95);
+            --accent-pink: #eab308; --accent-pink-hover: #ca8a04;
+            --text-main: #fefce8; --text-muted: #854d0e; --accent-rgb: 234, 179, 8;
+        }
+        [data-theme="ice-emerald"] {
+            --bg-dark: #051214; --bg-card: rgba(14, 34, 38, 0.85); --bg-nav: rgba(5, 18, 20, 0.95);
+            --accent-pink: #06b6d4; --accent-pink-hover: #0891b2;
+            --text-main: #ecfeff; --text-muted: #155e75; --accent-rgb: 6, 182, 212;
+        }
+        [data-theme="monochrome"] {
+            --bg-dark: #121212; --bg-card: rgba(28, 28, 28, 0.85); --bg-nav: rgba(18, 18, 18, 0.95);
+            --accent-pink: #e2e8f0; --accent-pink-hover: #cbd5e1;
+            --text-main: #ffffff; --text-muted: #64748b; --accent-rgb: 226, 232, 240;
+        }
+        [data-theme="copper-bronze"] {
+            --bg-dark: #120b08; --bg-card: rgba(33, 20, 16, 0.85); --bg-nav: rgba(18, 11, 8, 0.95);
+            --accent-pink: #c2410c; --accent-pink-hover: #9a3412;
+            --text-main: #fff7ed; --text-muted: #7c2d12; --accent-rgb: 194, 65, 12;
+        }
+        [data-theme="coral-reef"] {
+            --bg-dark: #0a1114; --bg-card: rgba(18, 30, 36, 0.85); --bg-nav: rgba(10, 17, 20, 0.95);
+            --accent-pink: #ff6b6b; --accent-pink-hover: #ee5253;
+            --text-main: #f8f9fa; --text-muted: #8395a7; --accent-rgb: 255, 107, 107;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -48,10 +94,11 @@
             background-color: var(--bg-dark); 
             color: var(--text-main); 
             font-family: var(--font-family);
-            font-weight: 300; /* FUENTE MÁS FINA / DELGADA */
+            font-weight: 300;
             overflow-x: hidden; 
             min-height: 100vh; 
             position: relative; 
+            transition: background-color 0.4s ease, color 0.4s ease;
         }
 
         #bg-canvas { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 0; pointer-events: none; }
@@ -66,8 +113,9 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0 4rem;
+            padding: 0 3rem;
             z-index: 1000;
+            transition: background 0.4s ease;
         }
 
         .logo {
@@ -82,15 +130,16 @@
             align-items: center;
             gap: 12px;
         }
-        .logo i { font-size: 1.5rem; color: var(--accent-pink); }
+        .logo i { font-size: 1.5rem; color: var(--accent-pink); transition: color 0.4s ease; }
         .logo strong { font-weight: 500; color: var(--text-main); }
 
-        nav { display: flex; gap: 2rem; align-items: center; }
+        nav { display: flex; gap: 1.8rem; align-items: center; }
         nav a {
             font-family: var(--font-family);
-            color: #d1cede;
+            color: var(--text-main);
+            opacity: 0.8;
             text-decoration: none;
-            font-size: 0.8rem;
+            font-size: 0.78rem;
             font-weight: 300;
             text-transform: uppercase;
             letter-spacing: 2px;
@@ -110,7 +159,7 @@
             letter-spacing: 1px; 
             text-transform: lowercase;
         }
-        nav a:hover, nav a.active { color: #fff; font-weight: 400; }
+        nav a:hover, nav a.active { opacity: 1; font-weight: 400; }
         nav a:hover span.sub, nav a.active span.sub { color: var(--accent-pink); }
         
         nav a.active::after {
@@ -125,17 +174,20 @@
         }
 
         .header-actions { display: flex; align-items: center; gap: 1rem; }
+        
+        /* SELECTOR DE TEMAS MEJORADO */
         .theme-select {
             padding: 0.4rem 0.8rem;
             background-color: rgba(0,0,0,0.6);
             color: var(--text-main);
-            border: 1px solid rgba(255,255,255,0.15);
+            border: 1px solid var(--accent-pink);
             border-radius: 2px;
             outline: none;
             cursor: pointer;
             font-size: 0.75rem;
             font-family: var(--font-family);
             font-weight: 300;
+            transition: all 0.3s ease;
         }
 
         main { margin-top: 70px; position: relative; z-index: 1; }
@@ -149,7 +201,7 @@
             justify-content: center;
             text-align: center;
             padding: 4rem 2rem 10rem 2rem;
-            background: linear-gradient(180deg, rgba(15, 10, 28, 0.75) 0%, var(--bg-dark) 100%),
+            background: linear-gradient(180deg, rgba(8, 14, 24, 0.75) 0%, var(--bg-dark) 100%),
                         url('https://images.unsplash.com/photo-1515165562839-538804960bf2?q=80&w=1600&auto=format&fit=crop') center/cover no-repeat;
         }
 
@@ -246,7 +298,7 @@
             font-size: 2.4rem;
             margin-bottom: 1rem;
             display: block;
-            color: #fff;
+            color: var(--accent-pink);
         }
         .skew-card h3 {
             font-size: 1.15rem;
@@ -288,6 +340,7 @@
             border: 1px solid rgba(255, 255, 255, 0.08);
             margin-bottom: 1.8rem;
             clip-path: polygon(15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%, 0 15px);
+            transition: border-color 0.3s ease;
         }
 
         .badge {
@@ -321,7 +374,7 @@
         .slide-item img { width: 100%; height: 100%; object-fit: cover; }
         .slide-caption {
             position: absolute; bottom: 0; left: 0; right: 0;
-            background: linear-gradient(0deg, rgba(15,10,28,0.95) 0%, transparent 100%);
+            background: linear-gradient(0deg, var(--bg-dark) 0%, transparent 100%);
             padding: 2.5rem; color: #fff;
         }
         .slide-caption h2 { font-weight: 400; letter-spacing: 2px; text-transform: uppercase; }
@@ -397,10 +450,20 @@
             <a onclick="showPage('nosotros')" id="nav-nosotros">NOSOTROS<span class="sub">about</span></a>
         </nav>
         <div class="header-actions">
+            <!-- SELECTOR DE 12 PALETAS DE COLOR -->
             <select id="theme-select" class="theme-select" onchange="changeTheme(this.value)">
-                <option value="cyber-blue">🟦 Cyan / Blue</option>
-                <option value="brown-black">🪵 Amber / Dark</option>
-                <option value="matrix-green">🟢 Green / Matrix</option>
+                <option value="cyber-blue">🟦 Cyber Cyan</option>
+                <option value="brown-black">🪵 Amber Dark</option>
+                <option value="matrix-green">🟢 Matrix Green</option>
+                <option value="neon-violet">🟣 Neon Violet</option>
+                <option value="ruby-red">🔴 Ruby Red</option>
+                <option value="sunset-orange">🟠 Sunset Orange</option>
+                <option value="sakura-pink">🌸 Sakura Pink</option>
+                <option value="electric-yellow">🟡 Electric Gold</option>
+                <option value="ice-emerald">🧊 Ice Emerald</option>
+                <option value="monochrome">⚪ Monochrome</option>
+                <option value="copper-bronze">🟤 Copper Bronze</option>
+                <option value="coral-reef">🪸 Coral Reef</option>
             </select>
             <button onclick="toggleAdminPanel('admin-panel-juegos')" class="btn-action btn-action-primary" style="padding: 0.4rem 1rem; font-size: 0.7rem;">Admin</button>
         </div>
@@ -838,7 +901,7 @@
             loadPosts();
         }
 
-        // CANVAS PARTICULAS
+        // CANVAS PARTICULAS DINÁMICO SEGÚN TEMA
         const canvas = document.getElementById('bg-canvas');
         const ctx = canvas.getContext('2d');
         let width, height, particles = [];
