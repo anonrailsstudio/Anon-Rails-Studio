@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Anon Rails - Gaming Platform</title>
     
-    <!-- FUENTE ROBOTO (PESOS FINOS 300 Y 400) -->
+    <!-- FUENTE ROBOTO -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
@@ -15,77 +15,51 @@
 
     <style>
         :root {
-            --bg-dark: #080e18; 
-            --bg-card: rgba(16, 27, 46, 0.85); 
-            --bg-nav: rgba(8, 14, 24, 0.95);
-            --accent-pink: #00d2ff; 
-            --accent-pink-hover: #00a3cc;
-            --text-main: #f1f5f9; 
-            --text-muted: #8295a8; 
-            --accent-rgb: 0, 210, 255;
+            --bg-dark: #080d1a;
+            --bg-card: rgba(15, 23, 42, 0.85);
+            --bg-nav: rgba(8, 13, 26, 0.9);
+            --accent-color: #00e5ff;
+            --accent-hover: #00b0ff;
+            --accent-rgb: 0, 229, 255;
+            --text-main: #ffffff;
+            --text-muted: #e2e8f0;
             --font-family: 'Roboto', sans-serif;
         }
 
-        /* PALETAS DE COLOR / TEMAS */
-        [data-theme="cyber-blue"] {
-            --bg-dark: #080e18; --bg-card: rgba(16, 27, 46, 0.85); --bg-nav: rgba(8, 14, 24, 0.95);
-            --accent-pink: #00d2ff; --accent-pink-hover: #00a3cc;
-            --text-main: #f1f5f9; --text-muted: #8295a8; --accent-rgb: 0, 210, 255;
+        [data-theme="crimson-flame"] {
+            --bg-dark: #18080a;
+            --bg-card: rgba(40, 16, 20, 0.85);
+            --bg-nav: rgba(24, 8, 10, 0.9);
+            --accent-color: #ff2a5f;
+            --accent-hover: #d9043d;
+            --accent-rgb: 255, 42, 95;
         }
-        [data-theme="brown-black"] {
-            --bg-dark: #120e0a; --bg-card: rgba(31, 23, 18, 0.85); --bg-nav: rgba(18, 14, 10, 0.95);
-            --accent-pink: #d97706; --accent-pink-hover: #b45309;
-            --text-main: #f5f0eb; --text-muted: #a39587; --accent-rgb: 217, 119, 6;
+
+        [data-theme="vaporwave"] {
+            --bg-dark: #13091e;
+            --bg-card: rgba(35, 18, 52, 0.85);
+            --bg-nav: rgba(19, 9, 30, 0.9);
+            --accent-color: #e040fb;
+            --accent-hover: #aa00ff;
+            --accent-rgb: 224, 64, 251;
         }
-        [data-theme="matrix-green"] {
-            --bg-dark: #06120b; --bg-card: rgba(15, 33, 22, 0.85); --bg-nav: rgba(6, 18, 11, 0.95);
-            --accent-pink: #10b981; --accent-pink-hover: #059669;
-            --text-main: #f0fdf4; --text-muted: #79a388; --accent-rgb: 16, 185, 129;
+
+        [data-theme="matrix-emerald"] {
+            --bg-dark: #05140b;
+            --bg-card: rgba(14, 38, 23, 0.85);
+            --bg-nav: rgba(5, 20, 11, 0.9);
+            --accent-color: #00e676;
+            --accent-hover: #00c853;
+            --accent-rgb: 0, 230, 118;
         }
-        [data-theme="neon-violet"] {
-            --bg-dark: #0d0614; --bg-card: rgba(26, 15, 38, 0.85); --bg-nav: rgba(13, 6, 20, 0.95);
-            --accent-pink: #a855f7; --accent-pink-hover: #9333ea;
-            --text-main: #f8fafc; --text-muted: #94a3b8; --accent-rgb: 168, 85, 247;
-        }
-        [data-theme="ruby-red"] {
-            --bg-dark: #140606; --bg-card: rgba(38, 15, 15, 0.85); --bg-nav: rgba(20, 6, 6, 0.95);
-            --accent-pink: #ef4444; --accent-pink-hover: #dc2626;
-            --text-main: #fef2f2; --text-muted: #991b1b; --accent-rgb: 239, 68, 68;
-        }
-        [data-theme="sunset-orange"] {
-            --bg-dark: #140a06; --bg-card: rgba(38, 20, 15, 0.85); --bg-nav: rgba(20, 10, 6, 0.95);
-            --accent-pink: #f97316; --accent-pink-hover: #ea580c;
-            --text-main: #fff7ed; --text-muted: #9a3412; --accent-rgb: 249, 115, 22;
-        }
-        [data-theme="sakura-pink"] {
-            --bg-dark: #140610; --bg-card: rgba(38, 15, 30, 0.85); --bg-nav: rgba(20, 6, 16, 0.95);
-            --accent-pink: #ec4899; --accent-pink-hover: #db2777;
-            --text-main: #fdf2f8; --text-muted: #9d174d; --accent-rgb: 236, 72, 153;
-        }
-        [data-theme="electric-yellow"] {
-            --bg-dark: #121106; --bg-card: rgba(33, 31, 15, 0.85); --bg-nav: rgba(18, 17, 6, 0.95);
-            --accent-pink: #eab308; --accent-pink-hover: #ca8a04;
-            --text-main: #fefce8; --text-muted: #854d0e; --accent-rgb: 234, 179, 8;
-        }
-        [data-theme="ice-emerald"] {
-            --bg-dark: #051214; --bg-card: rgba(14, 34, 38, 0.85); --bg-nav: rgba(5, 18, 20, 0.95);
-            --accent-pink: #06b6d4; --accent-pink-hover: #0891b2;
-            --text-main: #ecfeff; --text-muted: #155e75; --accent-rgb: 6, 182, 212;
-        }
-        [data-theme="monochrome"] {
-            --bg-dark: #121212; --bg-card: rgba(28, 28, 28, 0.85); --bg-nav: rgba(18, 18, 18, 0.95);
-            --accent-pink: #e2e8f0; --accent-pink-hover: #cbd5e1;
-            --text-main: #ffffff; --text-muted: #64748b; --accent-rgb: 226, 232, 240;
-        }
-        [data-theme="copper-bronze"] {
-            --bg-dark: #120b08; --bg-card: rgba(33, 20, 16, 0.85); --bg-nav: rgba(18, 11, 8, 0.95);
-            --accent-pink: #c2410c; --accent-pink-hover: #9a3412;
-            --text-main: #fff7ed; --text-muted: #7c2d12; --accent-rgb: 194, 65, 12;
-        }
-        [data-theme="coral-reef"] {
-            --bg-dark: #0a1114; --bg-card: rgba(18, 30, 36, 0.85); --bg-nav: rgba(10, 17, 20, 0.95);
-            --accent-pink: #ff6b6b; --accent-pink-hover: #ee5253;
-            --text-main: #f8f9fa; --text-muted: #8395a7; --accent-rgb: 255, 107, 107;
+
+        [data-theme="amber-dark"] {
+            --bg-dark: #140d07;
+            --bg-card: rgba(36, 23, 14, 0.85);
+            --bg-nav: rgba(20, 13, 7, 0.9);
+            --accent-color: #ff9100;
+            --accent-hover: #ff6d00;
+            --accent-rgb: 255, 145, 0;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -98,10 +72,31 @@
             overflow-x: hidden; 
             min-height: 100vh; 
             position: relative; 
-            transition: background-color 0.4s ease, color 0.4s ease;
         }
 
-        #bg-canvas { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 0; pointer-events: none; }
+        /* FONDO SOLO PARA LA SECCIÓN DE INICIO */
+        .global-bg-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: 
+                radial-gradient(circle at center, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.92) 100%),
+                linear-gradient(180deg, rgba(0, 0, 0, 0.6) 0%, var(--bg-dark) 100%),
+                url('https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=1920&auto=format&fit=crop') center/cover no-repeat;
+            z-index: 0;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        /* Activar la imagen de fondo únicamente cuando estemos en Inicio */
+        body.show-hero-bg .global-bg-overlay {
+            opacity: 1;
+        }
+
+        #bg-canvas { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 1; pointer-events: none; }
 
         /* HEADER */
         header {
@@ -109,38 +104,34 @@
             top: 0; left: 0; width: 100%;
             height: 70px;
             background: var(--bg-nav);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.12);
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0 3rem;
+            padding: 0 4rem;
             z-index: 1000;
-            transition: background 0.4s ease;
         }
 
         .logo {
-            font-family: var(--font-family);
             font-size: 1.3rem;
             font-weight: 300;
             letter-spacing: 3px;
             text-transform: uppercase;
             cursor: pointer;
-            color: #fff;
+            color: #ffffff;
             display: flex;
             align-items: center;
             gap: 12px;
         }
-        .logo i { font-size: 1.5rem; color: var(--accent-pink); transition: color 0.4s ease; }
-        .logo strong { font-weight: 500; color: var(--text-main); }
+        .logo i { font-size: 1.5rem; color: var(--accent-color); }
 
-        nav { display: flex; gap: 1.8rem; align-items: center; }
+        nav { display: flex; gap: 2rem; align-items: center; }
         nav a {
-            font-family: var(--font-family);
-            color: var(--text-main);
-            opacity: 0.8;
+            color: #ffffff !important;
             text-decoration: none;
-            font-size: 0.78rem;
-            font-weight: 300;
+            font-size: 0.8rem;
+            font-weight: 400;
             text-transform: uppercase;
             letter-spacing: 2px;
             transition: all 0.3s ease;
@@ -150,18 +141,19 @@
             align-items: center;
             position: relative;
             padding: 5px 0;
+            opacity: 0.85;
         }
         nav a span.sub { 
             font-size: 0.6rem; 
-            color: var(--text-muted); 
+            color: #ffffff;
             font-weight: 300; 
             margin-top: 2px; 
             letter-spacing: 1px; 
             text-transform: lowercase;
+            opacity: 0.7;
         }
-        nav a:hover, nav a.active { opacity: 1; font-weight: 400; }
-        nav a:hover span.sub, nav a.active span.sub { color: var(--accent-pink); }
-        
+        nav a:hover, nav a.active { opacity: 1; text-shadow: 0 0 8px rgba(255, 255, 255, 0.6); }
+        nav a:hover span.sub, nav a.active span.sub { color: var(--accent-color); opacity: 1; }
         nav a.active::after {
             content: '';
             position: absolute;
@@ -169,71 +161,76 @@
             left: 0;
             width: 100%;
             height: 2px;
-            background-color: var(--accent-pink);
-            box-shadow: 0 0 8px var(--accent-pink);
+            background-color: var(--accent-color);
+            box-shadow: 0 0 10px var(--accent-color);
         }
 
         .header-actions { display: flex; align-items: center; gap: 1rem; }
         
-        /* SELECTOR DE TEMAS MEJORADO */
         .theme-select {
-            padding: 0.4rem 0.8rem;
-            background-color: rgba(0,0,0,0.6);
-            color: var(--text-main);
-            border: 1px solid var(--accent-pink);
+            padding: 0.45rem 0.8rem;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: #ffffff;
+            border: 1px solid var(--accent-color);
             border-radius: 2px;
             outline: none;
             cursor: pointer;
             font-size: 0.75rem;
             font-family: var(--font-family);
-            font-weight: 300;
-            transition: all 0.3s ease;
         }
+        .theme-select option { background-color: #0d0b18; color: #ffffff; }
 
-        main { margin-top: 70px; position: relative; z-index: 1; }
+        main { margin-top: 70px; position: relative; z-index: 2; }
+
+        .page-section { 
+            display: none; 
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+        .page-section.active-page { display: block; }
+        .page-section.fade-in { opacity: 1; transform: translateY(0); }
 
         /* HERO BANNER */
         .hero-banner {
             position: relative;
-            min-height: 540px;
+            min-height: 520px;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 4rem 2rem 10rem 2rem;
-            background: linear-gradient(180deg, rgba(8, 14, 24, 0.75) 0%, var(--bg-dark) 100%),
-                        url('https://images.unsplash.com/photo-1515165562839-538804960bf2?q=80&w=1600&auto=format&fit=crop') center/cover no-repeat;
+            padding: 5rem 2rem 8rem 2rem;
         }
-
         .hero-content { max-width: 800px; z-index: 2; }
         .hero-title {
-            font-size: 2.8rem;
+            font-size: 3rem;
             font-weight: 300;
             text-transform: uppercase;
             letter-spacing: 4px;
             margin-bottom: 1.5rem;
             line-height: 1.2;
+            color: #ffffff;
         }
-        .hero-title strong { font-weight: 500; }
+        .hero-title strong { font-weight: 500; color: var(--accent-color); }
         .hero-description {
-            font-size: 1rem;
-            color: var(--text-muted);
+            font-size: 1.05rem;
+            color: #ffffff;
             line-height: 1.8;
             margin-bottom: 2.5rem;
-            max-width: 680px;
+            max-width: 700px;
             margin-left: auto; margin-right: auto;
-            font-weight: 300;
+            opacity: 0.9;
         }
 
-        /* BOTONES CON CORTE EN ESQUINAS */
+        /* BOTONES DE ACCIÓN */
         .btn-group { display: flex; justify-content: center; gap: 1.2rem; }
         .btn-action {
             display: inline-flex;
             align-items: center;
             gap: 10px;
-            padding: 0.8rem 2rem;
+            padding: 0.85rem 2.2rem;
             font-family: var(--font-family);
-            font-weight: 300;
+            font-weight: 400;
             font-size: 0.8rem;
             text-transform: uppercase;
             letter-spacing: 2px;
@@ -241,34 +238,32 @@
             transition: all 0.3s ease;
             clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
             border: none;
+            color: #ffffff !important;
             text-decoration: none;
         }
         .btn-action-primary {
-            background-color: var(--accent-pink);
-            color: #fff;
-            box-shadow: 0 4px 20px rgba(var(--accent-rgb), 0.3);
+            background-color: var(--accent-color);
+            box-shadow: 0 4px 20px rgba(var(--accent-rgb), 0.4);
         }
         .btn-action-primary:hover { 
-            background-color: var(--accent-pink-hover);
+            background-color: var(--accent-hover);
             transform: translateY(-2px);
         }
         .btn-action-outline {
-            background: rgba(255, 255, 255, 0.05);
-            color: #fff;
-            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.4);
         }
         .btn-action-outline:hover { 
-            background: rgba(255, 255, 255, 0.12); 
-            box-shadow: inset 0 0 0 1px #fff;
-            transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.2); 
+            box-shadow: inset 0 0 0 1px var(--accent-color);
         }
 
-        /* TARJETAS ANGULARES EN DIAGONAL */
+        /* TARJETAS DE INICIO */
         .featured-cards-wrapper {
-            margin-top: -90px;
+            margin-top: -60px;
             position: relative;
             z-index: 10;
-            padding: 0 2rem;
+            padding: 0 2rem 4rem 2rem;
         }
         .featured-grid {
             max-width: 1100px;
@@ -277,48 +272,30 @@
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 1.8rem;
         }
-
         .skew-card {
             background: var(--bg-card);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.12);
             padding: 2.5rem 2rem;
             text-align: center;
             transform: skewY(-2deg);
             transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(12px);
             cursor: pointer;
         }
         .skew-card:hover {
             transform: skewY(-2deg) translateY(-8px);
-            border-color: var(--accent-pink);
-            box-shadow: 0 12px 35px rgba(0,0,0,0.5);
+            border-color: var(--accent-color);
         }
         .skew-card-content { transform: skewY(2deg); }
         .skew-card-icon {
             font-size: 2.4rem;
             margin-bottom: 1rem;
             display: block;
-            color: var(--accent-pink);
-        }
-        .skew-card h3 {
-            font-size: 1.15rem;
-            font-weight: 400;
-            margin-bottom: 0.8rem;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-        }
-        .skew-card p {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            line-height: 1.6;
-            font-weight: 300;
+            color: var(--accent-color);
         }
 
-        /* CONTENEDORES Y SECCIONES */
+        /* CONTENEDORES DE SECCIÓN */
         .container { max-width: 1100px; margin: 0 auto; padding: 4rem 2rem; }
-        .page-section { display: none; }
-        .page-section.active-page { display: block; }
-
         .section-title {
             font-size: 1.4rem;
             font-weight: 300;
@@ -328,19 +305,21 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid rgba(255,255,255,0.08);
+            border-bottom: 1px solid rgba(255,255,255,0.12);
             padding-bottom: 1rem;
+            color: #ffffff;
         }
-        .section-title strong { font-weight: 500; color: var(--accent-pink); }
+        .section-title strong { font-weight: 500; color: var(--accent-color); }
 
         .card {
             background-color: var(--bg-card);
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(12px);
             padding: 2.2rem;
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.12);
             margin-bottom: 1.8rem;
             clip-path: polygon(15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%, 0 15px);
-            transition: border-color 0.3s ease;
+            color: #ffffff;
+            position: relative;
         }
 
         .badge {
@@ -350,19 +329,48 @@
             font-weight: 400;
             text-transform: uppercase;
             letter-spacing: 1px;
-            background: rgba(var(--accent-rgb), 0.15);
-            color: var(--accent-pink);
+            background: rgba(var(--accent-rgb), 0.2);
+            color: #ffffff;
             margin-bottom: 1rem;
-            border-left: 2px solid var(--accent-pink);
+            border-left: 3px solid var(--accent-color);
         }
 
-        /* SLIDESHOW METROVERSO */
+        /* MODO EDICIÓN EN VIVO */
+        body.edit-mode [contenteditable="true"] {
+            outline: 2px dashed var(--accent-color) !important;
+            padding: 4px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 3px;
+        }
+
+        .admin-panel {
+            display: none;
+            background: var(--bg-card);
+            border: 1px solid var(--accent-color);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            clip-path: polygon(15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%, 0 15px);
+        }
+
+        .forum-input, .forum-textarea, .forum-select {
+            width: 100%;
+            padding: 0.8rem;
+            margin-bottom: 1.2rem;
+            background: rgba(0,0,0,0.7);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: #ffffff;
+            outline: none;
+            font-family: var(--font-family);
+            font-size: 0.85rem;
+        }
+        .forum-textarea { min-height: 100px; resize: vertical; }
+
         .slideshow-container {
             position: relative;
             width: 100%;
             height: 420px;
             overflow: hidden;
-            border: 1px solid rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.12);
             margin-bottom: 2rem;
             clip-path: polygon(20px 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%, 0 20px);
         }
@@ -374,67 +382,45 @@
         .slide-item img { width: 100%; height: 100%; object-fit: cover; }
         .slide-caption {
             position: absolute; bottom: 0; left: 0; right: 0;
-            background: linear-gradient(0deg, var(--bg-dark) 0%, transparent 100%);
-            padding: 2.5rem; color: #fff;
+            background: linear-gradient(0deg, rgba(0,0,0,0.95) 0%, transparent 100%);
+            padding: 2.5rem; color: #ffffff;
         }
-        .slide-caption h2 { font-weight: 400; letter-spacing: 2px; text-transform: uppercase; }
-
-        /* PROGRESO Y TRAMOS */
-        .progress-container { margin: 1.2rem 0; background: rgba(0,0,0,0.4); padding: 1rem; border-left: 2px solid var(--accent-pink); }
-        .progress-bar-bg { background: rgba(255,255,255,0.1); height: 8px; overflow: hidden; margin-top: 0.6rem; }
-        .progress-bar-fill { background: var(--accent-pink); height: 100%; transition: width 0.4s ease; }
-
-        .tramo-card {
-            background: rgba(0,0,0,0.3);
-            border: 1px solid rgba(255,255,255,0.08);
-            padding: 1rem;
-            margin-top: 0.8rem;
-            display: flex; justify-content: space-between; align-items: center;
-        }
-
-        .admin-panel {
-            display: none;
-            background: var(--bg-card);
-            border: 1px solid var(--accent-pink);
-            padding: 2rem;
-            margin-bottom: 2rem;
-            clip-path: polygon(15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%, 0 15px);
-        }
-
-        .forum-input, .forum-textarea, .forum-select {
-            width: 100%;
-            padding: 0.8rem;
-            margin-bottom: 1.2rem;
-            background: rgba(0,0,0,0.6);
-            border: 1px solid rgba(255,255,255,0.12);
-            color: #fff;
-            outline: none;
-            font-family: var(--font-family);
-            font-weight: 300;
-            font-size: 0.85rem;
-        }
-        .forum-textarea { min-height: 100px; resize: vertical; }
 
         .game-img { width: 100%; max-height: 320px; object-fit: cover; margin: 1rem 0; }
+        .progress-container { margin: 1.2rem 0; background: rgba(0,0,0,0.5); padding: 1rem; border-left: 3px solid var(--accent-color); }
+        .progress-bar-bg { background: rgba(255,255,255,0.15); height: 8px; overflow: hidden; margin-top: 0.6rem; }
+        .progress-bar-fill { background: var(--accent-color); height: 100%; }
+
+        .tramo-card {
+            background: rgba(0,0,0,0.4);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 1rem; margin-top: 0.8rem;
+            display: flex; justify-content: space-between; align-items: center;
+        }
 
         footer {
             text-align: center;
             padding: 3rem;
             background: var(--bg-nav);
-            border-top: 1px solid rgba(255,255,255,0.08);
-            color: var(--text-muted);
+            border-top: 1px solid rgba(255,255,255,0.12);
+            color: #ffffff;
             font-size: 0.8rem;
             margin-top: 5rem;
             letter-spacing: 1px;
-            font-weight: 300;
+            position: relative;
+            z-index: 2;
+            opacity: 0.8;
         }
     </style>
 </head>
-<body data-theme="cyber-blue">
+<body data-theme="cyber-blue" class="show-hero-bg">
+
+    <!-- IMAGEN DE FONDO SOLO PARA INICIO -->
+    <div class="global-bg-overlay"></div>
 
     <canvas id="bg-canvas"></canvas>
 
-    <!-- HEADER / BARRA DE NAVEGACIÓN -->
+    <!-- HEADER -->
     <header>
         <div class="logo" onclick="showPage('inicio')">
             <i class="fa-solid fa-train"></i>
@@ -450,106 +436,89 @@
             <a onclick="showPage('nosotros')" id="nav-nosotros">NOSOTROS<span class="sub">about</span></a>
         </nav>
         <div class="header-actions">
-            <!-- SELECTOR DE 12 PALETAS DE COLOR -->
             <select id="theme-select" class="theme-select" onchange="changeTheme(this.value)">
-                <option value="cyber-blue">🟦 Cyber Cyan</option>
-                <option value="brown-black">🪵 Amber Dark</option>
-                <option value="matrix-green">🟢 Matrix Green</option>
-                <option value="neon-violet">🟣 Neon Violet</option>
-                <option value="ruby-red">🔴 Ruby Red</option>
-                <option value="sunset-orange">🟠 Sunset Orange</option>
-                <option value="sakura-pink">🌸 Sakura Pink</option>
-                <option value="electric-yellow">🟡 Electric Gold</option>
-                <option value="ice-emerald">🧊 Ice Emerald</option>
-                <option value="monochrome">⚪ Monochrome</option>
-                <option value="copper-bronze">🟤 Copper Bronze</option>
-                <option value="coral-reef">🪸 Coral Reef</option>
+                <option value="cyber-blue">🟦 Neon Cyber</option>
+                <option value="crimson-flame">🔥 Crimson Flame</option>
+                <option value="vaporwave">🟣 Synthwave / Pink</option>
+                <option value="matrix-emerald">🟢 Matrix Emerald</option>
+                <option value="amber-dark">🪵 Amber Dark</option>
             </select>
-            <button onclick="toggleAdminPanel('admin-panel-juegos')" class="btn-action btn-action-primary" style="padding: 0.4rem 1rem; font-size: 0.7rem;">Admin</button>
+            <button id="admin-toggle-btn" onclick="toggleGlobalAdmin()" class="btn-action btn-action-primary" style="padding: 0.4rem 1rem; font-size: 0.7rem;">
+                <i class="fa-solid fa-lock"></i> Admin
+            </button>
         </div>
     </header>
 
     <main>
-        <!-- SECCIÓN INICIO CON BANNER HERO -->
-        <div id="page-inicio" class="page-section active-page">
+        <!-- INICIO -->
+        <div id="page-inicio" class="page-section active-page fade-in">
             <section class="hero-banner">
                 <div class="hero-content">
-                    <h1 class="hero-title">ANON RAILS - <strong>PLATAFORMA INTEGRAL</strong></h1>
-                    <p class="hero-description">
-                        Simulación ferroviaria de nueva generación, desarrollo de rutas detalladas e infraestructura de transporte.
+                    <h1 class="hero-title" id="editable-hero-title">ANON RAILS - <strong>GAMING THEME</strong></h1>
+                    <p class="hero-description" id="editable-hero-desc">
+                        Simulación ferroviaria de nueva generación, desarrollo de rutas detalladas e infraestructura de transporte masivo.
                     </p>
                     <div class="btn-group">
-                        <a onclick="showPage('juegos')" class="btn-action btn-action-primary"><i class="fa-solid fa-cart-shopping"></i> Ver Juegos</a>
-                        <a onclick="showPage('foro')" class="btn-action btn-action-outline"><i class="fa-solid fa-users"></i> Comunidad</a>
+                        <a onclick="showPage('juegos')" class="btn-action btn-action-primary"><i class="fa-solid fa-circle-play"></i> VER JUEGOS</a>
+                        <a onclick="showPage('foro')" class="btn-action btn-action-outline"><i class="fa-solid fa-comments"></i> COMUNIDAD</a>
                     </div>
                 </div>
             </section>
 
-            <!-- TRIPLE TARJETA SKEW EN DIAGONAL -->
             <div class="featured-cards-wrapper">
                 <div class="featured-grid">
                     <div class="skew-card" onclick="showPage('novedades')">
                         <div class="skew-card-content">
                             <span class="skew-card-icon"><i class="fa-solid fa-rss"></i></span>
-                            <h3>Novedades</h3>
-                            <p>Entérate de las últimas actualizaciones, anuncios del desarrollo e hitos alcanzados.</p>
+                            <h3 id="editable-card1-title">Novedades</h3>
+                            <p id="editable-card1-desc">Entérate de las últimas actualizaciones, anuncios del desarrollo e hitos alcanzados.</p>
                         </div>
                     </div>
                     <div class="skew-card" onclick="showPage('juegos')">
                         <div class="skew-card-content">
                             <span class="skew-card-icon"><i class="fa-solid fa-store"></i></span>
-                            <h3>Catálogo</h3>
-                            <p>Explora nuestras rutas, proyectos en curso y simuladores ferroviarios activos.</p>
+                            <h3 id="editable-card2-title">Catálogo</h3>
+                            <p id="editable-card2-desc">Explora nuestras rutas, proyectos en curso y simuladores ferroviarios activos.</p>
                         </div>
                     </div>
                     <div class="skew-card" onclick="showPage('foro')">
                         <div class="skew-card-content">
-                            <span class="skew-card-icon"><i class="fa-solid fa-comments"></i></span>
-                            <h3>Comunidad</h3>
-                            <p>Únete a la discusión, sugiere ideas y comparte con otros fanáticos de trenes.</p>
+                            <span class="skew-card-icon"><i class="fa-solid fa-users"></i></span>
+                            <h3 id="editable-card3-title">Comunidad</h3>
+                            <p id="editable-card3-desc">Únete a la discusión, sugiere ideas y comparte con otros fanáticos de trenes.</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- METROVERSO WORLDWIDE -->
+        <!-- METROVERSO -->
         <div id="page-metroverso" class="page-section">
             <div class="container">
-                <div class="section-title">
-                    <span><strong>METROVERSO</strong> WORLDWIDE</span>
-                    <button onclick="toggleEditor()" class="btn-action btn-action-outline" style="padding:0.4rem 0.8rem; font-size:0.75rem;"><i class="fa-solid fa-pen-to-square"></i> Editar Texto</button>
-                </div>
+                <div class="section-title"><span><strong>METROVERSO</strong> WORLDWIDE</span></div>
 
                 <div class="slideshow-container">
                     <div class="slide-item active">
                         <img src="https://images.unsplash.com/photo-1515165562839-538804960bf2?q=80&w=1000&auto=format&fit=crop" alt="Metro 1">
                         <div class="slide-caption">
-                            <h2>Red Internacional de Metros</h2>
-                            <p>Infraestructura detallada e interconexión urbana.</p>
+                            <h2 id="editable-slide1-title">Red Internacional de Metros</h2>
+                            <p id="editable-slide1-desc">Infraestructura detallada e interconexión urbana.</p>
                         </div>
                     </div>
                     <div class="slide-item">
                         <img src="https://images.unsplash.com/photo-1474487548417-781cb71495f3?q=80&w=1000&auto=format&fit=crop" alt="Metro 2">
                         <div class="slide-caption">
-                            <h2>Estaciones a Escala</h2>
-                            <p>Modelado de infraestructura a escala real.</p>
+                            <h2 id="editable-slide2-title">Estaciones a Escala</h2>
+                            <p id="editable-slide2-desc">Modelado de infraestructura a escala real.</p>
                         </div>
                     </div>
                 </div>
 
                 <div class="card">
-                    <div id="metroverso-text-display">
-                        <h2 style="font-weight:400;">Bienvenido a Metroverso Worldwide</h2>
-                        <p style="margin-top:0.8rem; color: var(--text-muted); line-height: 1.7;">
-                            Esta es la sección global dedicada al desarrollo del Metroverso. Aquí compartiremos avances, imágenes dinámicas y actualizaciones sobre las rutas urbanas y suburbanas del proyecto.
-                        </p>
-                    </div>
-
-                    <div id="metroverso-text-editor" style="display: none; margin-top: 1rem;">
-                        <textarea id="editor-textarea" class="forum-textarea" style="min-height: 120px;"></textarea>
-                        <button onclick="saveText()" class="btn-action btn-action-primary" style="padding:0.4rem 0.8rem; font-size:0.75rem;">Guardar Cambios</button>
-                    </div>
+                    <h2 id="editable-metro-title">Bienvenido a Metroverso Worldwide</h2>
+                    <p id="editable-metro-text" style="margin-top:0.8rem; opacity: 0.9; line-height: 1.7;">
+                        Esta es la sección global dedicada al desarrollo del Metroverso. Puedes editar este texto activando el modo administrador.
+                    </p>
                 </div>
             </div>
         </div>
@@ -557,15 +526,11 @@
         <!-- NOVEDADES -->
         <div id="page-novedades" class="page-section">
             <div class="container">
-                <div class="section-title">
-                    <span>ÚLTIMAS <strong>NOVEDADES</strong></span>
-                    <button onclick="toggleAdminPanel('admin-panel-news')" class="btn-action btn-action-outline" style="padding:0.4rem 0.8rem; font-size:0.75rem;">Modo Admin</button>
-                </div>
+                <div class="section-title"><span>ÚLTIMAS <strong>NOVEDADES</strong></span></div>
 
                 <div id="admin-panel-news" class="admin-panel">
-                    <h3 style="margin-bottom: 1rem; color: var(--accent-pink); font-weight: 400;">Publicar Novedad</h3>
+                    <h3 style="margin-bottom: 1rem; color: var(--accent-color);">Publicar Novedad</h3>
                     <input type="text" id="news-title" class="forum-input" placeholder="Título">
-                    <input type="text" id="news-image-url" class="forum-input" placeholder="URL de la imagen">
                     <textarea id="news-content" class="forum-textarea" placeholder="Contenido..."></textarea>
                     <button onclick="addNews()" class="btn-action btn-action-primary" style="padding:0.4rem 0.8rem; font-size:0.75rem;">Publicar</button>
                 </div>
@@ -577,31 +542,24 @@
         <!-- JUEGOS -->
         <div id="page-juegos" class="page-section">
             <div class="container">
-                <div class="section-title">
-                    <span>CATÁLOGO DE <strong>JUEGOS</strong></span>
-                    <button onclick="toggleAdminPanel('admin-panel-juegos')" class="btn-action btn-action-outline" style="padding:0.4rem 0.8rem; font-size:0.75rem;">Panel Admin</button>
-                </div>
+                <div class="section-title"><span>CATÁLOGO DE <strong>JUEGOS</strong></span></div>
 
                 <div id="admin-panel-juegos" class="admin-panel">
-                    <h3 style="margin-bottom: 1rem; color: var(--accent-pink); font-weight: 400;" id="game-form-title">Crear / Editar Juego</h3>
-                    <input type="hidden" id="edit-game-id" value="-1">
+                    <h3 style="margin-bottom: 1rem; color: var(--accent-color);">Crear / Editar Juego</h3>
                     <input type="text" id="input-game-title" class="forum-input" placeholder="Título del juego">
                     <input type="text" id="input-game-platform" class="forum-input" placeholder="Plataforma">
                     <input type="text" id="input-game-image" class="forum-input" placeholder="URL Imagen">
-                    <input type="text" id="input-game-manual" class="forum-input" placeholder="URL Manual">
                     <textarea id="input-game-desc" class="forum-textarea" placeholder="Descripción..."></textarea>
                     <input type="number" id="input-game-progress" class="forum-input" placeholder="Progreso %">
                     <input type="text" id="input-game-stage" class="forum-input" placeholder="Etapa actual">
 
-                    <div style="display:flex; gap:0.5rem; margin-bottom: 1.5rem;">
-                        <button onclick="saveGame()" class="btn-action btn-action-primary" style="padding:0.4rem 0.8rem; font-size:0.75rem;">Guardar Juego</button>
-                    </div>
+                    <button onclick="saveGame()" class="btn-action btn-action-primary" style="padding:0.4rem 0.8rem; font-size:0.75rem; margin-bottom: 1.5rem;">Guardar Juego</button>
 
                     <hr style="border-color: rgba(255,255,255,0.1); margin-bottom: 1.5rem;">
 
-                    <h3 style="margin-bottom: 1rem; color: var(--accent-pink); font-weight: 400;" id="tramo-form-title">Agregar Tramo</h3>
+                    <h3 style="margin-bottom: 1rem; color: var(--accent-color);">Agregar Tramo</h3>
                     <select id="select-game-for-tramo" class="forum-select"></select>
-                    <input type="text" id="input-linea" class="forum-input" placeholder="Nombre de línea/tramo">
+                    <input type="text" id="input-linea" class="forum-input" placeholder="Línea / Tramo">
                     <input type="number" id="input-km" class="forum-input" placeholder="KM">
                     <input type="text" id="input-origen-destino" class="forum-input" placeholder="Trayecto">
 
@@ -617,7 +575,7 @@
             <div class="container">
                 <div class="section-title"><span>FORO <strong>COMUNITARIO</strong></span></div>
                 <div class="card">
-                    <h3 style="margin-bottom: 1rem; color: var(--accent-pink); font-weight: 400;">Crear Publicación</h3>
+                    <h3 style="margin-bottom: 1rem; color: var(--accent-color);">Crear Publicación</h3>
                     <input type="text" id="post-author" class="forum-input" placeholder="Tu Usuario">
                     <input type="text" id="post-title" class="forum-input" placeholder="Título">
                     <textarea id="post-content" class="forum-textarea" placeholder="Mensaje..."></textarea>
@@ -633,42 +591,141 @@
                 <div class="section-title"><span>BIBLIOTECA DE <strong>MODELOS 3D</strong></span></div>
                 <div class="card">
                     <span class="badge">3D Asset</span>
-                    <h3 style="font-weight: 400; margin-bottom: 0.5rem;">Material Rodante</h3>
-                    <p style="color: var(--text-muted);">Modelos optimizados e interactivos listos para exportación o integración.</p>
+                    <h3 id="editable-3d-title">Material Rodante</h3>
+                    <p id="editable-3d-desc" style="opacity: 0.85; margin-top: 0.5rem;">Modelos optimizados e interactivos listos para exportación o integración.</p>
                 </div>
             </div>
         </div>
 
-        <!-- SOBRE NOSOTROS -->
+        <!-- NOSOTROS -->
         <div id="page-nosotros" class="page-section">
             <div class="container">
                 <div class="section-title"><span>SOBRE <strong>NOSOTROS</strong></span></div>
                 <div class="card">
-                    <p style="color: var(--text-muted); line-height: 1.7;">Desarrolladores apasionados por la simulación e infraestructura de transporte masivo.</p>
+                    <h2 id="editable-about-title" style="margin-bottom:0.8rem;">Nuestro Equipo</h2>
+                    <p id="editable-about-desc" style="opacity: 0.9; line-height: 1.7;">
+                        Desarrolladores apasionados por la simulación e infraestructura de transporte masivo.
+                    </p>
                 </div>
             </div>
         </div>
     </main>
 
     <footer>
-        <p>&copy; 2026 ANON RAILS. Todos los derechos reservados.</p>
+        <p id="editable-footer">&copy; 2026 ANON RAILS. Todos los derechos reservados.</p>
     </footer>
 
-    <!-- LÓGICA JAVASCRIPT -->
     <script>
         let isAdminLoggedIn = false;
+        let isTransitioning = false;
+
+        // ELEMENTOS CON NOMBRES DE ID QUE PERMITEN EDICIÓN
+        const editableIds = [
+            'editable-hero-title', 'editable-hero-desc',
+            'editable-card1-title', 'editable-card1-desc',
+            'editable-card2-title', 'editable-card2-desc',
+            'editable-card3-title', 'editable-card3-desc',
+            'editable-slide1-title', 'editable-slide1-desc',
+            'editable-slide2-title', 'editable-slide2-desc',
+            'editable-metro-title', 'editable-metro-text',
+            'editable-3d-title', 'editable-3d-desc',
+            'editable-about-title', 'editable-about-desc',
+            'editable-footer'
+        ];
 
         function showPage(pageId) {
-            document.querySelectorAll('.page-section').forEach(p => p.classList.remove('active-page'));
-            document.querySelectorAll('nav a').forEach(l => l.classList.remove('active'));
+            if (isTransitioning) return;
 
+            const currentActive = document.querySelector('.page-section.active-page');
             const targetPage = document.getElementById('page-' + pageId);
-            if (targetPage) targetPage.classList.add('active-page');
 
+            if (!targetPage || currentActive === targetPage) return;
+
+            isTransitioning = true;
+
+            // CONTROL DEL FONDO: Solo se muestra en la sección 'inicio'
+            if (pageId === 'inicio') {
+                document.body.classList.add('show-hero-bg');
+            } else {
+                document.body.classList.remove('show-hero-bg');
+            }
+
+            document.querySelectorAll('nav a').forEach(l => l.classList.remove('active'));
             const targetNav = document.getElementById('nav-' + pageId);
             if (targetNav) targetNav.classList.add('active');
 
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            if (currentActive) currentActive.classList.remove('fade-in');
+
+            setTimeout(() => {
+                if (currentActive) currentActive.classList.remove('active-page');
+                targetPage.classList.add('active-page');
+                void targetPage.offsetWidth; 
+                targetPage.classList.add('fade-in');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                isTransitioning = false;
+            }, 350);
+        }
+
+        function toggleGlobalAdmin() {
+            if (!isAdminLoggedIn) {
+                const pass = prompt("Contraseña de Admin:");
+                if (pass === "6860") {
+                    isAdminLoggedIn = true;
+                    document.body.classList.add('edit-mode');
+                    document.getElementById('admin-toggle-btn').innerHTML = '<i class="fa-solid fa-unlock"></i> Modo Edición ON';
+                    document.getElementById('admin-panel-news').style.display = 'block';
+                    document.getElementById('admin-panel-juegos').style.display = 'block';
+                    enableEditableElements();
+                    renderGames();
+                    alert("¡Modo edición global activado! Haz clic directo sobre los textos de la página para cambiarlos.");
+                } else {
+                    alert("Contraseña incorrecta.");
+                }
+            } else {
+                isAdminLoggedIn = false;
+                document.body.classList.remove('edit-mode');
+                document.getElementById('admin-toggle-btn').innerHTML = '<i class="fa-solid fa-lock"></i> Admin';
+                document.getElementById('admin-panel-news').style.display = 'none';
+                document.getElementById('admin-panel-juegos').style.display = 'none';
+                disableEditableElements();
+                renderGames();
+            }
+        }
+
+        function enableEditableElements() {
+            editableIds.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) {
+                    el.contentEditable = "true";
+                    el.addEventListener('blur', savePageContent);
+                }
+            });
+        }
+
+        function disableEditableElements() {
+            editableIds.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.contentEditable = "false";
+            });
+        }
+
+        function savePageContent() {
+            const savedData = {};
+            editableIds.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) savedData[id] = el.innerHTML;
+            });
+            localStorage.setItem('site_editable_content', JSON.stringify(savedData));
+        }
+
+        function loadPageContent() {
+            const savedData = JSON.parse(localStorage.getItem('site_editable_content'));
+            if (savedData) {
+                editableIds.forEach(id => {
+                    const el = document.getElementById(id);
+                    if (el && savedData[id]) el.innerHTML = savedData[id];
+                });
+            }
         }
 
         function changeTheme(themeKey) {
@@ -692,57 +749,12 @@
             slides[currentSlide].classList.add('active');
         }, 4000);
 
-        function toggleEditor() {
-            const editor = document.getElementById('metroverso-text-editor');
-            const display = document.getElementById('metroverso-text-display');
-            if (editor.style.display === 'none') {
-                document.getElementById('editor-textarea').value = display.innerHTML.trim();
-                editor.style.display = 'block';
-            } else {
-                editor.style.display = 'none';
-            }
-        }
-
-        function saveText() {
-            const display = document.getElementById('metroverso-text-display');
-            const textarea = document.getElementById('editor-textarea');
-            display.innerHTML = textarea.value;
-            localStorage.setItem('metroverso_custom_text', textarea.value);
-            document.getElementById('metroverso-text-editor').style.display = 'none';
-        }
-
-        function loadMetroversoText() {
-            const savedText = localStorage.getItem('metroverso_custom_text');
-            if (savedText) document.getElementById('metroverso-text-display').innerHTML = savedText;
-        }
-
-        function toggleAdminPanel(panelId) {
-            const panel = document.getElementById(panelId);
-            if (panel.style.display === 'block') {
-                panel.style.display = 'none';
-            } else {
-                if (isAdminLoggedIn) {
-                    panel.style.display = 'block';
-                } else {
-                    const pass = prompt("Contraseña de Admin:");
-                    if (pass === "6860") {
-                        isAdminLoggedIn = true;
-                        panel.style.display = 'block';
-                        renderGames();
-                    } else {
-                        alert("Contraseña incorrecta.");
-                    }
-                }
-            }
-        }
-
-        // BASE DE DATOS LOCAL
+        // BASE DE DATOS DE JUEGOS
         const defaultGames = [{
             id: 1,
             title: "Metroverso WorldWide",
             platform: "Roblox",
             image: "",
-            manual: "",
             description: "Simulador ferroviario inmersivo con líneas interurbanas.",
             progress: 45,
             stage: "Desarrollo Alfa",
@@ -768,32 +780,32 @@
 
                 let adminBtns = isAdminLoggedIn ? `
                     <div style="margin-top:1rem; display:flex; gap:0.5rem;">
-                        <button onclick="deleteGame(${game.id})" class="btn-action btn-action-outline" style="padding:0.3rem 0.6rem; font-size:0.7rem; border-color:#ef4444; color:#ef4444;">Borrar</button>
+                        <button onclick="deleteGame(${game.id})" class="btn-action btn-action-outline" style="padding:0.3rem 0.6rem; font-size:0.7rem; border-color:#ef4444; color:#ef4444 !important;">Borrar Juego</button>
                     </div>` : '';
 
                 let tramosHtml = game.tramos ? game.tramos.map((t, idx) => `
                     <div class="tramo-card">
                         <div>
-                            <strong style="color:var(--accent-pink); font-weight:400;">${t.linea}</strong> - ${t.km} KM
-                            <p style="font-size:0.75rem; color:var(--text-muted);">${t.trayecto}</p>
+                            <strong style="color:var(--accent-color);">${t.linea}</strong> - ${t.km} KM
+                            <p style="font-size:0.75rem; opacity: 0.8;">${t.trayecto}</p>
                         </div>
-                        ${isAdminLoggedIn ? `<button onclick="deleteTramo(${game.id},${idx})" class="btn-action btn-action-outline" style="padding:0.2rem 0.5rem; font-size:0.6rem; border-color:#ef4444; color:#ef4444;">X</button>` : ''}
+                        ${isAdminLoggedIn ? `<button onclick="deleteTramo(${game.id},${idx})" class="btn-action btn-action-outline" style="padding:0.2rem 0.5rem; font-size:0.6rem; border-color:#ef4444; color:#ef4444 !important;">X</button>` : ''}
                     </div>
                 `).join('') : '';
 
                 card.innerHTML = `
                     <span class="badge">${game.platform}</span>
-                    <h2 style="font-weight: 400;">${game.title}</h2>
+                    <h2>${game.title}</h2>
                     ${game.image ? `<img src="${game.image}" class="game-img">` : ''}
-                    <p style="color:var(--text-muted); margin: 0.8rem 0;">${game.description}</p>
+                    <p style="opacity:0.85; margin: 0.8rem 0;">${game.description}</p>
                     <div class="progress-container">
                         <div style="display:flex; justify-content:space-between; font-size:0.8rem;">
                             <span>Etapa: ${game.stage}</span>
-                            <span style="color:var(--accent-pink); font-weight:400;">${game.progress}%</span>
+                            <span style="color:var(--accent-color);">${game.progress}%</span>
                         </div>
                         <div class="progress-bar-bg"><div class="progress-bar-fill" style="width:${game.progress}%;"></div></div>
                     </div>
-                    <h4 style="margin-top:1rem; color:var(--accent-pink); font-size:0.9rem; font-weight:400;">Tramos</h4>
+                    <h4 style="margin-top:1rem; color:var(--accent-color); font-size:0.9rem;">Tramos</h4>
                     ${tramosHtml}
                     ${adminBtns}
                 `;
@@ -810,7 +822,6 @@
                 title,
                 platform: document.getElementById('input-game-platform').value || 'PC',
                 image: document.getElementById('input-game-image').value,
-                manual: document.getElementById('input-game-manual').value,
                 description: document.getElementById('input-game-desc').value,
                 progress: document.getElementById('input-game-progress').value || 10,
                 stage: document.getElementById('input-game-stage').value || 'Alfa',
@@ -818,8 +829,6 @@
             });
             saveGamesData(games);
             renderGames();
-            document.getElementById('input-game-title').value = '';
-            document.getElementById('input-game-desc').value = '';
         }
 
         function deleteGame(id) {
@@ -853,15 +862,14 @@
             }
         }
 
-        // NOVEDADES & FORO
         function loadNews() {
             const news = JSON.parse(localStorage.getItem('site_news')) || [];
             const container = document.getElementById('news-container');
             container.innerHTML = news.map(n => `
                 <div class="card">
                     <span class="badge">${n.date}</span>
-                    <h3 style="font-weight: 400; margin-bottom: 0.5rem;">${n.title}</h3>
-                    <p style="color:var(--text-muted); margin-top:0.5rem;">${n.content}</p>
+                    <h3>${n.title}</h3>
+                    <p style="opacity:0.85; margin-top:0.5rem;">${n.content}</p>
                 </div>
             `).join('');
         }
@@ -881,11 +889,11 @@
             const container = document.getElementById('forum-posts-container');
             container.innerHTML = posts.map(p => `
                 <div class="card">
-                    <div style="display:flex; justify-content:space-between; color:var(--accent-pink); font-size:0.75rem;">
+                    <div style="display:flex; justify-content:space-between; color:var(--accent-color); font-size:0.75rem;">
                         <span><i class="fa-solid fa-user"></i> ${p.author}</span><span>${p.date}</span>
                     </div>
-                    <h4 style="margin: 0.6rem 0; font-weight:400;">${p.title}</h4>
-                    <p style="color:var(--text-muted); font-size:0.88rem; line-height: 1.6;">${p.content}</p>
+                    <h4 style="margin: 0.6rem 0;">${p.title}</h4>
+                    <p style="opacity:0.85; font-size:0.88rem; line-height: 1.6;">${p.content}</p>
                 </div>
             `).join('');
         }
@@ -901,7 +909,7 @@
             loadPosts();
         }
 
-        // CANVAS PARTICULAS DINÁMICO SEGÚN TEMA
+        // CANVAS PARTICULAS
         const canvas = document.getElementById('bg-canvas');
         const ctx = canvas.getContext('2d');
         let width, height, particles = [];
@@ -928,7 +936,7 @@
             draw(rgb) {
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, 1.2, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(${rgb}, 0.4)`;
+                ctx.fillStyle = `rgba(${rgb}, 0.5)`;
                 ctx.fill();
             }
         }
@@ -940,14 +948,14 @@
 
         function animate() {
             ctx.clearRect(0, 0, width, height);
-            let rgb = getComputedStyle(document.body).getPropertyValue('--accent-rgb').trim() || "0, 210, 255";
+            let rgb = getComputedStyle(document.body).getPropertyValue('--accent-rgb').trim() || "0, 229, 255";
             particles.forEach((p, i) => {
                 p.update(); p.draw(rgb);
                 for(let j = i + 1; j < particles.length; j++) {
                     let dx = p.x - particles[j].x, dy = p.y - particles[j].y, dist = Math.sqrt(dx*dx + dy*dy);
                     if(dist < 110) {
                         ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(particles[j].x, particles[j].y);
-                        ctx.strokeStyle = `rgba(${rgb}, ${0.15 * (1 - dist/110)})`;
+                        ctx.strokeStyle = `rgba(${rgb}, ${0.2 * (1 - dist/110)})`;
                         ctx.stroke();
                     }
                 }
@@ -959,7 +967,7 @@
         initParticles();
         animate();
         loadTheme();
-        loadMetroversoText();
+        loadPageContent();
         loadNews();
         loadPosts();
         renderGames();
