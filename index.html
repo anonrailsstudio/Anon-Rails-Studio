@@ -344,8 +344,9 @@
         <a onclick="showPage('inicio')" class="logo">ANON <span>RAILS</span></a>
         <nav>
             <a onclick="showPage('inicio')" id="nav-inicio" class="active">🏠 Inicio</a>
+            <a onclick="showPage('metroverso')" id="nav-metroverso">🚇 Metroverso Worldwide</a>
             <a onclick="showPage('novedades')" id="nav-novedades">📢 Novedades</a>
-            <a onclick="showPage('juegos')" id="nav-juegos">🎮 Juegos</a>
+            <a onclick="showPage('juegos')" id="nav-juegos">🎮 Todos los Juegos</a>
             <a onclick="showPage('foro')" id="nav-foro">💬 Foro</a>
             <a onclick="showPage('modelos3d')" id="nav-modelos3d">📦 Modelos 3D</a>
             <a onclick="showPage('nosotros')" id="nav-nosotros">👥 Sobre Nosotros</a>
@@ -375,17 +376,17 @@
                 <section class="hero">
                     <h1>Simulación Ferroviaria de Alta Calidad</h1>
                     <p>Desarrollamos experiencias ferroviarias inmersivas. Realismo, detalle y pasión por las vías.</p>
-                    <a onclick="showPage('juegos')" class="btn">Explorar Juegos</a>
+                    <a onclick="showPage('metroverso')" class="btn">Ver Metroverso Worldwide</a>
                 </section>
 
                 <div class="container">
                     <div class="section-title">Destacados</div>
                     <div class="grid">
                         <div class="card" style="margin-bottom:0;">
-                            <span class="badge">Nuestros Proyectos</span>
-                            <h3 style="margin-bottom: 0.5rem;">Catálogo de Juegos</h3>
-                            <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Explora los juegos en desarrollo, plataformas, avances y sus respectivos manuales.</p>
-                            <a onclick="showPage('juegos')" class="btn">Ver Juegos</a>
+                            <span class="badge">Proyecto Destacado</span>
+                            <h3 style="margin-bottom: 0.5rem;">Metroverso Worldwide</h3>
+                            <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Explora los detalles del proyecto principal, avances de tramos y sus manuales.</p>
+                            <a onclick="showPage('metroverso')" class="btn">Ver Metroverso</a>
                         </div>
                         <div class="card" style="margin-bottom:0;">
                             <span class="badge">Comunidad</span>
@@ -394,6 +395,57 @@
                             <a onclick="showPage('foro')" class="btn">Ir al Foro</a>
                         </div>
                     </div>
+                </div>
+            </div>
+
+            <!-- TAB METROVERSO WORLDWIDE -->
+            <div id="page-metroverso" class="page-section">
+                <div class="container">
+                    <div class="section-title">
+                        <span>Metroverso Worldwide</span>
+                        <button onclick="toggleAdminPanel('admin-panel-metroverso')" class="btn btn-sm">🔒 Editar Metroverso</button>
+                    </div>
+
+                    <!-- PANEL DE EDICIÓN PARA METROVERSO -->
+                    <div id="admin-panel-metroverso" class="admin-panel">
+                        <h3 style="margin-bottom: 1rem; color: var(--accent);">✏️ Editar Datos de Metroverso Worldwide</h3>
+                        
+                        <label style="color: var(--text-muted); font-size: 0.85rem;">Plataforma:</label>
+                        <input type="text" id="mv-platform-input" class="forum-input" placeholder="Ej: Roblox / Standalone">
+
+                        <label style="color: var(--text-muted); font-size: 0.85rem;">URL de la Imagen:</label>
+                        <input type="text" id="mv-image-input" class="forum-input" placeholder="https://ejemplo.com/imagen.jpg">
+
+                        <label style="color: var(--text-muted); font-size: 0.85rem;">URL del Manual / Guía:</label>
+                        <input type="text" id="mv-manual-input" class="forum-input" placeholder="https://ejemplo.com/manual.pdf">
+
+                        <label style="color: var(--text-muted); font-size: 0.85rem;">Descripción:</label>
+                        <textarea id="mv-desc-input" class="forum-textarea" placeholder="Descripción del juego..."></textarea>
+
+                        <label style="color: var(--text-muted); font-size: 0.85rem;">Porcentaje de Avance (1 - 100):</label>
+                        <input type="number" id="mv-progress-input" class="forum-input" min="1" max="100">
+
+                        <label style="color: var(--text-muted); font-size: 0.85rem;">Etapa Actual:</label>
+                        <input type="text" id="mv-stage-input" class="forum-input" placeholder="Ej: Fase Beta">
+
+                        <button onclick="saveMetroversoData()" class="btn" style="margin-bottom: 1.5rem;">Guardar Cambios</button>
+
+                        <hr style="border-color: var(--border-purple); margin-bottom: 1.5rem;">
+
+                        <h3 style="margin-bottom: 1rem; color: var(--accent);">🛤️ Agregar / Editar Tramo de Metroverso</h3>
+                        <input type="hidden" id="mv-edit-tramo-index" value="-1">
+                        <input type="text" id="mv-linea-input" class="forum-input" placeholder="Nombre del Tramo / Línea (Ej: Línea A)">
+                        <input type="number" id="mv-km-input" class="forum-input" placeholder="Longitud en KM (Ej: 15)">
+                        <input type="text" id="mv-trayecto-input" class="forum-input" placeholder="Trayecto (Ej: Plaza de Mayo - San Pedrito)">
+
+                        <div style="display: flex; gap: 0.5rem;">
+                            <button onclick="saveMetroversoTramo()" class="btn">Guardar Tramo</button>
+                            <button onclick="resetMetroversoTramoForm()" class="btn btn-danger" id="btn-cancel-mv-tramo" style="display: none;">Cancelar</button>
+                        </div>
+                    </div>
+
+                    <!-- VISTA DEL JUEGO METROVERSO -->
+                    <div id="metroverso-display-container"></div>
                 </div>
             </div>
 
@@ -417,11 +469,11 @@
                 </div>
             </div>
 
-            <!-- JUEGOS -->
+            <!-- JUEGOS GENERALES -->
             <div id="page-juegos" class="page-section">
                 <div class="container">
                     <div class="section-title">
-                        <span>Juegos de Anon Rails</span>
+                        <span>Catálogo General de Juegos</span>
                         <button onclick="toggleAdminPanel('admin-panel-juegos')" class="btn btn-sm">🔒 Panel Admin</button>
                     </div>
 
@@ -431,7 +483,7 @@
                         <input type="hidden" id="edit-game-id" value="-1">
                         
                         <label style="color: var(--text-muted); font-size: 0.85rem;">Nombre del Juego:</label>
-                        <input type="text" id="input-game-title" class="forum-input" placeholder="Ej: Metroverso WorldWide">
+                        <input type="text" id="input-game-title" class="forum-input" placeholder="Ej: Trenes Argentinos Sim">
 
                         <label style="color: var(--text-muted); font-size: 0.85rem;">Plataforma:</label>
                         <input type="text" id="input-game-platform" class="forum-input" placeholder="Ej: Roblox, PC / Standalone, OpenBVE">
@@ -474,7 +526,6 @@
                         </div>
                     </div>
 
-                    <!-- CONTENEDOR DE JUEGOS DINÁMICO -->
                     <div id="games-container"></div>
                 </div>
             </div>
@@ -522,252 +573,274 @@
             <div id="page-nosotros" class="page-section">
                 <div class="container">
                     <div class="section-title">Sobre Nosotros</div>
-                    <p style="color: var(--text-muted); font-size: 1.1rem;">Somos Anon Rails, apasionados por el desarrollo de simuladores de trenes realistas.</p>
+                    <div class="card">
+                        <h3 style="margin-bottom: 1rem; color: var(--accent);">Anon Rails</h3>
+                        <p style="color: var(--text-muted); margin-bottom: 1rem;">Somos un equipo independiente enfocado en el desarrollo de simuladores y proyectos ferroviarios de alta fidelidad.</p>
+                        <p style="color: var(--text-muted);">Nuestra misión es llevar el realismo de los trenes a múltiples plataformas digitales.</p>
+                    </div>
                 </div>
             </div>
         </div>
 
         <footer>
-            <p>&copy; 2026 Anon Rails. Todos los derechos reservados.</p>
+            <p>&copy; 2026 Anon Rails - Todos los derechos reservados. Desarrollado para simulación ferroviaria.</p>
         </footer>
     </main>
 
+    <!-- LOGICA JAVASCRIPT -->
     <script>
-        let isAdminLoggedIn = false;
+        // DATOS INICIALES CON LOCALSTORAGE
+        let metroversoData = JSON.parse(localStorage.getItem('anonrails_metroverso')) || {
+            id: 'mv-01',
+            title: 'Metroverso Worldwide',
+            platform: 'Roblox / Standalone',
+            image: 'https://via.placeholder.com/800x400/1c1815/c67d34?text=Metroverso+Worldwide',
+            manual: '#',
+            description: 'Metroverso Worldwide es un proyecto inmersivo enfocado en redes de metro y trenes urbanos de todo el mundo.',
+            progress: 65,
+            stage: 'Desarrollo Activo de Redes',
+            tramos: [
+                { linea: 'Línea 1 - Centro', km: 18, trayecto: 'Estación Central - Terminal Norte' }
+            ]
+        };
 
+        let gamesData = JSON.parse(localStorage.getItem('anonrails_games')) || [];
+        let newsData = JSON.parse(localStorage.getItem('anonrails_news')) || [
+            { id: 1, title: '¡Bienvenido a Anon Rails!', image: '', content: 'Inauguramos nuestro sitio oficial donde publicaremos los avances de Metroverso Worldwide y nuestros simuladores.' }
+        ];
+        let forumPosts = JSON.parse(localStorage.getItem('anonrails_forum')) || [
+            { id: 1, author: 'Admin', title: 'Reglas del Foro', content: 'Mantén el respeto entre aficionados de la simulación ferroviaria.' }
+        ];
+
+        // NAVEGACIÓN ENTRE PÁGINAS
         function showPage(pageId) {
-            document.querySelectorAll('.page-section').forEach(p => p.classList.remove('active-page'));
-            document.querySelectorAll('nav a').forEach(l => l.classList.remove('active'));
+            const pages = document.querySelectorAll('.page-section');
+            pages.forEach(p => p.classList.remove('active-page'));
+
+            const navLinks = document.querySelectorAll('aside nav a');
+            navLinks.forEach(a => a.classList.remove('active'));
 
             const targetPage = document.getElementById('page-' + pageId);
-            if (targetPage) targetPage.classList.add('active-page');
+            if(targetPage) targetPage.classList.add('active-page');
 
             const targetNav = document.getElementById('nav-' + pageId);
-            if (targetNav) targetNav.classList.add('active');
+            if(targetNav) targetNav.classList.add('active');
 
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // --- TEMA DE COLOR ---
-        function changeTheme(themeKey) {
-            document.body.setAttribute('data-theme', themeKey);
-            localStorage.setItem('selected_theme', themeKey);
-        }
-
-        function loadTheme() {
-            const savedTheme = localStorage.getItem('selected_theme') || 'brown-black';
-            document.body.setAttribute('data-theme', savedTheme);
-            document.getElementById('theme-select').value = savedTheme;
-        }
-
-        // --- PANEL DE ADMIN (CLAVE 6860) ---
         function toggleAdminPanel(panelId) {
             const panel = document.getElementById(panelId);
-            if (panel.style.display === 'block') {
-                panel.style.display = 'none';
-            } else {
-                if (isAdminLoggedIn) {
-                    panel.style.display = 'block';
-                } else {
-                    const pass = prompt("Introduce la contraseña de Administrador:");
-                    if (pass === "6860") {
-                        isAdminLoggedIn = true;
-                        panel.style.display = 'block';
-                        renderGames(); // Recarga para activar botones de administración
-                    } else {
-                        alert("Contraseña incorrecta.");
-                    }
-                }
-            }
+            panel.style.display = (panel.style.display === 'block') ? 'none' : 'block';
         }
 
-        // --- SISTEMA DE JUEGOS Y TRAMOS ---
-        const defaultGames = [
-            {
-                id: 1,
-                title: "Metroverso WorldWide",
-                platform: "Roblox",
-                image: "",
-                manual: "",
-                description: "Simulador ferroviario inmersivo con líneas interurbanas, señalización realista y material rodante detallado.",
-                progress: 45,
-                stage: "Desarrollo Alfa / Vías y Estaciones",
-                tramos: [
-                    { linea: "Línea Principal A", km: 15, trayecto: "Estación Central - San Martín" }
-                ]
-            }
-        ];
-
-        function getGamesData() {
-            return JSON.parse(localStorage.getItem('anon_rails_games')) || defaultGames;
+        function changeTheme(themeName) {
+            document.body.setAttribute('data-theme', themeName);
         }
 
-        function saveGamesData(games) {
-            localStorage.setItem('anon_rails_games', JSON.stringify(games));
-        }
+        // --- RENDERIZADO Y LÓGICA DE METROVERSO WORLDWIDE ---
+        function renderMetroverso() {
+            const container = document.getElementById('metroverso-display-container');
+            if(!container) return;
 
-        function renderGames() {
-            const games = getGamesData();
-            const container = document.getElementById('games-container');
-            const selectGame = document.getElementById('select-game-for-tramo');
-            
-            container.innerHTML = '';
-            selectGame.innerHTML = '';
-
-            games.forEach((game) => {
-                // Opción para el selector de tramos
-                const option = document.createElement('option');
-                option.value = game.id;
-                option.textContent = game.title;
-                selectGame.appendChild(option);
-
-                // Tarjeta de Juego
-                const gameCard = document.createElement('div');
-                gameCard.className = 'card';
-
-                let adminActions = '';
-                if (isAdminLoggedIn) {
-                    adminActions = `
-                        <div style="display:flex; gap:0.5rem; margin-top:0.5rem;">
-                            <button onclick="prepareEditGame(${game.id})" class="btn btn-warning btn-sm">✏️ Editar Juego</button>
-                            <button onclick="deleteGame(${game.id})" class="btn btn-danger btn-sm">🗑️ Borrar Juego</button>
+            let tramosHTML = '';
+            metroversoData.tramos.forEach((t, index) => {
+                tramosHTML += `
+                    <div class="tramo-card">
+                        <div>
+                            <strong>${t.linea}</strong> (${t.km} KM)
+                            <div style="font-size: 0.85rem; color: var(--text-muted);">${t.trayecto}</div>
                         </div>
-                    `;
-                }
+                        <div>
+                            <button onclick="editMetroversoTramo(${index})" class="btn btn-warning btn-sm">Editar</button>
+                            <button onclick="deleteMetroversoTramo(${index})" class="btn btn-danger btn-sm">Eliminar</button>
+                        </div>
+                    </div>
+                `;
+            });
 
-                let manualBtn = game.manual ? `<a href="${game.manual}" target="_blank" class="btn btn-secondary btn-sm" style="margin-top:0.5rem;">📖 Ver Manual / Guía</a>` : '';
-
-                let tramosHtml = '';
-                if (game.tramos && game.tramos.length > 0) {
-                    game.tramos.forEach((tramo, tIndex) => {
-                        let tramoAdminBtns = '';
-                        if (isAdminLoggedIn) {
-                            tramoAdminBtns = `
-                                <div>
-                                    <button onclick="prepareEditTramo(${game.id}, ${tIndex})" class="btn btn-warning btn-sm">✏️ Edit</button>
-                                    <button onclick="deleteTramo(${game.id}, ${tIndex})" class="btn btn-danger btn-sm">🗑️ Del</button>
-                                </div>
-                            `;
-                        }
-
-                        tramosHtml += `
-                            <div class="tramo-card">
-                                <div>
-                                    <h4 style="color: var(--accent); font-size: 1rem;">${tramo.linea}</h4>
-                                    <p style="font-size: 0.85rem; color: var(--text-main);"><strong>Distancia:</strong> ${tramo.km} km</p>
-                                    <p style="font-size: 0.85rem; color: var(--text-muted);"><strong>Trayecto:</strong> ${tramo.trayecto}</p>
-                                </div>
-                                ${tramoAdminBtns}
-                            </div>
-                        `;
-                    });
-                } else {
-                    tramosHtml = `<p style="color: var(--text-muted); font-size: 0.9rem;">No hay tramos registrados aún.</p>`;
-                }
-
-                gameCard.innerHTML = `
+            container.innerHTML = `
+                <div class="card">
                     <div class="card-header-flex">
                         <div>
-                            <span class="badge">Plataforma: ${game.platform}</span>
-                            <h2 style="font-size: 1.8rem; color: var(--text-main);">${game.title}</h2>
+                            <span class="badge">${metroversoData.platform}</span>
+                            <h2 style="font-size: 2rem; margin-bottom: 0.5rem;">${metroversoData.title}</h2>
                         </div>
-                        ${adminActions}
+                        ${metroversoData.manual && metroversoData.manual !== '#' ? `<a href="${metroversoData.manual}" target="_blank" class="btn btn-secondary">📘 Ver Manual</a>` : ''}
                     </div>
 
-                    ${game.image ? `<img src="${game.image}" class="game-img" alt="Imagen del juego">` : ''}
+                    <img src="${metroversoData.image}" alt="${metroversoData.title}" class="game-img" onerror="this.src='https://via.placeholder.com/800x400/1c1815/c67d34?text=Sin+Imagen'">
 
-                    <p style="color: var(--text-muted); margin-top: 0.8rem;">${game.description}</p>
-                    ${manualBtn}
+                    <p style="margin-bottom: 1.5rem; color: var(--text-muted); font-size: 1.05rem;">${metroversoData.description}</p>
 
                     <div class="progress-container">
                         <div class="progress-header">
-                            <span style="color: var(--text-muted);">Etapa: <span style="color: var(--text-main);">${game.stage}</span></span>
-                            <span style="color: var(--accent);">${game.progress}%</span>
+                            <span>Estado de Desarrollo: ${metroversoData.stage}</span>
+                            <span>${metroversoData.progress}%</span>
                         </div>
                         <div class="progress-bar-bg">
-                            <div class="progress-bar-fill" style="width: ${game.progress}%;"></div>
+                            <div class="progress-bar-fill" style="width: ${metroversoData.progress}%;"></div>
                         </div>
                     </div>
 
-                    <h3 style="color: var(--accent); margin-top: 1.5rem; border-top: 1px solid var(--border-purple); padding-top: 1rem;">🛤️ Tramos e Información</h3>
-                    <div class="tramos-list">${tramosHtml}</div>
-                `;
+                    <h3 style="margin-top: 2rem; margin-bottom: 1rem; color: var(--accent);">🛤️ Tramos e Infraestructura</h3>
+                    <div class="tramos-list">
+                        ${tramosHTML || '<p style="color: var(--text-muted);">No hay tramos registrados aún.</p>'}
+                    </div>
+                </div>
+            `;
 
-                container.appendChild(gameCard);
+            // Rellenar inputs del panel
+            document.getElementById('mv-platform-input').value = metroversoData.platform;
+            document.getElementById('mv-image-input').value = metroversoData.image;
+            document.getElementById('mv-manual-input').value = metroversoData.manual;
+            document.getElementById('mv-desc-input').value = metroversoData.description;
+            document.getElementById('mv-progress-input').value = metroversoData.progress;
+            document.getElementById('mv-stage-input').value = metroversoData.stage;
+        }
+
+        function saveMetroversoData() {
+            metroversoData.platform = document.getElementById('mv-platform-input').value;
+            metroversoData.image = document.getElementById('mv-image-input').value;
+            metroversoData.manual = document.getElementById('mv-manual-input').value;
+            metroversoData.description = document.getElementById('mv-desc-input').value;
+            metroversoData.progress = document.getElementById('mv-progress-input').value;
+            metroversoData.stage = document.getElementById('mv-stage-input').value;
+
+            localStorage.setItem('anonrails_metroverso', JSON.stringify(metroversoData));
+            renderMetroverso();
+            alert('¡Datos de Metroverso guardados!');
+        }
+
+        function saveMetroversoTramo() {
+            const index = parseInt(document.getElementById('mv-edit-tramo-index').value);
+            const linea = document.getElementById('mv-linea-input').value;
+            const km = document.getElementById('mv-km-input').value;
+            const trayecto = document.getElementById('mv-trayecto-input').value;
+
+            if(!linea || !km) return alert('Por favor completa la línea y los KM.');
+
+            if(index >= 0) {
+                metroversoData.tramos[index] = { linea, km, trayecto };
+            } else {
+                metroversoData.tramos.push({ linea, km, trayecto });
+            }
+
+            localStorage.setItem('anonrails_metroverso', JSON.stringify(metroversoData));
+            resetMetroversoTramoForm();
+            renderMetroverso();
+        }
+
+        function editMetroversoTramo(index) {
+            const tramo = metroversoData.tramos[index];
+            document.getElementById('mv-edit-tramo-index').value = index;
+            document.getElementById('mv-linea-input').value = tramo.linea;
+            document.getElementById('mv-km-input').value = tramo.km;
+            document.getElementById('mv-trayecto-input').value = tramo.trayecto;
+            document.getElementById('btn-cancel-mv-tramo').style.display = 'inline-block';
+        }
+
+        function deleteMetroversoTramo(index) {
+            if(confirm('¿Eliminar este tramo?')) {
+                metroversoData.tramos.splice(index, 1);
+                localStorage.setItem('anonrails_metroverso', JSON.stringify(metroversoData));
+                renderMetroverso();
+            }
+        }
+
+        function resetMetroversoTramoForm() {
+            document.getElementById('mv-edit-tramo-index').value = '-1';
+            document.getElementById('mv-linea-input').value = '';
+            document.getElementById('mv-km-input').value = '';
+            document.getElementById('mv-trayecto-input').value = '';
+            document.getElementById('btn-cancel-mv-tramo').style.display = 'none';
+        }
+
+        // --- MANEJO DE OTROS JUEGOS ---
+        function renderGames() {
+            const container = document.getElementById('games-container');
+            const selectGame = document.getElementById('select-game-for-tramo');
+            if(!container) return;
+
+            container.innerHTML = '';
+            selectGame.innerHTML = '';
+
+            if(gamesData.length === 0) {
+                container.innerHTML = '<p style="color: var(--text-muted);">No hay otros juegos guardados aún.</p>';
+            }
+
+            gamesData.forEach((game, gIndex) => {
+                selectGame.innerHTML += `<option value="${gIndex}">${game.title}</option>`;
+
+                let tramosHTML = '';
+                (game.tramos || []).forEach((t, tIndex) => {
+                    tramosHTML += `
+                        <div class="tramo-card">
+                            <div>
+                                <strong>${t.linea}</strong> (${t.km} KM)
+                                <div style="font-size: 0.85rem; color: var(--text-muted);">${t.trayecto}</div>
+                            </div>
+                            <div>
+                                <button onclick="editTramo(${gIndex}, ${tIndex})" class="btn btn-warning btn-sm">Editar</button>
+                                <button onclick="deleteTramo(${gIndex}, ${tIndex})" class="btn btn-danger btn-sm">Eliminar</button>
+                            </div>
+                        </div>
+                    `;
+                });
+
+                container.innerHTML += `
+                    <div class="card">
+                        <div class="card-header-flex">
+                            <div>
+                                <span class="badge">${game.platform}</span>
+                                <h2 style="font-size: 1.8rem;">${game.title}</h2>
+                            </div>
+                            <div>
+                                <button onclick="editGame(${gIndex})" class="btn btn-warning btn-sm">Editar Juego</button>
+                                <button onclick="deleteGame(${gIndex})" class="btn btn-danger btn-sm">Eliminar</button>
+                            </div>
+                        </div>
+                        <img src="${game.image}" class="game-img" onerror="this.src='https://via.placeholder.com/800x400/1c1815/c67d34?text=Sin+Imagen'">
+                        <p style="color: var(--text-muted);">${game.description}</p>
+                        
+                        <div class="progress-container">
+                            <div class="progress-header">
+                                <span>Avance: ${game.stage}</span>
+                                <span>${game.progress}%</span>
+                            </div>
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar-fill" style="width: ${game.progress}%;"></div>
+                            </div>
+                        </div>
+
+                        <h4 style="margin-top: 1rem; color: var(--accent);">Tramos de Vía:</h4>
+                        <div class="tramos-list">${tramosHTML || '<p style="color: var(--text-muted);">Sin tramos.</p>'}</div>
+                    </div>
+                `;
             });
         }
 
-        // --- GESTIÓN DE JUEGOS ---
         function saveGame() {
-            const editId = parseInt(document.getElementById('edit-game-id').value);
-            const title = document.getElementById('input-game-title').value.trim();
-            const platform = document.getElementById('input-game-platform').value.trim();
-            const image = document.getElementById('input-game-image').value.trim();
-            const manual = document.getElementById('input-game-manual').value.trim();
-            const description = document.getElementById('input-game-desc').value.trim();
+            const id = parseInt(document.getElementById('edit-game-id').value);
+            const title = document.getElementById('input-game-title').value;
+            const platform = document.getElementById('input-game-platform').value;
+            const image = document.getElementById('input-game-image').value;
+            const manual = document.getElementById('input-game-manual').value;
+            const description = document.getElementById('input-game-desc').value;
             const progress = document.getElementById('input-game-progress').value;
-            const stage = document.getElementById('input-game-stage').value.trim();
+            const stage = document.getElementById('input-game-stage').value;
 
-            if (!title || !platform || !progress || !stage) {
-                alert("Completa al menos el Título, Plataforma, Porcentaje y Etapa.");
-                return;
-            }
+            if(!title) return alert('El título es requerido');
 
-            let games = getGamesData();
-
-            if (editId >= 0) {
-                const index = games.findIndex(g => g.id === editId);
-                if (index !== -1) {
-                    games[index].title = title;
-                    games[index].platform = platform;
-                    games[index].image = image;
-                    games[index].manual = manual;
-                    games[index].description = description;
-                    games[index].progress = Math.min(100, Math.max(1, progress));
-                    games[index].stage = stage;
-                    alert("¡Juego actualizado!");
-                }
+            if(id >= 0) {
+                gamesData[id] = { ...gamesData[id], title, platform, image, manual, description, progress, stage };
             } else {
-                const newGame = {
-                    id: Date.now(),
-                    title,
-                    platform,
-                    image,
-                    manual,
-                    description,
-                    progress: Math.min(100, Math.max(1, progress)),
-                    stage,
-                    tramos: []
-                };
-                games.push(newGame);
-                alert("¡Nuevo juego agregado!");
+                gamesData.push({ title, platform, image, manual, description, progress, stage, tramos: [] });
             }
 
-            saveGamesData(games);
+            localStorage.setItem('anonrails_games', JSON.stringify(gamesData));
             resetGameForm();
             renderGames();
-        }
-
-        function prepareEditGame(gameId) {
-            const games = getGamesData();
-            const game = games.find(g => g.id === gameId);
-            if (!game) return;
-
-            document.getElementById('edit-game-id').value = game.id;
-            document.getElementById('input-game-title').value = game.title;
-            document.getElementById('input-game-platform').value = game.platform;
-            document.getElementById('input-game-image').value = game.image || '';
-            document.getElementById('input-game-manual').value = game.manual || '';
-            document.getElementById('input-game-desc').value = game.description || '';
-            document.getElementById('input-game-progress').value = game.progress;
-            document.getElementById('input-game-stage').value = game.stage;
-
-            document.getElementById('game-form-title').innerText = '✏️ Editar Juego';
-            document.getElementById('btn-save-game').innerText = 'Actualizar Juego';
-            document.getElementById('btn-cancel-game').style.display = 'inline-block';
-
-            document.getElementById('admin-panel-juegos').style.display = 'block';
-            window.scrollTo({ top: document.getElementById('admin-panel-juegos').offsetTop - 50, behavior: 'smooth' });
         }
 
         function resetGameForm() {
@@ -779,312 +852,143 @@
             document.getElementById('input-game-desc').value = '';
             document.getElementById('input-game-progress').value = '';
             document.getElementById('input-game-stage').value = '';
-
-            document.getElementById('game-form-title').innerText = '🎮 Crear / Editar Juego';
-            document.getElementById('btn-save-game').innerText = 'Guardar Juego';
             document.getElementById('btn-cancel-game').style.display = 'none';
         }
 
-        function deleteGame(gameId) {
-            if (confirm("¿Estás seguro de que deseas eliminar este juego y todos sus tramos?")) {
-                let games = getGamesData().filter(g => g.id !== gameId);
-                saveGamesData(games);
+        function editGame(index) {
+            const g = gamesData[index];
+            document.getElementById('edit-game-id').value = index;
+            document.getElementById('input-game-title').value = g.title;
+            document.getElementById('input-game-platform').value = g.platform;
+            document.getElementById('input-game-image').value = g.image;
+            document.getElementById('input-game-manual').value = g.manual;
+            document.getElementById('input-game-desc').value = g.description;
+            document.getElementById('input-game-progress').value = g.progress;
+            document.getElementById('input-game-stage').value = g.stage;
+            document.getElementById('btn-cancel-game').style.display = 'inline-block';
+        }
+
+        function deleteGame(index) {
+            if(confirm('¿Seguro que deseas eliminar este juego?')) {
+                gamesData.splice(index, 1);
+                localStorage.setItem('anonrails_games', JSON.stringify(gamesData));
                 renderGames();
             }
         }
 
-        // --- GESTIÓN DE TRAMOS ---
         function saveTramo() {
-            const gameId = parseInt(document.getElementById('select-game-for-tramo').value);
-            const linea = document.getElementById('input-linea').value.trim();
-            const km = document.getElementById('input-km').value.trim();
-            const trayecto = document.getElementById('input-origen-destino').value.trim();
-            const editIndex = parseInt(document.getElementById('edit-tramo-index').value);
+            const gameIndex = parseInt(document.getElementById('select-game-for-tramo').value);
+            const linea = document.getElementById('input-linea').value;
+            const km = document.getElementById('input-km').value;
+            const trayecto = document.getElementById('input-origen-destino').value;
 
-            if (!gameId || !linea || !km || !trayecto) {
-                alert("Completa todos los campos del tramo.");
-                return;
-            }
+            if(isNaN(gameIndex) || !linea) return alert('Selecciona un juego e ingresa la línea.');
 
-            let games = getGamesData();
-            const gameIndex = games.findIndex(g => g.id === gameId);
+            gamesData[gameIndex].tramos = gamesData[gameIndex].tramos || [];
+            gamesData[gameIndex].tramos.push({ linea, km, trayecto });
 
-            if (gameIndex === -1) {
-                alert("Juego no encontrado.");
-                return;
-            }
-
-            if (!games[gameIndex].tramos) games[gameIndex].tramos = [];
-
-            if (editIndex >= 0) {
-                games[gameIndex].tramos[editIndex] = { linea, km, trayecto };
-                alert("¡Tramo actualizado!");
-            } else {
-                games[gameIndex].tramos.push({ linea, km, trayecto });
-                alert("¡Tramo añadido!");
-            }
-
-            saveGamesData(games);
-            resetTramoForm();
+            localStorage.setItem('anonrails_games', JSON.stringify(gamesData));
             renderGames();
         }
 
-        function prepareEditTramo(gameId, tramoIndex) {
-            const games = getGamesData();
-            const game = games.find(g => g.id === gameId);
-            if (!game || !game.tramos[tramoIndex]) return;
-
-            const tramo = game.tramos[tramoIndex];
-
-            document.getElementById('select-game-for-tramo').value = gameId;
-            document.getElementById('edit-tramo-index').value = tramoIndex;
-            document.getElementById('input-linea').value = tramo.linea;
-            document.getElementById('input-km').value = tramo.km;
-            document.getElementById('input-origen-destino').value = tramo.trayecto;
-
-            document.getElementById('tramo-form-title').innerText = '✏️ Editar Tramo';
-            document.getElementById('btn-save-tramo').innerText = 'Actualizar Tramo';
-            document.getElementById('btn-cancel-tramo').style.display = 'inline-block';
-
-            document.getElementById('admin-panel-juegos').style.display = 'block';
-            window.scrollTo({ top: document.getElementById('admin-panel-juegos').offsetTop - 50, behavior: 'smooth' });
-        }
-
-        function resetTramoForm() {
-            document.getElementById('edit-tramo-index').value = '-1';
-            document.getElementById('input-linea').value = '';
-            document.getElementById('input-km').value = '';
-            document.getElementById('input-origen-destino').value = '';
-
-            document.getElementById('tramo-form-title').innerText = '🛤️ Agregar / Editar Tramo a un Juego';
-            document.getElementById('btn-save-tramo').innerText = 'Guardar Tramo';
-            document.getElementById('btn-cancel-tramo').style.display = 'none';
-        }
-
-        function deleteTramo(gameId, tramoIndex) {
-            if (confirm("¿Estás seguro de que deseas eliminar este tramo?")) {
-                let games = getGamesData();
-                const gameIndex = games.findIndex(g => g.id === gameId);
-                if (gameIndex !== -1) {
-                    games[gameIndex].tramos.splice(tramoIndex, 1);
-                    saveGamesData(games);
-                    renderGames();
-                }
-            }
-        }
-
-        // --- SISTEMA DE NOVEDADES ---
-        const defaultNews = [
-            {
-                title: "Lanzamiento del Sitio Web Oficial",
-                image: "",
-                content: "Inauguramos nuestra plataforma web para compartir avances de proyectos y conectar con la comunidad.",
-                date: "17/08/2026"
-            }
-        ];
-
-        function loadNews() {
-            const savedNews = JSON.parse(localStorage.getItem('site_news')) || defaultNews;
+        // --- NOVEDADES ---
+        function renderNews() {
             const container = document.getElementById('news-container');
+            if(!container) return;
             container.innerHTML = '';
-
-            savedNews.forEach(item => {
-                const newsCard = document.createElement('div');
-                newsCard.className = 'news-card';
-                newsCard.innerHTML = `
-                    <div style="font-size:0.85rem; color:var(--accent); font-weight:bold; margin-bottom:0.4rem;">📅 ${item.date}</div>
-                    <h3 style="color: var(--text-main); font-size: 1.3rem; margin-bottom: 0.5rem;">${item.title}</h3>
-                    ${item.image ? `<img src="${item.image}" class="game-img" alt="Imagen Novedad">` : ''}
-                    <p style="color: var(--text-muted);">${item.content}</p>
+            newsData.forEach(n => {
+                container.innerHTML += `
+                    <div class="news-card">
+                        <h3>${n.title}</h3>
+                        ${n.image ? `<img src="${n.image}" class="game-img">` : ''}
+                        <p style="color: var(--text-muted); margin-top:0.5rem;">${n.content}</p>
+                    </div>
                 `;
-                container.appendChild(newsCard);
             });
         }
 
         function addNews() {
-            const title = document.getElementById('news-title').value.trim();
-            const imageUrl = document.getElementById('news-image-url').value.trim();
-            const content = document.getElementById('news-content').value.trim();
+            const title = document.getElementById('news-title').value;
+            const image = document.getElementById('news-image-url').value;
+            const content = document.getElementById('news-content').value;
 
-            if (!title || !content) {
-                alert("Completa el título y la descripción.");
-                return;
-            }
+            if(!title || !content) return alert('Título y contenido son obligatorios');
 
-            const newEntry = {
-                title: title,
-                image: imageUrl,
-                content: content,
-                date: new Date().toLocaleDateString('es-ES')
-            };
-
-            const newsList = JSON.parse(localStorage.getItem('site_news')) || defaultNews;
-            newsList.unshift(newEntry);
-            localStorage.setItem('site_news', JSON.stringify(newsList));
-
-            document.getElementById('news-title').value = '';
-            document.getElementById('news-image-url').value = '';
-            document.getElementById('news-content').value = '';
-
-            loadNews();
-            alert("¡Novedad publicada!");
+            newsData.unshift({ id: Date.now(), title, image, content });
+            localStorage.setItem('anonrails_news', JSON.stringify(newsData));
+            renderNews();
         }
 
         // --- FORO ---
-        const defaultPosts = [
-            {
-                author: "AnonRailsAdmin",
-                title: "¡Bienvenidos al foro oficial de Anon Rails!",
-                content: "Usa este espacio para compartir ideas, enviar sugerencias de locomotoras o reportar errores.",
-                date: "17/08/2026"
-            }
-        ];
-
-        function loadPosts() {
-            const savedPosts = JSON.parse(localStorage.getItem('forum_posts')) || defaultPosts;
+        function renderForum() {
             const container = document.getElementById('forum-posts-container');
+            if(!container) return;
             container.innerHTML = '';
-
-            savedPosts.forEach(post => {
-                const postElement = document.createElement('div');
-                postElement.className = 'forum-post';
-                postElement.innerHTML = `
-                    <div style="display:flex; justify-content:space-between; font-size:0.85rem; color:var(--accent); font-weight:bold; margin-bottom:0.4rem;">
-                        <span>👤 ${post.author}</span>
-                        <span>📅 ${post.date}</span>
+            forumPosts.forEach(p => {
+                container.innerHTML += `
+                    <div class="forum-post">
+                        <strong style="color: var(--accent);">${p.author}</strong>
+                        <h4 style="margin: 0.3rem 0;">${p.title}</h4>
+                        <p style="color: var(--text-muted);">${p.content}</p>
                     </div>
-                    <h4 style="color: var(--text-main); font-size: 1.1rem; margin-bottom: 0.4rem;">${post.title}</h4>
-                    <p style="color: var(--text-muted); font-size: 0.95rem;">${post.content}</p>
                 `;
-                container.appendChild(postElement);
             });
         }
 
         function addPost() {
-            const authorInput = document.getElementById('post-author').value.trim();
-            const titleInput = document.getElementById('post-title').value.trim();
-            const contentInput = document.getElementById('post-content').value.trim();
+            const author = document.getElementById('post-author').value || 'Anónimo';
+            const title = document.getElementById('post-title').value;
+            const content = document.getElementById('post-content').value;
 
-            if (!authorInput || !titleInput || !contentInput) {
-                alert("Completa todos los campos para publicar.");
-                return;
-            }
+            if(!title || !content) return alert('Completa título y contenido');
 
-            const newPost = {
-                author: authorInput,
-                title: titleInput,
-                content: contentInput,
-                date: new Date().toLocaleDateString('es-ES')
-            };
-
-            const posts = JSON.parse(localStorage.getItem('forum_posts')) || defaultPosts;
-            posts.unshift(newPost);
-            localStorage.setItem('forum_posts', JSON.stringify(posts));
-
-            document.getElementById('post-author').value = '';
-            document.getElementById('post-title').value = '';
-            document.getElementById('post-content').value = '';
-
-            loadPosts();
+            forumPosts.unshift({ id: Date.now(), author, title, content });
+            localStorage.setItem('anonrails_forum', JSON.stringify(forumPosts));
+            renderForum();
         }
 
-        // --- CANVA / FONDO INTERACTIVO ---
+        // CANVAS INTERACTIVO DE FONDO
         const canvas = document.getElementById('bg-canvas');
         const ctx = canvas.getContext('2d');
-        let width, height, particles = [];
-        let mouse = { x: null, y: null, isPressed: false, radius: 170 };
+        let stars = [];
 
-        function resizeCanvas() {
-            width = canvas.width = window.innerWidth;
-            height = canvas.height = window.innerHeight;
-            createParticles();
+        function initCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            stars = [];
+            for(let i = 0; i < 60; i++) {
+                stars.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    radius: Math.random() * 1.5,
+                    alpha: Math.random()
+                });
+            }
         }
 
-        window.addEventListener('resize', resizeCanvas);
-        window.addEventListener('mousemove', (e) => { mouse.x = e.clientX; mouse.y = e.clientY; });
-        window.addEventListener('mouseleave', () => { mouse.x = null; mouse.y = null; });
-        window.addEventListener('mousedown', () => mouse.isPressed = true);
-        window.addEventListener('mouseup', () => mouse.isPressed = false);
-
-        class Particle {
-            constructor() {
-                this.x = Math.random() * width;
-                this.y = Math.random() * height;
-                this.vx = (Math.random() - 0.5) * 0.8;
-                this.vy = (Math.random() - 0.5) * 0.8;
-                this.radius = Math.random() * 2 + 1;
-            }
-
-            update() {
-                this.x += this.vx;
-                this.y += this.vy;
-
-                if (this.x < 0 || this.x > width) this.vx *= -1;
-                if (this.y < 0 || this.y > height) this.vy *= -1;
-
-                if (mouse.x !== null && mouse.y !== null) {
-                    let dx = mouse.x - this.x;
-                    let dy = mouse.y - this.y;
-                    let dist = Math.sqrt(dx * dx + dy * dy);
-                    let forceRadius = mouse.isPressed ? mouse.radius * 1.5 : mouse.radius;
-
-                    if (dist < forceRadius) {
-                        let force = (forceRadius - dist) / forceRadius;
-                        let angle = Math.atan2(dy, dx);
-                        this.x += Math.cos(angle) * force * (mouse.isPressed ? 3 : 1.5);
-                        this.y += Math.sin(angle) * force * (mouse.isPressed ? 3 : 1.5);
-                    }
-                }
-            }
-
-            draw(accentRgb) {
+        function drawCanvas() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#ffffff';
+            stars.forEach(s => {
+                ctx.globalAlpha = s.alpha;
                 ctx.beginPath();
-                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(${accentRgb}, 0.5)`;
+                ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
                 ctx.fill();
-            }
+            });
+            requestAnimationFrame(drawCanvas);
         }
 
-        function createParticles() {
-            particles = [];
-            let count = Math.floor((width * height) / 12000);
-            for (let i = 0; i < count; i++) particles.push(new Particle());
-        }
-
-        function animate() {
-            ctx.clearRect(0, 0, width, height);
-            let accentRgb = getComputedStyle(document.body).getPropertyValue('--accent-rgb').trim() || "198, 125, 52";
-
-            for (let i = 0; i < particles.length; i++) {
-                particles[i].update();
-                particles[i].draw(accentRgb);
-
-                for (let j = i + 1; j < particles.length; j++) {
-                    let dx = particles[i].x - particles[j].x;
-                    let dy = particles[i].y - particles[j].y;
-                    let dist = Math.sqrt(dx * dx + dy * dy);
-
-                    if (dist < 120) {
-                        let alpha = (1 - dist / 120) * 0.25;
-                        ctx.beginPath();
-                        ctx.moveTo(particles[i].x, particles[i].y);
-                        ctx.lineTo(particles[j].x, particles[j].y);
-                        ctx.strokeStyle = `rgba(${accentRgb}, ${alpha})`;
-                        ctx.lineWidth = 1;
-                        ctx.stroke();
-                    }
-                }
-            }
-            requestAnimationFrame(animate);
-        }
+        window.addEventListener('resize', initCanvas);
 
         // INICIALIZACIÓN
-        resizeCanvas();
-        animate();
-        loadTheme();
-        loadNews();
-        loadPosts();
-        renderGames();
+        window.onload = function() {
+            initCanvas();
+            drawCanvas();
+            renderMetroverso();
+            renderGames();
+            renderNews();
+            renderForum();
+        };
     </script>
 </body>
 </html>
