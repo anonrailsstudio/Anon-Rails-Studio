@@ -256,6 +256,60 @@
             border: 1px solid var(--border-purple);
         }
 
+        /* CARRUSEL SLIDESHOW AUTOMÁTICO */
+        .slideshow-container {
+            position: relative;
+            width: 100%;
+            height: 450px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border-purple);
+            background-color: var(--bg-main);
+            margin-bottom: 2rem;
+        }
+
+        .slide-item {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            opacity: 0;
+            transition: opacity 0.8s ease-in-out;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .slide-item.active { opacity: 1; }
+
+        .slide-item img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+        }
+
+        .slide-caption {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            background: linear-gradient(0deg, rgba(0,0,0,0.85) 0%, transparent 100%);
+            color: #ffffff;
+            padding: 1.5rem;
+        }
+
+        .slide-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0,0,0,0.6);
+            color: white;
+            border: 1px solid var(--border-purple);
+            font-size: 1.5rem;
+            width: 40px; height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 10;
+        }
+        .slide-btn.prev { left: 15px; }
+        .slide-btn.next { right: 15px; }
+
         /* BARRA DE PROGRESO */
         .progress-container {
             margin: 1.5rem 0;
@@ -326,152 +380,6 @@
         }
         .news-card { border-left: 4px solid var(--accent); }
 
-        /* CARRUSEL Y SLIDESHOW MODELOS 3D */
-        .carousel-wrapper {
-            position: relative;
-            width: 100%;
-            max-width: 900px;
-            margin: 0 auto 2rem auto;
-            border-radius: 12px;
-            overflow: hidden;
-            border: 1px solid var(--border-purple);
-            background-color: var(--bg-main);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
-        }
-
-        .carousel-slide-container {
-            position: relative;
-            width: 100%;
-            height: 420px;
-            overflow: hidden;
-        }
-
-        .carousel-slide {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0;
-            transition: opacity 0.8s ease-in-out;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            pointer-events: none;
-        }
-
-        .carousel-slide.active {
-            opacity: 1;
-            pointer-events: auto;
-        }
-
-        .carousel-slide img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-
-        .carousel-caption {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(0deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 70%, transparent 100%);
-            color: #ffffff;
-            padding: 1.5rem 1.5rem 1rem 1.5rem;
-            text-align: left;
-        }
-
-        .carousel-caption h3 {
-            font-size: 1.3rem;
-            color: var(--accent);
-            margin-bottom: 0.3rem;
-        }
-
-        .carousel-caption p {
-            font-size: 0.9rem;
-            color: #e0e0e0;
-        }
-
-        .carousel-btn {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background-color: rgba(0, 0, 0, 0.5);
-            color: #ffffff;
-            border: 1px solid var(--border-purple);
-            font-size: 1.5rem;
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            cursor: pointer;
-            z-index: 10;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.2s ease;
-        }
-
-        .carousel-btn:hover {
-            background-color: var(--accent);
-            color: #fff;
-        }
-
-        .carousel-btn.prev { left: 15px; }
-        .carousel-btn.next { right: 15px; }
-
-        .carousel-indicators {
-            position: absolute;
-            bottom: 12px;
-            right: 20px;
-            display: flex;
-            gap: 8px;
-            z-index: 10;
-        }
-
-        .indicator-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background-color: rgba(255, 255, 255, 0.4);
-            cursor: pointer;
-            border: 1px solid rgba(0, 0, 0, 0.3);
-            transition: all 0.3s ease;
-        }
-
-        .indicator-dot.active {
-            background-color: var(--accent);
-            width: 28px;
-            border-radius: 6px;
-        }
-
-        /* ADMIN LISTA MODELOS 3D */
-        .model-item-row {
-            background-color: var(--bg-main);
-            border: 1px solid var(--border-purple);
-            border-radius: 8px;
-            padding: 1rem;
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .model-item-preview {
-            width: 80px;
-            height: 60px;
-            object-fit: cover;
-            border-radius: 6px;
-            border: 1px solid var(--border-purple);
-            background-color: #000;
-        }
-
-        .model-item-details {
-            flex-grow: 1;
-        }
-
         footer {
             text-align: center;
             padding: 2rem;
@@ -492,6 +400,7 @@
         <a onclick="showPage('inicio')" class="logo">ANON <span>RAILS</span></a>
         <nav>
             <a onclick="showPage('inicio')" id="nav-inicio" class="active">🏠 Inicio</a>
+            <a onclick="showPage('metroverso')" id="nav-metroverso">🌐 Metroverso Worldwide</a>
             <a onclick="showPage('novedades')" id="nav-novedades">📢 Novedades</a>
             <a onclick="showPage('juegos')" id="nav-juegos">🎮 Juegos</a>
             <a onclick="showPage('foro')" id="nav-foro">💬 Foro</a>
@@ -540,6 +449,61 @@
                             <h3 style="margin-bottom: 0.5rem;">Foro Comunitario</h3>
                             <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Comparte sugerencias, reporta errores y platica sobre simuladores con la comunidad.</p>
                             <a onclick="showPage('foro')" class="btn">Ir al Foro</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- METROVERSO WORLDWIDE -->
+            <div id="page-metroverso" class="page-section">
+                <div class="container">
+                    <div class="section-title">
+                        <span>Metroverso Worldwide</span>
+                        <button onclick="toggleEditor()" class="btn btn-sm">✏️ Editar Texto</button>
+                    </div>
+
+                    <!-- SLIDESHOW AUTOMÁTICO -->
+                    <div class="slideshow-container">
+                        <button class="slide-btn prev" onclick="moveSlide(-1)">&#10094;</button>
+                        <button class="slide-btn next" onclick="moveSlide(1)">&#10095;</button>
+                        
+                        <div class="slide-item active">
+                            <img src="https://images.unsplash.com/photo-1515165562839-538804960bf2?q=80&w=1000&auto=format&fit=crop" alt="Metro 1">
+                            <div class="slide-caption">
+                                <h3>Red Internacional de Metros</h3>
+                                <p>Sistemas de transporte interconectados en alta resolución.</p>
+                            </div>
+                        </div>
+                        <div class="slide-item">
+                            <img src="https://images.unsplash.com/photo-1474487548417-781cb71495f3?q=80&w=1000&auto=format&fit=crop" alt="Metro 2">
+                            <div class="slide-caption">
+                                <h3>Estaciones Detalladas</h3>
+                                <p>Modelado de infraestructura a escala real.</p>
+                            </div>
+                        </div>
+                        <div class="slide-item">
+                            <img src="https://images.unsplash.com/photo-1509749837427-ac94a2553d0e?q=80&w=1000&auto=format&fit=crop" alt="Metro 3">
+                            <div class="slide-caption">
+                                <h3>Simulación Dinámica</h3>
+                                <p>Tráfico, señalización e interacciones avanzadas.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SECCIÓN DE TEXTO EDITABLE -->
+                    <div class="card">
+                        <div id="metroverso-text-display">
+                            <h2>Bienvenido a Metroverso Worldwide</h2>
+                            <p style="margin-top:0.8rem; color: var(--text-muted);">
+                                Esta es la sección global dedicada al desarrollo del Metroverso. Aquí compartiremos avances, imágenes dinámicas y actualizaciones sobre las rutas urbanas y suburbanas del proyecto.
+                            </p>
+                        </div>
+
+                        <!-- PANEL EDITABLE (OCULTO POR DEFECTO) -->
+                        <div id="metroverso-text-editor" style="display: none; margin-top: 1rem;">
+                            <label style="font-weight: bold; font-size: 0.9rem; margin-bottom: 0.5rem; display: block;">Modificar Descripción:</label>
+                            <textarea id="editor-textarea" class="forum-textarea" style="min-height: 120px;"></textarea>
+                            <button onclick="saveText()" class="btn btn-sm">Guardar Cambios</button>
                         </div>
                     </div>
                 </div>
@@ -648,63 +612,19 @@
             <!-- MODELOS 3D -->
             <div id="page-modelos3d" class="page-section">
                 <div class="container">
-                    <div class="section-title">
-                        <span>Modelos 3D</span>
-                        <button onclick="toggleAdminPanel('admin-panel-modelos3d')" class="btn btn-sm">🔒 Gestor 3D Admin</button>
-                    </div>
-                    <p style="color: var(--text-muted); font-size: 1.1rem; margin-bottom: 2rem;">Catálogo e imágenes de trenes, señalizaciones y objetos 3D desarrollados para nuestras experiencias.</p>
-
-                    <!-- PANEL DE ADMINISTRACIÓN DE GALERÍA Y SLIDESHOW DE MODELOS 3D -->
-                    <div id="admin-panel-modelos3d" class="admin-panel">
-                        <h3 style="margin-bottom: 1rem; color: var(--accent);" id="model3d-form-title">📦 Agregar / Editar Imagen de Modelo 3D</h3>
-                        <input type="hidden" id="edit-model3d-id" value="-1">
-
-                        <label style="color: var(--text-muted); font-size: 0.85rem;">Título del Modelo / Imagen:</label>
-                        <input type="text" id="input-model3d-title" class="forum-input" placeholder="Ej: Locomotora Diésel CSR SDD7">
-
-                        <label style="color: var(--text-muted); font-size: 0.85rem;">Categoría / Etiqueta:</label>
-                        <input type="text" id="input-model3d-category" class="forum-input" placeholder="Ej: Material Rodante / Infraestructura / Señalización">
-
-                        <label style="color: var(--text-muted); font-size: 0.85rem;">URL de la Imagen (Link):</label>
-                        <input type="text" id="input-model3d-image" class="forum-input" placeholder="https://ejemplo.com/imagen_modelo.jpg">
-
-                        <label style="color: var(--text-muted); font-size: 0.85rem;">Descripción Corta:</label>
-                        <textarea id="input-model3d-desc" class="forum-textarea" placeholder="Breve descripción del elemento modelado..."></textarea>
-
-                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1.5rem;">
-                            <button onclick="saveModel3D()" class="btn" id="btn-save-model3d">Guardar Modelo</button>
-                            <button onclick="resetModel3DForm()" class="btn btn-danger" id="btn-cancel-model3d" style="display: none;">Cancelar</button>
-                        </div>
-
-                        <h4 style="color: var(--text-main); margin-bottom: 1rem; border-top: 1px solid var(--border-purple); padding-top: 1rem;">Lista de Modelos Guardados</h4>
-                        <div id="admin-models3d-list"></div>
-                    </div>
-
-                    <!-- CARRUSEL SLIDESHOW AUTOMÁTICO -->
-                    <div class="carousel-wrapper" onmouseenter="pauseCarousel()" onmouseleave="resumeCarousel()">
-                        <div class="carousel-slide-container" id="carousel-slides-container">
-                            <!-- Inyectado dinámicamente -->
-                        </div>
-
-                        <!-- Botones de navegación manual -->
-                        <button class="carousel-btn prev" onclick="prevSlide()" title="Anterior">❮</button>
-                        <button class="carousel-btn next" onclick="nextSlide()" title="Siguiente">❯</button>
-
-                        <!-- Indicadores -->
-                        <div class="carousel-indicators" id="carousel-indicators-container"></div>
-                    </div>
-
-                    <!-- TARJETAS DE CATEGORÍAS -->
-                    <div class="grid" id="models3d-cards-grid">
+                    <div class="section-title">Modelos 3D</div>
+                    <p style="color: var(--text-muted); font-size: 1.1rem; margin-bottom: 2rem;">Catálogo de trenes, señalizaciones y objetos 3D desarrollados para nuestras experiencias.</p>
+                    
+                    <div class="grid">
                         <div class="card" style="margin-bottom:0;">
                             <span class="badge">Modelado 3D</span>
                             <h3 style="margin-bottom: 0.5rem;">Locomotoras & Formaciones</h3>
-                            <p style="color: var(--text-muted);">Modelos detallados de material rodante optimizados para simulación en vivo.</p>
+                            <p style="color: var(--text-muted);">Modelos detallados de material rodante optimizados.</p>
                         </div>
                         <div class="card" style="margin-bottom:0;">
                             <span class="badge">Infraestructura</span>
                             <h3 style="margin-bottom: 0.5rem;">Señales y Catenarias</h3>
-                            <p style="color: var(--text-muted);">Elementos de vía, cambios de agujas y sistemas de señalización interactivos.</p>
+                            <p style="color: var(--text-muted);">Elementos de vía, cambios de agujas y sistemas de señalización.</p>
                         </div>
                     </div>
                 </div>
@@ -749,15 +669,68 @@
         function loadTheme() {
             const savedTheme = localStorage.getItem('selected_theme') || 'brown-black';
             document.body.setAttribute('data-theme', savedTheme);
-            const themeSelect = document.getElementById('theme-select');
-            if (themeSelect) themeSelect.value = savedTheme;
+            document.getElementById('theme-select').value = savedTheme;
+        }
+
+        // --- LÓGICA DEL SLIDESHOW EN METROVERSO ---
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide-item');
+        let slideInterval = setInterval(autoSlide, 4000);
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.remove('active');
+                if (i === index) slide.classList.add('active');
+            });
+        }
+
+        function autoSlide() {
+            if (slides.length === 0) return;
+            currentSlide = (currentSlide + 1) % slides.length;
+            showSlide(currentSlide);
+        }
+
+        function moveSlide(direction) {
+            clearInterval(slideInterval);
+            currentSlide += direction;
+            if (currentSlide < 0) currentSlide = slides.length - 1;
+            if (currentSlide >= slides.length) currentSlide = 0;
+            showSlide(currentSlide);
+            slideInterval = setInterval(autoSlide, 4000);
+        }
+
+        // --- EDICIÓN DE TEXTO EN METROVERSO ---
+        function toggleEditor() {
+            const editor = document.getElementById('metroverso-text-editor');
+            const display = document.getElementById('metroverso-text-display');
+            const textarea = document.getElementById('editor-textarea');
+
+            if (editor.style.display === 'none') {
+                textarea.value = display.innerHTML.trim();
+                editor.style.display = 'block';
+            } else {
+                editor.style.display = 'none';
+            }
+        }
+
+        function saveText() {
+            const display = document.getElementById('metroverso-text-display');
+            const textarea = document.getElementById('editor-textarea');
+            display.innerHTML = textarea.value;
+            localStorage.setItem('metroverso_custom_text', textarea.value);
+            document.getElementById('metroverso-text-editor').style.display = 'none';
+        }
+
+        function loadMetroversoText() {
+            const savedText = localStorage.getItem('metroverso_custom_text');
+            if (savedText) {
+                document.getElementById('metroverso-text-display').innerHTML = savedText;
+            }
         }
 
         // --- PANEL DE ADMIN (CLAVE 6860) ---
         function toggleAdminPanel(panelId) {
             const panel = document.getElementById(panelId);
-            if (!panel) return;
-
             if (panel.style.display === 'block') {
                 panel.style.display = 'none';
             } else {
@@ -768,9 +741,8 @@
                     if (pass === "6860") {
                         isAdminLoggedIn = true;
                         panel.style.display = 'block';
-                        renderGames(); // Recarga para activar botones de administración
-                        renderModels3DAdmin(); // Recarga la administración de modelos
-                    } else if (pass !== null) {
+                        renderGames();
+                    } else {
                         alert("Contraseña incorrecta.");
                     }
                 }
@@ -783,7 +755,7 @@
                 id: 1,
                 title: "Metroverso WorldWide",
                 platform: "Roblox",
-                image: "https://images.unsplash.com/photo-1515165562839-978bbcf1b267?auto=format&fit=crop&w=1000&q=80",
+                image: "",
                 manual: "",
                 description: "Simulador ferroviario inmersivo con líneas interurbanas, señalización realista y material rodante detallado.",
                 progress: 45,
@@ -807,19 +779,15 @@
             const container = document.getElementById('games-container');
             const selectGame = document.getElementById('select-game-for-tramo');
             
-            if (!container || !selectGame) return;
-
             container.innerHTML = '';
             selectGame.innerHTML = '';
 
             games.forEach((game) => {
-                // Opción para el selector de tramos
                 const option = document.createElement('option');
                 option.value = game.id;
                 option.textContent = game.title;
                 selectGame.appendChild(option);
 
-                // Tarjeta de Juego
                 const gameCard = document.createElement('div');
                 gameCard.className = 'card';
 
@@ -872,7 +840,7 @@
                         ${adminActions}
                     </div>
 
-                    ${game.image ? `<img src="${game.image}" class="game-img" alt="Imagen del juego" onerror="this.src='https://placehold.co/800x400/221e1a/c67d34?text=Anon+Rails+Juego'">` : ''}
+                    ${game.image ? `<img src="${game.image}" class="game-img" alt="Imagen del juego">` : ''}
 
                     <p style="color: var(--text-muted); margin-top: 0.8rem;">${game.description}</p>
                     ${manualBtn}
@@ -895,51 +863,50 @@
             });
         }
 
+        // --- GESTIÓN DE JUEGOS ---
         function saveGame() {
             const editId = parseInt(document.getElementById('edit-game-id').value);
             const title = document.getElementById('input-game-title').value.trim();
             const platform = document.getElementById('input-game-platform').value.trim();
             const image = document.getElementById('input-game-image').value.trim();
             const manual = document.getElementById('input-game-manual').value.trim();
-            const desc = document.getElementById('input-game-desc').value.trim();
-            const progress = parseInt(document.getElementById('input-game-progress').value) || 0;
+            const description = document.getElementById('input-game-desc').value.trim();
+            const progress = document.getElementById('input-game-progress').value;
             const stage = document.getElementById('input-game-stage').value.trim();
 
-            if (!title) { alert("Por favor, ingresa el título del juego."); return; }
+            if (!title || !platform || !progress || !stage) {
+                alert("Completa al menos el Título, Plataforma, Porcentaje y Etapa.");
+                return;
+            }
 
             let games = getGamesData();
 
-            if (editId === -1) {
-                // Nuevo juego
+            if (editId >= 0) {
+                const index = games.findIndex(g => g.id === editId);
+                if (index !== -1) {
+                    games[index].title = title;
+                    games[index].platform = platform;
+                    games[index].image = image;
+                    games[index].manual = manual;
+                    games[index].description = description;
+                    games[index].progress = Math.min(100, Math.max(1, progress));
+                    games[index].stage = stage;
+                    alert("¡Juego actualizado!");
+                }
+            } else {
                 const newGame = {
                     id: Date.now(),
                     title,
-                    platform: platform || "Roblox",
+                    platform,
                     image,
                     manual,
-                    description: desc,
-                    progress,
-                    stage: stage || "En Desarrollo",
+                    description,
+                    progress: Math.min(100, Math.max(1, progress)),
+                    stage,
                     tramos: []
                 };
                 games.push(newGame);
-            } else {
-                // Editar juego existente
-                games = games.map(g => {
-                    if (g.id === editId) {
-                        return {
-                            ...g,
-                            title,
-                            platform: platform || g.platform,
-                            image,
-                            manual,
-                            description: desc,
-                            progress,
-                            stage: stage || g.stage
-                        };
-                    }
-                    return g;
-                });
+                alert("¡Nuevo juego agregado!");
             }
 
             saveGamesData(games);
@@ -955,69 +922,77 @@
             document.getElementById('edit-game-id').value = game.id;
             document.getElementById('input-game-title').value = game.title;
             document.getElementById('input-game-platform').value = game.platform;
-            document.getElementById('input-game-image').value = game.image;
-            document.getElementById('input-game-manual').value = game.manual;
-            document.getElementById('input-game-desc').value = game.description;
+            document.getElementById('input-game-image').value = game.image || '';
+            document.getElementById('input-game-manual').value = game.manual || '';
+            document.getElementById('input-game-desc').value = game.description || '';
             document.getElementById('input-game-progress').value = game.progress;
             document.getElementById('input-game-stage').value = game.stage;
 
-            document.getElementById('game-form-title').innerText = "✏️ Editar Juego: " + game.title;
-            document.getElementById('btn-save-game').innerText = "Actualizar Juego";
-            document.getElementById('btn-cancel-game').style.display = "inline-block";
+            document.getElementById('game-form-title').innerText = '✏️ Editar Juego';
+            document.getElementById('btn-save-game').innerText = 'Actualizar Juego';
+            document.getElementById('btn-cancel-game').style.display = 'inline-block';
 
-            window.scrollTo({ top: document.getElementById('admin-panel-juegos').offsetTop - 20, behavior: 'smooth' });
+            document.getElementById('admin-panel-juegos').style.display = 'block';
+            window.scrollTo({ top: document.getElementById('admin-panel-juegos').offsetTop - 50, behavior: 'smooth' });
         }
 
         function resetGameForm() {
-            document.getElementById('edit-game-id').value = "-1";
-            document.getElementById('input-game-title').value = "";
-            document.getElementById('input-game-platform').value = "";
-            document.getElementById('input-game-image').value = "";
-            document.getElementById('input-game-manual').value = "";
-            document.getElementById('input-game-desc').value = "";
-            document.getElementById('input-game-progress').value = "";
-            document.getElementById('input-game-stage').value = "";
+            document.getElementById('edit-game-id').value = '-1';
+            document.getElementById('input-game-title').value = '';
+            document.getElementById('input-game-platform').value = '';
+            document.getElementById('input-game-image').value = '';
+            document.getElementById('input-game-manual').value = '';
+            document.getElementById('input-game-desc').value = '';
+            document.getElementById('input-game-progress').value = '';
+            document.getElementById('input-game-stage').value = '';
 
-            document.getElementById('game-form-title').innerText = "🎮 Crear / Editar Juego";
-            document.getElementById('btn-save-game').innerText = "Guardar Juego";
-            document.getElementById('btn-cancel-game').style.display = "none";
+            document.getElementById('game-form-title').innerText = '🎮 Crear / Editar Juego';
+            document.getElementById('btn-save-game').innerText = 'Guardar Juego';
+            document.getElementById('btn-cancel-game').style.display = 'none';
         }
 
         function deleteGame(gameId) {
-            if (confirm("¿Estás seguro de eliminar este juego?")) {
-                let games = getGamesData();
-                games = games.filter(g => g.id !== gameId);
+            if (confirm("¿Estás seguro de que deseas eliminar este juego y todos sus tramos?")) {
+                let games = getGamesData().filter(g => g.id !== gameId);
                 saveGamesData(games);
                 renderGames();
             }
         }
 
+        // --- GESTIÓN DE TRAMOS ---
         function saveTramo() {
             const gameId = parseInt(document.getElementById('select-game-for-tramo').value);
-            const tramoIndex = parseInt(document.getElementById('edit-tramo-index').value);
             const linea = document.getElementById('input-linea').value.trim();
-            const km = parseFloat(document.getElementById('input-km').value) || 0;
+            const km = document.getElementById('input-km').value.trim();
             const trayecto = document.getElementById('input-origen-destino').value.trim();
+            const editIndex = parseInt(document.getElementById('edit-tramo-index').value);
 
-            if (!linea) { alert("Ingresa el nombre de la línea o tramo."); return; }
-            if (!gameId) { alert("Selecciona un juego."); return; }
+            if (!gameId || !linea || !km || !trayecto) {
+                alert("Completa todos los campos del tramo.");
+                return;
+            }
 
             let games = getGamesData();
-            const game = games.find(g => g.id === gameId);
+            const gameIndex = games.findIndex(g => g.id === gameId);
 
-            if (game) {
-                if (!game.tramos) game.tramos = [];
-
-                if (tramoIndex === -1) {
-                    game.tramos.push({ linea, km, trayecto });
-                } else {
-                    game.tramos[tramoIndex] = { linea, km, trayecto };
-                }
-
-                saveGamesData(games);
-                resetTramoForm();
-                renderGames();
+            if (gameIndex === -1) {
+                alert("Juego no encontrado.");
+                return;
             }
+
+            if (!games[gameIndex].tramos) games[gameIndex].tramos = [];
+
+            if (editIndex >= 0) {
+                games[gameIndex].tramos[editIndex] = { linea, km, trayecto };
+                alert("¡Tramo actualizado!");
+            } else {
+                games[gameIndex].tramos.push({ linea, km, trayecto });
+                alert("¡Tramo añadido!");
+            }
+
+            saveGamesData(games);
+            resetTramoForm();
+            renderGames();
         }
 
         function prepareEditTramo(gameId, tramoIndex) {
@@ -1033,461 +1008,250 @@
             document.getElementById('input-km').value = tramo.km;
             document.getElementById('input-origen-destino').value = tramo.trayecto;
 
-            document.getElementById('tramo-form-title').innerText = "✏️ Editar Tramo de " + game.title;
-            document.getElementById('btn-save-tramo').innerText = "Actualizar Tramo";
-            document.getElementById('btn-cancel-tramo').style.display = "inline-block";
+            document.getElementById('tramo-form-title').innerText = '✏️ Editar Tramo';
+            document.getElementById('btn-save-tramo').innerText = 'Actualizar Tramo';
+            document.getElementById('btn-cancel-tramo').style.display = 'inline-block';
 
-            window.scrollTo({ top: document.getElementById('admin-panel-juegos').offsetTop - 20, behavior: 'smooth' });
+            document.getElementById('admin-panel-juegos').style.display = 'block';
+            window.scrollTo({ top: document.getElementById('admin-panel-juegos').offsetTop - 50, behavior: 'smooth' });
         }
 
         function resetTramoForm() {
-            document.getElementById('edit-tramo-index').value = "-1";
-            document.getElementById('input-linea').value = "";
-            document.getElementById('input-km').value = "";
-            document.getElementById('input-origen-destino').value = "";
+            document.getElementById('edit-tramo-index').value = '-1';
+            document.getElementById('input-linea').value = '';
+            document.getElementById('input-km').value = '';
+            document.getElementById('input-origen-destino').value = '';
 
-            document.getElementById('tramo-form-title').innerText = "🛤️ Agregar / Editar Tramo a un Juego";
-            document.getElementById('btn-save-tramo').innerText = "Guardar Tramo";
-            document.getElementById('btn-cancel-tramo').style.display = "none";
+            document.getElementById('tramo-form-title').innerText = '🛤️ Agregar / Editar Tramo a un Juego';
+            document.getElementById('btn-save-tramo').innerText = 'Guardar Tramo';
+            document.getElementById('btn-cancel-tramo').style.display = 'none';
         }
 
         function deleteTramo(gameId, tramoIndex) {
-            if (confirm("¿Borrar este tramo?")) {
+            if (confirm("¿Estás seguro de que deseas eliminar este tramo?")) {
                 let games = getGamesData();
-                const game = games.find(g => g.id === gameId);
-                if (game && game.tramos) {
-                    game.tramos.splice(tramoIndex, 1);
+                const gameIndex = games.findIndex(g => g.id === gameId);
+                if (gameIndex !== -1) {
+                    games[gameIndex].tramos.splice(tramoIndex, 1);
                     saveGamesData(games);
                     renderGames();
                 }
             }
         }
 
-        // --- SISTEMA DE MODELOS 3D, SLIDESHOW Y GALERÍA DYNÁMICA ---
-        const defaultModels3D = [
-            {
-                id: 1,
-                title: "Locomotora Diésel GM GT22CW",
-                category: "Material Rodante",
-                image: "https://images.unsplash.com/photo-1474487548417-781cb71495f3?auto=format&fit=crop&w=1200&q=80",
-                description: "Modelo 3D de alta fidelidad con bogies articulados, textura mate y física personalizada."
-            },
-            {
-                id: 2,
-                title: "Señalamiento Luminoso LED Ferroviario",
-                category: "Infraestructura",
-                image: "https://images.unsplash.com/photo-1515165562839-978bbcf1b267?auto=format&fit=crop&w=1200&q=80",
-                description: "Sistema de señales programables con lógica de cantones automática."
-            },
-            {
-                id: 3,
-                title: "Coche de Pasajeros de Larga Distancia",
-                category: "Material Rodante",
-                image: "https://images.unsplash.com/photo-1541427468627-a89a96e5ca1d?auto=format&fit=crop&w=1200&q=80",
-                description: "Interior modelado con asientos reclinables, iluminación nocturna e intercomunicadores."
-            }
-        ];
-
-        let currentSlideIndex = 0;
-        let carouselTimer = null;
-
-        function getModels3DData() {
-            return JSON.parse(localStorage.getItem('anon_rails_models3d')) || defaultModels3D;
-        }
-
-        function saveModels3DData(models) {
-            localStorage.setItem('anon_rails_models3d', JSON.stringify(models));
-        }
-
-        function renderCarousel() {
-            const models = getModels3DData();
-            const slidesContainer = document.getElementById('carousel-slides-container');
-            const indicatorsContainer = document.getElementById('carousel-indicators-container');
-
-            if (!slidesContainer || !indicatorsContainer) return;
-
-            slidesContainer.innerHTML = '';
-            indicatorsContainer.innerHTML = '';
-
-            if (models.length === 0) {
-                slidesContainer.innerHTML = `
-                    <div class="carousel-slide active" style="background:#1a1a1a; display:flex; justify-content:center; align-items:center;">
-                        <p style="color:var(--text-muted);">No hay modelos 3D disponibles en la galería.</p>
-                    </div>
-                `;
-                return;
-            }
-
-            if (currentSlideIndex >= models.length) {
-                currentSlideIndex = 0;
-            }
-
-            models.forEach((model, idx) => {
-                // Slide Item
-                const slideEl = document.createElement('div');
-                slideEl.className = `carousel-slide ${idx === currentSlideIndex ? 'active' : ''}`;
-                slideEl.innerHTML = `
-                    <img src="${model.image}" alt="${model.title}" onerror="this.src='https://placehold.co/900x420/1c1815/c67d34?text=${encodeURIComponent(model.title)}'">
-                    <div class="carousel-caption">
-                        <span class="badge" style="margin-bottom:0.3rem;">${model.category}</span>
-                        <h3>${model.title}</h3>
-                        <p>${model.description}</p>
-                    </div>
-                `;
-                slidesContainer.appendChild(slideEl);
-
-                // Indicator Dot
-                const dotEl = document.createElement('div');
-                dotEl.className = `indicator-dot ${idx === currentSlideIndex ? 'active' : ''}`;
-                dotEl.onclick = () => goToSlide(idx);
-                indicatorsContainer.appendChild(dotEl);
-            });
-        }
-
-        function showSlide(index) {
-            const models = getModels3DData();
-            if (models.length === 0) return;
-
-            if (index < 0) {
-                currentSlideIndex = models.length - 1;
-            } else if (index >= models.length) {
-                currentSlideIndex = 0;
-            } else {
-                currentSlideIndex = index;
-            }
-
-            renderCarousel();
-        }
-
-        function nextSlide() {
-            showSlide(currentSlideIndex + 1);
-        }
-
-        function prevSlide() {
-            showSlide(currentSlideIndex - 1);
-        }
-
-        function goToSlide(index) {
-            showSlide(index);
-        }
-
-        function startCarousel() {
-            stopCarousel();
-            carouselTimer = setInterval(() => {
-                nextSlide();
-            }, 4000); // Cambia automáticamente cada 4 segundos
-        }
-
-        function stopCarousel() {
-            if (carouselTimer) {
-                clearInterval(carouselTimer);
-                carouselTimer = null;
-            }
-        }
-
-        function pauseCarousel() {
-            stopCarousel();
-        }
-
-        function resumeCarousel() {
-            startCarousel();
-        }
-
-        // --- GESTIÓN DE MODELOS 3D EN MODO ADMIN ---
-        function renderModels3DAdmin() {
-            const models = getModels3DData();
-            const container = document.getElementById('admin-models3d-list');
-            if (!container) return;
-
-            container.innerHTML = '';
-
-            if (models.length === 0) {
-                container.innerHTML = `<p style="color:var(--text-muted); font-size:0.9rem;">No hay modelos guardados.</p>`;
-                return;
-            }
-
-            models.forEach((model) => {
-                const itemRow = document.createElement('div');
-                itemRow.className = 'model-item-row';
-                itemRow.innerHTML = `
-                    <img src="${model.image}" class="model-item-preview" alt="Preview" onerror="this.src='https://placehold.co/80x60/12100e/c67d34?text=3D'">
-                    <div class="model-item-details">
-                        <strong style="color:var(--text-main); font-size:0.95rem;">${model.title}</strong>
-                        <div style="font-size:0.8rem; color:var(--text-muted);">${model.category}</div>
-                    </div>
-                    <div style="display:flex; gap:0.4rem;">
-                        <button onclick="prepareEditModel3D(${model.id})" class="btn btn-warning btn-sm">✏️ Editar</button>
-                        <button onclick="deleteModel3D(${model.id})" class="btn btn-danger btn-sm">🗑️ Borrar</button>
-                    </div>
-                `;
-                container.appendChild(itemRow);
-            });
-        }
-
-        function saveModel3D() {
-            const editId = parseInt(document.getElementById('edit-model3d-id').value);
-            const title = document.getElementById('input-model3d-title').value.trim();
-            const category = document.getElementById('input-model3d-category').value.trim();
-            const image = document.getElementById('input-model3d-image').value.trim();
-            const desc = document.getElementById('input-model3d-desc').value.trim();
-
-            if (!title || !image) {
-                alert("Por favor, ingresa el título y la URL de la imagen del modelo 3D.");
-                return;
-            }
-
-            let models = getModels3DData();
-
-            if (editId === -1) {
-                models.push({
-                    id: Date.now(),
-                    title,
-                    category: category || "Modelado 3D",
-                    image,
-                    description: desc
-                });
-            } else {
-                models = models.map(m => {
-                    if (m.id === editId) {
-                        return { ...m, title, category: category || m.category, image, description: desc };
-                    }
-                    return m;
-                });
-            }
-
-            saveModels3DData(models);
-            resetModel3DForm();
-            renderCarousel();
-            renderModels3DAdmin();
-        }
-
-        function prepareEditModel3D(modelId) {
-            const models = getModels3DData();
-            const model = models.find(m => m.id === modelId);
-            if (!model) return;
-
-            document.getElementById('edit-model3d-id').value = model.id;
-            document.getElementById('input-model3d-title').value = model.title;
-            document.getElementById('input-model3d-category').value = model.category;
-            document.getElementById('input-model3d-image').value = model.image;
-            document.getElementById('input-model3d-desc').value = model.description;
-
-            document.getElementById('model3d-form-title').innerText = "✏️ Editar Imagen de Modelo 3D: " + model.title;
-            document.getElementById('btn-save-model3d').innerText = "Actualizar Modelo";
-            document.getElementById('btn-cancel-model3d').style.display = "inline-block";
-        }
-
-        function resetModel3DForm() {
-            document.getElementById('edit-model3d-id').value = "-1";
-            document.getElementById('input-model3d-title').value = "";
-            document.getElementById('input-model3d-category').value = "";
-            document.getElementById('input-model3d-image').value = "";
-            document.getElementById('input-model3d-desc').value = "";
-
-            document.getElementById('model3d-form-title').innerText = "📦 Agregar / Editar Imagen de Modelo 3D";
-            document.getElementById('btn-save-model3d').innerText = "Guardar Modelo";
-            document.getElementById('btn-cancel-model3d').style.display = "none";
-        }
-
-        function deleteModel3D(modelId) {
-            if (confirm("¿Eliminar este modelo 3D del slideshow?")) {
-                let models = getModels3DData();
-                models = models.filter(m => m.id !== modelId);
-                saveModels3DData(models);
-                renderCarousel();
-                renderModels3DAdmin();
-            }
-        }
-
         // --- SISTEMA DE NOVEDADES ---
         const defaultNews = [
             {
-                id: 1,
-                title: "Próxima Actualización de Vías y Señalización",
-                image: "https://images.unsplash.com/photo-1515165562839-978bbcf1b267?auto=format&fit=crop&w=1000&q=80",
-                content: "Estamos trabajando en la reconstrucción completa del sistema de cambiavías e iluminación dinámica de cabina.",
-                date: "2026-03-28"
+                title: "Lanzamiento del Sitio Web Oficial",
+                image: "",
+                content: "Inauguramos nuestra plataforma web para compartir avances de proyectos y conectar con la comunidad.",
+                date: "17/08/2026"
             }
         ];
 
-        function getNewsData() {
-            return JSON.parse(localStorage.getItem('anon_rails_news')) || defaultNews;
-        }
-
-        function saveNewsData(news) {
-            localStorage.setItem('anon_rails_news', JSON.stringify(news));
-        }
-
-        function renderNews() {
-            const news = getNewsData();
+        function loadNews() {
+            const savedNews = JSON.parse(localStorage.getItem('site_news')) || defaultNews;
             const container = document.getElementById('news-container');
-            if (!container) return;
-
             container.innerHTML = '';
-            news.forEach(item => {
-                const card = document.createElement('div');
-                card.className = 'news-card';
-                card.innerHTML = `
-                    <h3 style="color: var(--accent); margin-bottom: 0.5rem;">${item.title}</h3>
-                    <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 1rem;">Publicado el: ${item.date}</p>
-                    ${item.image ? `<img src="${item.image}" class="game-img" alt="Novedad" onerror="this.style.display='none'">` : ''}
-                    <p style="color: var(--text-main);">${item.content}</p>
+
+            savedNews.forEach(item => {
+                const newsCard = document.createElement('div');
+                newsCard.className = 'news-card';
+                newsCard.innerHTML = `
+                    <div style="font-size:0.85rem; color:var(--accent); font-weight:bold; margin-bottom:0.4rem;">📅 ${item.date}</div>
+                    <h3 style="color: var(--text-main); font-size: 1.3rem; margin-bottom: 0.5rem;">${item.title}</h3>
+                    ${item.image ? `<img src="${item.image}" class="game-img" alt="Imagen Novedad">` : ''}
+                    <p style="color: var(--text-muted);">${item.content}</p>
                 `;
-                container.appendChild(card);
+                container.appendChild(newsCard);
             });
         }
 
         function addNews() {
             const title = document.getElementById('news-title').value.trim();
-            const image = document.getElementById('news-image-url').value.trim();
+            const imageUrl = document.getElementById('news-image-url').value.trim();
             const content = document.getElementById('news-content').value.trim();
 
-            if (!title || !content) { alert("Completa título y contenido."); return; }
+            if (!title || !content) {
+                alert("Completa el título y la descripción.");
+                return;
+            }
 
-            const news = getNewsData();
-            news.unshift({
-                id: Date.now(),
-                title,
-                image,
-                content,
-                date: new Date().toISOString().split('T')[0]
-            });
+            const newEntry = {
+                title: title,
+                image: imageUrl,
+                content: content,
+                date: new Date().toLocaleDateString('es-ES')
+            };
 
-            saveNewsData(news);
+            const newsList = JSON.parse(localStorage.getItem('site_news')) || defaultNews;
+            newsList.unshift(newEntry);
+            localStorage.setItem('site_news', JSON.stringify(newsList));
+
             document.getElementById('news-title').value = '';
             document.getElementById('news-image-url').value = '';
             document.getElementById('news-content').value = '';
-            renderNews();
+
+            loadNews();
+            alert("¡Novedad publicada!");
         }
 
-        // --- SISTEMA DE FORO ---
+        // --- FORO ---
         const defaultPosts = [
             {
-                id: 1,
-                author: "FerroFan99",
-                title: "¿Qué opinan de las nuevas cabinas 3D?",
-                content: "El nivel de detalle del instrumental mate quedó excelente. ¡Felicidades al equipo!",
-                date: "2026-03-27"
+                author: "AnonRailsAdmin",
+                title: "¡Bienvenidos al foro oficial de Anon Rails!",
+                content: "Usa este espacio para compartir ideas, enviar sugerencias de locomotoras o reportar errores.",
+                date: "17/08/2026"
             }
         ];
 
-        function getPostsData() {
-            return JSON.parse(localStorage.getItem('anon_rails_posts')) || defaultPosts;
-        }
-
-        function savePostsData(posts) {
-            localStorage.setItem('anon_rails_posts', JSON.stringify(posts));
-        }
-
-        function renderPosts() {
-            const posts = getPostsData();
+        function loadPosts() {
+            const savedPosts = JSON.parse(localStorage.getItem('forum_posts')) || defaultPosts;
             const container = document.getElementById('forum-posts-container');
-            if (!container) return;
-
             container.innerHTML = '';
-            posts.forEach(post => {
-                const card = document.createElement('div');
-                card.className = 'forum-post';
-                card.innerHTML = `
-                    <div style="display:flex; justify-content:space-between; margin-bottom:0.5rem;">
-                        <strong style="color: var(--accent);">${post.author}</strong>
-                        <span style="font-size: 0.8rem; color: var(--text-muted);">${post.date}</span>
+
+            savedPosts.forEach(post => {
+                const postElement = document.createElement('div');
+                postElement.className = 'forum-post';
+                postElement.innerHTML = `
+                    <div style="display:flex; justify-content:space-between; font-size:0.85rem; color:var(--accent); font-weight:bold; margin-bottom:0.4rem;">
+                        <span>👤 ${post.author}</span>
+                        <span>📅 ${post.date}</span>
                     </div>
-                    <h4 style="margin-bottom: 0.5rem; color: var(--text-main);">${post.title}</h4>
+                    <h4 style="color: var(--text-main); font-size: 1.1rem; margin-bottom: 0.4rem;">${post.title}</h4>
                     <p style="color: var(--text-muted); font-size: 0.95rem;">${post.content}</p>
                 `;
-                container.appendChild(card);
+                container.appendChild(postElement);
             });
         }
 
         function addPost() {
-            const author = document.getElementById('post-author').value.trim() || "Anónimo";
-            const title = document.getElementById('post-title').value.trim();
-            const content = document.getElementById('post-content').value.trim();
+            const authorInput = document.getElementById('post-author').value.trim();
+            const titleInput = document.getElementById('post-title').value.trim();
+            const contentInput = document.getElementById('post-content').value.trim();
 
-            if (!title || !content) { alert("Escribe un título y contenido."); return; }
+            if (!authorInput || !titleInput || !contentInput) {
+                alert("Completa todos los campos para publicar.");
+                return;
+            }
 
-            const posts = getPostsData();
-            posts.unshift({
-                id: Date.now(),
-                author,
-                title,
-                content,
-                date: new Date().toISOString().split('T')[0]
-            });
+            const newPost = {
+                author: authorInput,
+                title: titleInput,
+                content: contentInput,
+                date: new Date().toLocaleDateString('es-ES')
+            };
 
-            savePostsData(posts);
+            const posts = JSON.parse(localStorage.getItem('forum_posts')) || defaultPosts;
+            posts.unshift(newPost);
+            localStorage.setItem('forum_posts', JSON.stringify(posts));
+
             document.getElementById('post-author').value = '';
             document.getElementById('post-title').value = '';
             document.getElementById('post-content').value = '';
-            renderPosts();
+
+            loadPosts();
         }
 
-        // --- CANVAS DE FONDO INTERACTIVO DE PARTÍCULAS ---
-        function initBgCanvas() {
-            const canvas = document.getElementById('bg-canvas');
-            if (!canvas) return;
-            const ctx = canvas.getContext('2d');
+        // --- CANVA / FONDO INTERACTIVO ---
+        const canvas = document.getElementById('bg-canvas');
+        const ctx = canvas.getContext('2d');
+        let width, height, particles = [];
+        let mouse = { x: null, y: null, isPressed: false, radius: 170 };
 
-            function resizeCanvas() {
-                canvas.width = window.innerWidth;
-                canvas.height = window.innerHeight;
-            }
-            resizeCanvas();
-            window.addEventListener('resize', resizeCanvas);
-
-            const particles = [];
-            const particleCount = 35;
-
-            for (let i = 0; i < particleCount; i++) {
-                particles.push({
-                    x: Math.random() * canvas.width,
-                    y: Math.random() * canvas.height,
-                    size: Math.random() * 2 + 1,
-                    speedX: (Math.random() - 0.5) * 0.4,
-                    speedY: (Math.random() - 0.5) * 0.4,
-                    alpha: Math.random() * 0.5 + 0.2
-                });
-            }
-
-            function animateCanvas() {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-                const computedAccent = getComputedStyle(document.body).getPropertyValue('--accent').trim() || '#c67d34';
-
-                particles.forEach(p => {
-                    p.x += p.speedX;
-                    p.y += p.speedY;
-
-                    if (p.x < 0) p.x = canvas.width;
-                    if (p.x > canvas.width) p.x = 0;
-                    if (p.y < 0) p.y = canvas.height;
-                    if (p.y > canvas.height) p.y = 0;
-
-                    ctx.fillStyle = computedAccent;
-                    ctx.globalAlpha = p.alpha;
-                    ctx.beginPath();
-                    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-                    ctx.fill();
-                });
-
-                requestAnimationFrame(animateCanvas);
-            }
-
-            animateCanvas();
+        function resizeCanvas() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+            createParticles();
         }
 
-        // --- INICIALIZACIÓN GENERAL ---
-        window.onload = function() {
-            loadTheme();
-            renderGames();
-            renderNews();
-            renderPosts();
-            renderCarousel();
-            renderModels3DAdmin();
-            startCarousel();
-            initBgCanvas();
-        };
+        window.addEventListener('resize', resizeCanvas);
+        window.addEventListener('mousemove', (e) => { mouse.x = e.clientX; mouse.y = e.clientY; });
+        window.addEventListener('mouseleave', () => { mouse.x = null; mouse.y = null; });
+        window.addEventListener('mousedown', () => mouse.isPressed = true);
+        window.addEventListener('mouseup', () => mouse.isPressed = false);
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.vx = (Math.random() - 0.5) * 0.8;
+                this.vy = (Math.random() - 0.5) * 0.8;
+                this.radius = Math.random() * 2 + 1;
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+
+                if (this.x < 0 || this.x > width) this.vx *= -1;
+                if (this.y < 0 || this.y > height) this.vy *= -1;
+
+                if (mouse.x !== null && mouse.y !== null) {
+                    let dx = mouse.x - this.x;
+                    let dy = mouse.y - this.y;
+                    let dist = Math.sqrt(dx * dx + dy * dy);
+                    let forceRadius = mouse.isPressed ? mouse.radius * 1.5 : mouse.radius;
+
+                    if (dist < forceRadius) {
+                        let force = (forceRadius - dist) / forceRadius;
+                        let angle = Math.atan2(dy, dx);
+                        this.x += Math.cos(angle) * force * (mouse.isPressed ? 3 : 1.5);
+                        this.y += Math.sin(angle) * force * (mouse.isPressed ? 3 : 1.5);
+                    }
+                }
+            }
+
+            draw(accentRgb) {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(${accentRgb}, 0.5)`;
+                ctx.fill();
+            }
+        }
+
+        function createParticles() {
+            particles = [];
+            let count = Math.floor((width * height) / 12000);
+            for (let i = 0; i < count; i++) particles.push(new Particle());
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+            let accentRgb = getComputedStyle(document.body).getPropertyValue('--accent-rgb').trim() || "198, 125, 52";
+
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw(accentRgb);
+
+                for (let j = i + 1; j < particles.length; j++) {
+                    let dx = particles[i].x - particles[j].x;
+                    let dy = particles[i].y - particles[j].y;
+                    let dist = Math.sqrt(dx * dx + dy * dy);
+
+                    if (dist < 120) {
+                        let alpha = (1 - dist / 120) * 0.25;
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.strokeStyle = `rgba(${accentRgb}, ${alpha})`;
+                        ctx.lineWidth = 1;
+                        ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(animate);
+        }
+
+        // INICIALIZACIÓN
+        resizeCanvas();
+        animate();
+        loadTheme();
+        loadMetroversoText();
+        loadNews();
+        loadPosts();
+        renderGames();
     </script>
 </body>
 </html>
